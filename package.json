@@ -15,7 +15,8 @@
   "author": "Valentin Daguenet <valentin.daguenet@gmail.com> (http://vdaguenet.fr)",
   "license": "MIT",
   "dependencies": {
-    "domready": "^1.0.8"
+    "domready": "^1.0.8",
+    "three": "^0.82.1"
   },
   "devDependencies": {
     "babel-plugin-transform-es2015-modules-commonjs": "*",
