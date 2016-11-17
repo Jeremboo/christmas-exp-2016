@@ -1,5 +1,5 @@
-import domready from 'domready'
+import domready from 'domready';
 
-domready( () => {
-  console.log( '[DOM] - DOM is ready' )
-} )
+domready(() => {
+  console.log('[DOM] - DOM is ready')
+});
