@@ -1,4 +1,4 @@
-import { Mesh, SphereGeometry, MeshBasicMaterial } from 'THREE'
+import { Mesh, SphereGeometry, MeshBasicMaterial } from 'three'
 
 export default class Sphere extends Mesh {
   constructor() {

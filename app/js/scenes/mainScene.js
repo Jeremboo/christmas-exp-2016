@@ -1,4 +1,4 @@
-import { Scene } from 'THREE'
+import { Scene } from 'three'
 import Sphere from '../components/sphere'
 
 export default class MainScene extends Scene {

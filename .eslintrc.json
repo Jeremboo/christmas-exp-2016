@@ -5,7 +5,16 @@
     "app": true,
     "dat": true,
     "THREE": true,
-    "WAGNER": true
+    "WAGNER": true,
+    "window": true,
+    "document": true
   },
-  "rules": {}
+  "rules": {
+    "no-console": 0,
+    "semi": 0,
+    "quotes": [2, "single"],
+    "indent": [2, 2],
+    "space-in-parens": 0,
+    "keyword-spacing": 0
+  }
 }
