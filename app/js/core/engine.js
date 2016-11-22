@@ -3,8 +3,8 @@ import MainScene from '../scenes/mainScene'
 
 export default class Engine {
   constructor( container ) {
-    this.camera = new PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0.1, 100 )
-    this.camera.position.set( 0, 0, 0 )
+    this.camera = new PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0.1, 1000 )
+    this.camera.position.set( 0, 0, 300 )
     this.camera.lookAt( 0, 0, 0 )
 
     this.renderer = new WebGLRenderer( { antialias: true } )
@@ -17,10 +17,13 @@ export default class Engine {
     this.fpsInterval = 1000 / fps
     this.then = Date.now()
 
-    this.scene = new MainScene()
-
     this.resize()
     this.bind()
+    this.init()
+  }
+
+  init() {
+    this.scene = new MainScene()
     this.loop()
   }
 
