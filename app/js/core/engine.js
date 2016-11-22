@@ -1,4 +1,4 @@
-import { PerspectiveCamera, WebGLRenderer } from 'three'
+import { PerspectiveCamera, WebGLRenderer, Vector3, Raycaster, Euler } from 'three'
 import MainScene from '../scenes/mainScene'
 
 export default class Engine {
@@ -19,17 +19,32 @@ export default class Engine {
 
     this.scene = new MainScene()
 
-    this.resize()
-    this.bind()
-    this.loop()
-  }
+    // DRAGGING SPHERE
+    this.sphereSelected = false;
+    this.mouse = new Vector3();
+    this.savedMousePosition = new Vector3();
+    this.savedSphereRotation = new Vector3();
+    this.raycaster = new Raycaster();
 
-  bind() {
-    window.addEventListener( 'resize', this.resize.bind( this ), false )
+    // BIND
+    this.loop = this.loop.bind(this);
+    this.resize = this.resize.bind(this);
+    this.onMouseMove = this.onMouseMove.bind(this);
+    this.onMouseDown = this.onMouseDown.bind(this);
+    this.onMouseUp = this.onMouseUp.bind(this);
+
+    // START
+    this.resize()
+    this.loop()
+
+    window.addEventListener( 'resize', this.resize, false )
+    window.addEventListener( 'mousemove', this.onMouseMove, false );
+    window.addEventListener( 'mousedown', this.onMouseDown, false );
+    window.addEventListener( 'mouseup', this.onMouseUp, false );
   }
 
   loop() {
-    this.raf = window.requestAnimationFrame( this.loop.bind( this ) )
+    this.raf = window.requestAnimationFrame( this.loop )
 
     const now = Date.now()
     const delta = now - this.then
@@ -49,5 +64,48 @@ export default class Engine {
     this.camera.updateProjectionMatrix()
 
     this.renderer.setSize( this.innerWidth, this.innerHeight )
+  }
+
+  onMouseMove(e) {
+    this.mouse.set(
+      (( e.clientX / window.innerWidth ) * 2) - 1,
+      -(( e.clientY / window.innerHeight ) * 2) + 1,
+      0,
+    );
+    this.raycaster.setFromCamera( this.mouse, this.camera );
+
+    if ( this.sphereSelected ) {
+      const delta = this.mouse.clone().sub(this.savedMousePosition);
+
+      // TODO use matrix
+      // TODO reverse position of delta when the spherePosition is negative
+      this.scene.sphere.targetedRotation.set(
+        this.savedSphereRotation.x - delta.y,
+        this.savedSphereRotation.y + delta.x,
+        this.savedSphereRotation.z,
+      );
+    }
+  }
+
+  onMouseDown(e) {
+    this.raycaster.setFromCamera( this.mouse, this.camera );
+    const intersects = this.raycaster.intersectObject( this.scene.sphere, true );
+    if ( intersects.length > 0 ) {
+      this.savedMousePosition.set(
+        (( e.clientX / window.innerWidth ) * 2) - 1,
+        -(( e.clientY / window.innerHeight ) * 2) + 1,
+        0,
+      );
+      this.savedSphereRotation.copy(this.scene.sphere.rotation.toVector3());
+      this.sphereSelected = true;
+      document.body.style.cursor = 'move';
+    }
+  }
+
+  onMouseUp() {
+    if ( this.sphereSelected ) {
+      this.sphereSelected = false;
+      document.body.style.cursor = 'auto';
+    }
   }
 }
