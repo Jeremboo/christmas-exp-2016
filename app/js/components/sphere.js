@@ -11,16 +11,9 @@ export default class Sphere extends Mesh {
     const geometry = new SphereGeometry( 100, 30, 30 )
     const textureTool = new ThreejsTextureTool();
 
-    const biomeTexture = textureTool.createImageTexture('assets/images/biome.jpg');
-    const noiseTexture = textureTool.createImageTexture('assets/images/noise.jpg');
-    // const material = biomeTexture.material;
-
-    // TODO tu peux utiliser ton texture tool pour changer la texture là ?
-    const loader = new TextureLoader()
-    const tempTexture = loader.load( 'assets/images/biome.jpg',
-    ( texture ) => {
-      return texture
-    } )
+    const biomeTextureTool = textureTool.createImageTexture('assets/images/biome.jpg', 'Biome');
+    const heightMapTextureTool = textureTool.createImageTexture('assets/images/heightMap.jpg', 'HeightMap');
+    // const material = biomeTextureTool.material;
 
     const material = new ShaderMaterial( {
       vertexShader,
@@ -34,10 +27,8 @@ export default class Sphere extends Mesh {
           type: 'v3',
           value: new Vector3( 1.0, 1.0, 1.0 )
         },
-        uTexture: {
-          type: 't',
-          value: tempTexture
-        }
+        uTexture: biomeTextureTool.uniform,
+        uHeightMap: heightMapTextureTool.uniform,
       },
       transparent: true
     } )

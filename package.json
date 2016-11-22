@@ -16,9 +16,9 @@
   "license": "MIT",
   "dependencies": {
     "domready": "^1.0.8",
-    "three": "^0.82.1",
     "glslify": "^6.0.1",
-    "threejs-texture-tool": "^0.2.4"
+    "three": "^0.82.1",
+    "threejs-texture-tool": "^0.2.6"
   },
   "devDependencies": {
     "babel-plugin-transform-es2015-modules-commonjs": "*",
