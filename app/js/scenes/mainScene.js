@@ -1,5 +1,6 @@
-import { Scene, SpotLight, SpotLightHelper } from 'three'
+import { Scene } from 'three'
 import Sphere from '../components/sphere'
+import Projector from '../components/projector'
 
 export default class MainScene extends Scene {
   constructor() {
@@ -10,17 +11,8 @@ export default class MainScene extends Scene {
     this.sphere = new Sphere()
     this.addMesh( this.sphere );
 
-    this.spotLight = new SpotLight( 0xFFFFFF, 1.0 )
-    this.spotLight.position.set( 0, 80, 150 )
-    this.spotLight.lookAt( 0, 0, 0 )
-    this.spotLight.distance = 100
-    this.spotLight.angle = 10 * Math.PI / 180
-    this.add( this.spotLight )
-
-    this.spotLightHelper = new SpotLightHelper( this.spotLight )
-    this.add( this.spotLightHelper )
-
-    this.counter = 0
+    this.projector = new Projector();
+    this.addMesh( this.projector );
   }
 
   update() {
@@ -28,11 +20,6 @@ export default class MainScene extends Scene {
     while (--i >= 0) {
       this.meshListeners[i].update(this.meshListeners);
     }
-
-    // update spotlight
-    this.spotLight.position.x = Math.sin( this.counter ) * 20
-    this.spotLightHelper.update()
-    this.counter += 0.01
   }
 
   addMesh(mesh) {

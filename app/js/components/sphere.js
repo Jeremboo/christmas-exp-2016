@@ -41,6 +41,7 @@ export default class Sphere extends Mesh {
   update( lightPosition ) {
     // update light position
     this.material.uniforms.uLight.value = lightPosition
+    this.material.needsUpdate = true;
 
     // update rotation
     const distRotation = this.targetedRotation.clone().sub(this.rotation.toVector3());
