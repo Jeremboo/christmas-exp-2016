@@ -12,7 +12,7 @@ export default class MainScene extends Scene {
     this.addMesh( this.projector );
 
     this.sphere = new Sphere()
-    this.addMesh( this.sphere, this.projector.position );
+    this.addMesh( this.sphere );
   }
 
   update() {

@@ -1,5 +1,7 @@
-import { Mesh, SphereGeometry, ShaderMaterial, Vector3, TextureLoader } from 'three'
+import { Mesh, SphereGeometry, ShaderMaterial, Vector3 } from 'three'
 import ThreejsTextureTool from 'threejs-texture-tool'
+
+import props from '../core/props';
 
 const glslify = require( 'glslify' )
 
@@ -13,7 +15,6 @@ export default class Sphere extends Mesh {
 
     const biomeTextureTool = textureTool.createImageTexture('assets/images/biome.jpg', 'Biome');
     const heightMapTextureTool = textureTool.createImageTexture('assets/images/heightMap.jpg', 'HeightMap');
-    // const material = biomeTextureTool.material;
 
     const material = new ShaderMaterial( {
       vertexShader,
@@ -25,7 +26,7 @@ export default class Sphere extends Mesh {
         },
         uLight: {
           type: 'v3',
-          value: new Vector3( 1.0, 1.0, 1.0 )
+          value: props.lightPosition,
         },
         uTexture: biomeTextureTool.uniform,
         uHeightMap: heightMapTextureTool.uniform,
@@ -38,10 +39,9 @@ export default class Sphere extends Mesh {
     this.targetedRotation = new Vector3()
   }
 
-  update( lightPosition ) {
+  update( ) {
     // update light position
-    this.material.uniforms.uLight.value = lightPosition
-    this.material.needsUpdate = true;
+    this.material.uniforms.uLight.value = props.lightPosition;
 
     // update rotation
     const distRotation = this.targetedRotation.clone().sub(this.rotation.toVector3());
