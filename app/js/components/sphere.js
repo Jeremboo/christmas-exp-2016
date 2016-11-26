@@ -1,5 +1,7 @@
-import { Mesh, SphereGeometry, ShaderMaterial, Vector3 } from 'three'
+import { Mesh, SphereGeometry, ShaderMaterial, Vector3, Quaternion, Euler } from 'three'
 import ThreejsTextureTool from 'threejs-texture-tool'
+import { toRadians } from '../core/utils';
+
 
 import props from '../core/props';
 
@@ -7,6 +9,7 @@ const glslify = require( 'glslify' )
 
 const vertexShader = glslify( '../shaders/sphere-vs.glsl' )
 const fragmentShader = glslify( '../shaders/sphere-fs.glsl' )
+
 
 export default class Sphere extends Mesh {
   constructor() {
@@ -36,18 +39,27 @@ export default class Sphere extends Mesh {
 
     super( geometry, material )
 
-    this.targetedRotation = new Vector3()
+    this.delta = new Vector3();
+    this.savedQuaternions = new Quaternion();
   }
 
   update( ) {
     // update light position
     this.material.uniforms.uLight.value = props.lightPosition;
+  }
 
-    // update rotation
-    const distRotation = this.targetedRotation.clone().sub(this.rotation.toVector3());
-    const rotationForce = distRotation.multiplyScalar(0.1);
+  saveQuaternions() {
+    this.savedQuaternions.copy(this.quaternion);
+  }
 
-    // update rotation with rotationForce
-    this.rotation.setFromVector3(this.rotation.toVector3().add(rotationForce));
+  rotateToQuaternion(delta) {
+    const deltaRotationQuaternion = new Quaternion()
+    .setFromEuler(new Euler(
+       toRadians(-delta.y * props.rotationForce),
+       toRadians(delta.x * props.rotationForce),
+       0,
+       'XYZ'
+    ));
+    this.quaternion.multiplyQuaternions(deltaRotationQuaternion, this.savedQuaternions);
   }
 }

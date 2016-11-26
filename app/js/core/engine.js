@@ -1,4 +1,5 @@
-import { PerspectiveCamera, WebGLRenderer, Vector3, Raycaster, Euler } from 'three'
+import { PerspectiveCamera, WebGLRenderer, Vector3, Raycaster, Euler, Quaternion } from 'three'
+
 import MainScene from '../scenes/mainScene'
 
 export default class Engine {
@@ -25,9 +26,9 @@ export default class Engine {
 
     // DRAGGING SPHERE
     this.sphereSelected = false;
-    this.mouse = new Vector3();
+    this.dragForce = new Vector3();
     this.savedMousePosition = new Vector3();
-    this.savedSphereRotation = new Vector3();
+    this.savedSphereQuaterion = new Quaternion();
     this.raycaster = new Raycaster();
 
     // BIND
@@ -71,28 +72,19 @@ export default class Engine {
   }
 
   onMouseMove(e) {
-    this.mouse.set(
+    this.dragForce.set(
       (( e.clientX / window.innerWidth ) * 2) - 1,
       -(( e.clientY / window.innerHeight ) * 2) + 1,
       0,
     );
-    this.raycaster.setFromCamera( this.mouse, this.camera );
 
     if ( this.sphereSelected ) {
-      const delta = this.mouse.clone().sub(this.savedMousePosition);
-
-      // TODO use matrix
-      // TODO reverse position of delta when the spherePosition is negative
-      this.scene.sphere.targetedRotation.set(
-        this.savedSphereRotation.x - delta.y,
-        this.savedSphereRotation.y + delta.x,
-        this.savedSphereRotation.z,
-      );
+      this.scene.sphere.rotateToQuaternion(this.dragForce.clone().sub(this.savedMousePosition));
     }
   }
 
   onMouseDown(e) {
-    this.raycaster.setFromCamera( this.mouse, this.camera );
+    this.raycaster.setFromCamera( this.dragForce, this.camera );
     const intersects = this.raycaster.intersectObject( this.scene.sphere, true );
     if ( intersects.length > 0 ) {
       this.savedMousePosition.set(
@@ -100,7 +92,7 @@ export default class Engine {
         -(( e.clientY / window.innerHeight ) * 2) + 1,
         0,
       );
-      this.savedSphereRotation.copy(this.scene.sphere.rotation.toVector3());
+      this.scene.sphere.saveQuaternions();
       this.sphereSelected = true;
       document.body.style.cursor = 'move';
     }
