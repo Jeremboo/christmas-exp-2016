@@ -1,5 +1,6 @@
 import { PerspectiveCamera, WebGLRenderer, Vector3, Raycaster, Euler, Quaternion } from 'three'
 
+import { getNormalizedPosFromScreen } from './utils';
 import MainScene from '../scenes/mainScene'
 
 export default class Engine {
@@ -26,9 +27,6 @@ export default class Engine {
 
     // DRAGGING SPHERE
     this.sphereSelected = false;
-    this.dragForce = new Vector3();
-    this.savedMousePosition = new Vector3();
-    this.savedSphereQuaterion = new Quaternion();
     this.raycaster = new Raycaster();
 
     // BIND
@@ -72,27 +70,17 @@ export default class Engine {
   }
 
   onMouseMove(e) {
-    this.dragForce.set(
-      (( e.clientX / window.innerWidth ) * 2) - 1,
-      -(( e.clientY / window.innerHeight ) * 2) + 1,
-      0,
-    );
-
     if ( this.sphereSelected ) {
-      this.scene.sphere.rotateToQuaternion(this.dragForce.clone().sub(this.savedMousePosition));
+      this.scene.sphere.updateDragging(getNormalizedPosFromScreen(e.clientX, e.clientY));
     }
   }
 
   onMouseDown(e) {
-    this.raycaster.setFromCamera( this.dragForce, this.camera );
+    const mouseNormToScreen = getNormalizedPosFromScreen(e.clientX, e.clientY);
+    this.raycaster.setFromCamera(mouseNormToScreen, this.camera );
     const intersects = this.raycaster.intersectObject( this.scene.sphere, true );
     if ( intersects.length > 0 ) {
-      this.savedMousePosition.set(
-        (( e.clientX / window.innerWidth ) * 2) - 1,
-        -(( e.clientY / window.innerHeight ) * 2) + 1,
-        0,
-      );
-      this.scene.sphere.saveQuaternions();
+      this.scene.sphere.startDragging(mouseNormToScreen);
       this.sphereSelected = true;
       document.body.style.cursor = 'move';
     }

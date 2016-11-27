@@ -1,4 +1,4 @@
-import { Matrix4 } from 'three';
+import { Matrix4, Vector3 } from 'three';
 
 export const getRotationMatrix = vectRotation => {
   const m = new Matrix4();
@@ -16,4 +16,10 @@ export const getRotationMatrix = vectRotation => {
   return m;
 };
 
-export const toRadians = angle  => angle * (Math.PI / 180);
+export const toRadians = angle => angle * (Math.PI / 180);
+
+export const getNormalizedPosFromScreen = (x, y) => new Vector3(
+  (( x / window.innerWidth ) * 2) - 1,
+  -(( y / window.innerHeight ) * 2) + 1,
+  0,
+)

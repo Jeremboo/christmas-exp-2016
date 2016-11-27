@@ -39,20 +39,22 @@ export default class Sphere extends Mesh {
 
     super( geometry, material )
 
-    this.delta = new Vector3();
     this.savedQuaternions = new Quaternion();
+    this.baseMousePos = new Vector3();
+    this.currentMousePos = new Vector3();
+    this.targetedMousePos = new Vector3();
   }
 
   update( ) {
     // update light position
     this.material.uniforms.uLight.value = props.lightPosition;
-  }
 
-  saveQuaternions() {
-    this.savedQuaternions.copy(this.quaternion);
-  }
+    // updateRotation
+    const dist = this.targetedMousePos.clone().sub(this.currentMousePos);
+    const vel = dist.clone().multiplyScalar(props.rotationVel);
+    this.currentMousePos.add(vel);
 
-  rotateToQuaternion(delta) {
+    const delta = this.currentMousePos.clone().sub(this.baseMousePos)
     const deltaRotationQuaternion = new Quaternion()
     .setFromEuler(new Euler(
        toRadians(-delta.y * props.rotationForce),
@@ -61,5 +63,16 @@ export default class Sphere extends Mesh {
        'XYZ'
     ));
     this.quaternion.multiplyQuaternions(deltaRotationQuaternion, this.savedQuaternions);
+  }
+
+  startDragging(mousePos) {
+    this.baseMousePos.copy(mousePos);
+    this.currentMousePos.copy(mousePos);
+    this.targetedMousePos.copy(mousePos);
+    this.savedQuaternions.copy(this.quaternion);
+  }
+
+  updateDragging(targetedMousePos) {
+    this.targetedMousePos.copy(targetedMousePos);
   }
 }
