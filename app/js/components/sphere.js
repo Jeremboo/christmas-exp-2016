@@ -86,14 +86,14 @@ export default class Sphere extends Mesh {
 
     // updateRotation
     const dist = this.targetedMousePos.clone().sub(this.currentMousePos);
-    const vel = dist.clone().multiplyScalar(props.rotationVel);
+    const vel = dist.clone().multiplyScalar(props.rotation.vel);
     this.currentMousePos.add(vel);
 
     const delta = this.currentMousePos.clone().sub(this.baseMousePos)
     const deltaRotationQuaternion = new Quaternion()
     .setFromEuler(new Euler(
-       toRadians(-delta.y * props.rotationForce),
-       toRadians(delta.x * props.rotationForce),
+       toRadians(-delta.y * props.rotation.force),
+       toRadians(delta.x * props.rotation.force),
        0,
        'XYZ'
     ));
