@@ -1,6 +1,9 @@
-import { Scene } from 'three'
-import Sphere from '../components/sphere'
-import Projector from '../components/projector'
+import { Scene } from 'three';
+import { loadJSON } from '../core/loaderManager';
+import props from '../core/props';
+import Sphere from '../components/sphere';
+import Projector from '../components/projector';
+
 
 export default class MainScene extends Scene {
   constructor() {
@@ -8,11 +11,19 @@ export default class MainScene extends Scene {
     this.meshCount = 0;
     this.meshListeners = [];
 
-    this.projector = new Projector();
-    this.addMesh( this.projector );
+    // TODO load all object before construct
+    // TODO add loaderVisualizer
+    console.log('load objects...');
+    loadJSON('assets/skeleton.json', ( geometry, materials ) => {
+      console.log('loaded !');
+      props.objects.set('christmasTree', { geometry, materials });
 
-    this.sphere = new Sphere()
-    this.addMesh( this.sphere );
+      this.projector = new Projector();
+      this.addMesh( this.projector );
+
+      this.sphere = new Sphere()
+      this.addMesh( this.sphere );
+    });
   }
 
   update() {

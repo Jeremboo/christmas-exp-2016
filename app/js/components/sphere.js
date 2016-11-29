@@ -1,8 +1,10 @@
 import { Mesh, SphereGeometry, ShaderMaterial, Vector3, Quaternion, Euler, JSONLoader, SkeletonHelper, SkinnedMesh, MeshBasicMaterial, Object3D } from 'three'
 import ThreejsTextureTool from 'threejs-texture-tool';
-import { toRadians, getRandomFloat, getRandomEuler } from '../core/utils';
 
+import { toRadians, getRandomFloat, getRandomEuler } from '../core/utils';
 import props from '../core/props';
+
+import ChristmasTree from './chirstmasTree';
 
 const glslify = require( 'glslify' );
 
@@ -43,41 +45,12 @@ export default class Sphere extends Mesh {
     this.currentMousePos = new Vector3();
     this.targetedMousePos = new Vector3();
 
-
-    // TODO laod this into mainScene  or index
     this.christmasTrees = [];
-    // instantiate a loader
-    // https://www.youtube.com/watch?v=eEqB-eKcv7k&index=15&list=PLOGomoq5sDLutXOHLlESKG2j9CCnCwVqg
-    // https://www.youtube.com/watch?v=eEqB-eKcv7k
-    const loader = new JSONLoader();
-    // load a resource
-    loader.load('assets/skeleton.json', ( geometry, materials ) => {
-        console.log(geometry, materials);
-
-        for (let i = 0; i < 200; i++) {
-          // TODO place with texture
-          this.createThree(geometry, material);
-        }
-      }
-    );
-  }
-
-  createThree(geometry, material) {
-    // TODO use materials
-    const container = new Object3D();
-
-    container.rotation.copy(getRandomEuler());
-
-    const christmasTree = new SkinnedMesh( geometry, new MeshBasicMaterial({ color: 'red', skinning: true }) );
-    christmasTree.castShadow = true;
-    christmasTree.receiveShadow = true;
-    christmasTree.position.z = SIZE;
-    christmasTree.rotation.set( toRadians(90), 0, 0);
-    christmasTree.scale.multiplyScalar(getRandomFloat(1, 2));
-    this.christmasTrees.push(christmasTree);
-    container.add(christmasTree);
-
-    this.add(container);
+    for (let i = 0; i < 200; i++) {
+      const chirstmasTree = new ChristmasTree();
+      this.add(chirstmasTree);
+      this.christmasTrees.push(chirstmasTree);
+    }
   }
 
   update( ) {
@@ -99,15 +72,9 @@ export default class Sphere extends Mesh {
     ));
     this.quaternion.multiplyQuaternions(deltaRotationQuaternion, this.savedQuaternions);
 
-    // update skeleton
-    let i;
-    let j;
-    const christmasTreesLength = this.christmasTrees.length;
-    for (i = 0; i < christmasTreesLength; i++) {
-      const bonesLenght = this.christmasTrees[i].skeleton.bones.length;
-      for (j = 0; j < bonesLenght; j++) {
-        this.christmasTrees[i].skeleton.bones[j].rotation.copy(getRandomEuler());
-      }
+    // update christmasTrees
+    for (let i = (this.christmasTrees.length - 1); i >= 0; i--) {
+      this.christmasTrees[i].update();
     }
   }
 
