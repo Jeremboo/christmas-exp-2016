@@ -1,4 +1,4 @@
-import { PerspectiveCamera, WebGLRenderer, Vector3, Raycaster, Euler, Quaternion } from 'three'
+import { PerspectiveCamera, WebGLRenderer, Raycaster } from 'three'
 
 import { getNormalizedPosFromScreen } from './utils';
 import MainScene from '../scenes/mainScene'

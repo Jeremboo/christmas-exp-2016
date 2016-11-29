@@ -1,7 +1,7 @@
-import { Mesh, SphereGeometry, ShaderMaterial, Vector3, Quaternion, Euler, JSONLoader, SkeletonHelper, SkinnedMesh, MeshBasicMaterial, Object3D } from 'three'
+import { Mesh, SphereGeometry, ShaderMaterial, Vector3, Quaternion, Euler } from 'three'
 import ThreejsTextureTool from 'threejs-texture-tool';
 
-import { toRadians, getRandomFloat, getRandomEuler } from '../core/utils';
+import { toRadians } from '../core/utils';
 import props from '../core/props';
 
 import ChristmasTree from './chirstmasTree';

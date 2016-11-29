@@ -1,4 +1,4 @@
-import { SkinnedMesh, MeshBasicMaterial, Object3D } from 'three'
+import { SkinnedMesh, MeshBasicMaterial, Object3D, Euler } from 'three'
 
 import props from '../core/props';
 import { toRadians, getRandomFloat, getRandomEuler } from '../core/utils';
@@ -25,8 +25,14 @@ export default class ChirstmasTree extends Object3D {
     // update skeleton
     let i;
     const bonesLenght = this.christmasTree.skeleton.bones.length;
+    const time = Date.now() * 0.003;
+    const angle = new Euler(
+      toRadians(10 * Math.cos(time)),
+      toRadians(0),
+      toRadians(10 * Math.sin(time)),
+    );
     for (i = 0; i < bonesLenght; i++) {
-      this.christmasTree.skeleton.bones[i].rotation.copy(getRandomEuler());
+      this.christmasTree.skeleton.bones[i].rotation.copy(angle);
     }
   }
 }
