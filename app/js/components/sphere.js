@@ -4,7 +4,7 @@ import ThreejsTextureTool from 'threejs-texture-tool';
 import { toRadians } from '../core/utils';
 import props from '../core/props';
 
-import ChristmasTree from './chirstmasTree';
+import ChristmasTree from './christmasTree';
 
 const glslify = require( 'glslify' );
 
@@ -47,9 +47,9 @@ export default class Sphere extends Mesh {
 
     this.christmasTrees = [];
     for (let i = 0; i < 200; i++) {
-      const chirstmasTree = new ChristmasTree();
-      this.add(chirstmasTree);
-      this.christmasTrees.push(chirstmasTree);
+      const christmasTree = new ChristmasTree();
+      this.add(christmasTree);
+      this.christmasTrees.push(christmasTree);
     }
   }
 
