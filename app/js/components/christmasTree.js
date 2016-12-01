@@ -26,7 +26,7 @@ export default class ChristmasTree extends Object3D {
     const newWorldPosition = new Vector3().applyMatrix4( this.christmasTree.matrixWorld );
     // TODO Matriceeeee
     const dist = this.oldWorldPosition.clone().sub(newWorldPosition).multiplyScalar(0.1);
-    console.log(dist);
+    // console.log(dist);
     this.oldWorldPosition.copy(newWorldPosition);
     // update skeleton
     // const time = Date.now() * 0.003;

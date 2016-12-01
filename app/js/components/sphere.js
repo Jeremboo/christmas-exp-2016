@@ -1,5 +1,6 @@
 import { Mesh, SphereGeometry, ShaderMaterial, Vector3, Quaternion, Euler } from 'three'
-import ThreejsTextureTool from 'threejs-texture-tool';
+import ThreejsTextureTool from 'threejs-texture-tool'
+import Utils from '../utils'
 
 import { toRadians } from '../core/utils';
 import props from '../core/props';
@@ -51,12 +52,11 @@ export default class Sphere extends Mesh {
       this.add(christmasTree);
       this.christmasTrees.push(christmasTree);
     }
+
+    this.worldLightDirection = new Vector3( 0, 80, 150 )
   }
 
   update( ) {
-    // update light position
-    this.material.uniforms.uLight.value = props.lightPosition;
-
     // updateRotation
     const dist = this.targetedMousePos.clone().sub(this.currentMousePos);
     const vel = dist.clone().multiplyScalar(props.rotation.vel);
@@ -76,6 +76,11 @@ export default class Sphere extends Mesh {
     for (let i = (this.christmasTrees.length - 1); i >= 0; i--) {
       this.christmasTrees[i].update();
     }
+
+    // update light position
+    let localVector = new Vector3()
+    localVector = Utils.worldToLocalDirection( this, this.worldLightDirection, localVector )
+    this.material.uniforms.uLight.value = localVector
   }
 
   startDragging(mousePos) {
