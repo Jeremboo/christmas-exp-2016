@@ -21,7 +21,7 @@ export default class Sphere extends Object3D {
     this.add( this.spotLightHelper )
   }
 
-  update(  ) {
+  update() {
     this.spotLight.position.x = Math.sin( this.counter ) * 20
     this.spotLightHelper.update()
     this.counter += 0.01

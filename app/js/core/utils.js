@@ -30,3 +30,9 @@ export const getRandomEuler = () => new Euler(
   getRandomFloat(0, 6.2831),
   getRandomFloat(0, 6.2831),
 );
+
+export const worldToLocalDirection = ( object, worldDirectionVector, localDirectionVector ) => {
+  object.updateMatrixWorld()
+  localDirectionVector.copy( worldDirectionVector ).applyQuaternion( object.getWorldQuaternion().inverse() )
+  return localDirectionVector
+}

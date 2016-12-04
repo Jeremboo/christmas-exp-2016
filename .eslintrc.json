@@ -17,6 +17,7 @@
     "space-in-parens": 0,
     "keyword-spacing": 0,
     "comma-dangle": 0,
-    "no-plusplus": 0
+    "no-plusplus": 0,
+    "max-len": 0
   }
 }
