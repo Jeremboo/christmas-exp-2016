@@ -1,7 +1,8 @@
 import { PerspectiveCamera, WebGLRenderer, Raycaster } from 'three'
+import MainScene from '../scenes/mainScene'
 
 import { getNormalizedPosFromScreen } from './utils';
-import MainScene from '../scenes/mainScene'
+import props from './props';
 
 export default class Engine {
   constructor( container ) {
@@ -26,7 +27,7 @@ export default class Engine {
     this.scene = new MainScene()
 
     // DRAGGING SPHERE
-    this.sphereSelected = false;
+    this.planetSelected = false;
     this.raycaster = new Raycaster();
 
     // BIND
@@ -54,6 +55,8 @@ export default class Engine {
 
     if( delta > this.fpsInterval ) {
       this.scene.update()
+      this.camera.rotation.setFromVector3( props.camera.rotation )
+      this.camera.position.copy( props.camera.position )
       this.renderer.render( this.scene, this.camera )
       this.then = now
     }
@@ -70,25 +73,25 @@ export default class Engine {
   }
 
   onMouseMove(e) {
-    if ( this.sphereSelected ) {
-      this.scene.sphere.updateDragging(getNormalizedPosFromScreen(e.clientX, e.clientY));
+    if ( this.planetSelected ) {
+      this.scene.planet.updateDragging(getNormalizedPosFromScreen(e.clientX, e.clientY));
     }
   }
 
   onMouseDown(e) {
     const mouseNormToScreen = getNormalizedPosFromScreen(e.clientX, e.clientY);
     this.raycaster.setFromCamera(mouseNormToScreen, this.camera );
-    const intersects = this.raycaster.intersectObject( this.scene.sphere, true );
+    const intersects = this.raycaster.intersectObject( this.scene.planet, true );
     if ( intersects.length > 0 ) {
-      this.scene.sphere.startDragging(mouseNormToScreen);
-      this.sphereSelected = true;
+      this.scene.planet.startDragging(mouseNormToScreen);
+      this.planetSelected = true;
       document.body.style.cursor = 'move';
     }
   }
 
   onMouseUp() {
-    if ( this.sphereSelected ) {
-      this.sphereSelected = false;
+    if ( this.planetSelected ) {
+      this.planetSelected = false;
       document.body.style.cursor = 'auto';
     }
   }

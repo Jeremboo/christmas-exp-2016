@@ -1,7 +1,8 @@
 import { Scene } from 'three';
 import { loadJSON } from '../core/loaderManager';
 import props from '../core/props';
-import Sphere from '../components/sphere';
+import Skybox from '../components/skybox';
+import Planet from '../components/planet';
 
 export default class MainScene extends Scene {
   constructor() {
@@ -16,8 +17,11 @@ export default class MainScene extends Scene {
       console.log('loaded !');
       props.objects.set('christmasTree', { geometry, materials });
 
-      this.sphere = new Sphere()
-      this.addMesh( this.sphere );
+      this.skybox = new Skybox()
+      this.add( this.skybox );
+
+      this.planet = new Planet()
+      this.addMesh( this.planet );
     });
   }
 

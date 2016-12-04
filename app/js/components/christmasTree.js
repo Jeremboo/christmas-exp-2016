@@ -18,7 +18,7 @@ export default class ChristmasTree extends SkinnedMesh {
     this.position.y = Math.random() * 2 - 1;
     this.position.z = Math.random() * 2 - 1;
     this.position.normalize();
-    this.position.multiplyScalar( 100 );
+    this.position.multiplyScalar( 200 );
 
     // Make onject perpendicular
     const up = new Vector3(0, -1, 0);

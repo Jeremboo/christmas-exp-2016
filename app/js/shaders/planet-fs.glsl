@@ -1,5 +1,6 @@
 uniform vec3 uColor;
 uniform vec3 uLight;
+uniform float uCeil;
 uniform sampler2D uTexture;
 varying vec2 vUv;
 varying vec3 vNormal;
@@ -16,12 +17,11 @@ void main() {
   // if dotProduct > 0.9
   // show the mesh
   // TODO trouver un moyen de remplacer les if (GOURMAND)
-  if( dotProduct > 0.9 ) {
+  if( dotProduct > uCeil ) {
     opacity = 1.0;
-  } else if( dotProduct > 0.85 ) {
-    opacity = ( dotProduct - 0.85 ) / ( 0.9 - 0.85 );
+  } else if( dotProduct > 0.94 ) {
+    opacity = ( dotProduct - 0.94 ) / ( uCeil - 0.94 );
   }
 
-  vec4 texture = texture2D( uTexture, vUv );
-  gl_FragColor = vec4( texture.xyz, opacity );
+  gl_FragColor = vec4( uColor.xyz, opacity );
 }

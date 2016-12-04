@@ -8,13 +8,13 @@ import ChristmasTree from './christmasTree';
 
 const glslify = require( 'glslify' );
 
-const SIZE = 100;
-const vertexShader = glslify( '../shaders/sphere-vs.glsl' )
-const fragmentShader = glslify( '../shaders/sphere-fs.glsl' )
+const SIZE = 200;
+const vertexShader = glslify( '../shaders/planet-vs.glsl' )
+const fragmentShader = glslify( '../shaders/planet-fs.glsl' )
 
-export default class Sphere extends Mesh {
+export default class Planet extends Mesh {
   constructor() {
-    const geometry = new SphereGeometry( SIZE, 30, 30 )
+    const geometry = new SphereGeometry( SIZE, 100, 100 )
     const textureTool = new ThreejsTextureTool();
 
     const biomeTextureTool = textureTool.createImageTexture('assets/images/biome.jpg', 'Biome');
@@ -26,11 +26,15 @@ export default class Sphere extends Mesh {
       uniforms: {
         uColor: {
           type: 'v3',
-          value: new Vector3( 1.0, 1.0, 1.0 )
+          value: new Vector3( 0.93, 0.94, 0.95 )
         },
         uLight: {
           type: 'v3',
-          value: new Vector3( 0, 80, 150 ),
+          value: new Vector3( 0, 80, 150 )
+        },
+        uCeil: {
+          type: 'f',
+          value: 0.9
         },
         uTexture: biomeTextureTool.uniform,
         uHeightMap: heightMapTextureTool.uniform,
@@ -46,13 +50,13 @@ export default class Sphere extends Mesh {
     this.targetedMousePos = new Vector3();
 
     this.christmasTrees = [];
-    for (let i = 0; i < 200; i++) {
+    for (let i = 0; i < 100; i++) {
       const christmasTree = new ChristmasTree();
       this.add(christmasTree);
       this.christmasTrees.push(christmasTree);
     }
 
-    this.worldLightDirection = new Vector3( 0, 80, 150 )
+    this.worldLightDirection = new Vector3( 0, 1, 0 )
   }
 
   update() {
@@ -72,7 +76,7 @@ export default class Sphere extends Mesh {
     this.quaternion.multiplyQuaternions(deltaRotationQuaternion, this.savedQuaternions);
 
     // update christmasTrees
-    for (let i = (this.christmasTrees.length - 1); i >= 0; i--) {
+    for (let i = this.christmasTrees.length - 1; i >= 0; i--) {
       this.christmasTrees[i].update();
     }
 
@@ -80,6 +84,7 @@ export default class Sphere extends Mesh {
     let localVector = new Vector3()
     localVector = worldToLocalDirection( this, this.worldLightDirection, localVector )
     this.material.uniforms.uLight.value = localVector
+    this.material.uniforms.uCeil.value = props.shader.ceil
   }
 
   startDragging(mousePos) {
