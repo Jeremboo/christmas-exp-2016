@@ -18,8 +18,8 @@ export default class MainScene extends Scene {
       console.log('loaded !');
       props.objects.set('christmasTree', { geometry, materials });
 
-      this.projector = new Projector();
-      this.addMesh( this.projector );
+      // this.projector = new Projector();
+      // this.addMesh( this.projector );
 
       this.sphere = new Sphere()
       this.addMesh( this.sphere );

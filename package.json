@@ -5,7 +5,7 @@
   "main": "app/index.js",
   "scripts": {
     "start": "npm run dev",
-    "dev": "budo app/js/index.js:js/main.js --dir ./public --live --open --  -t babelify -g glslify | stylus -w app/css/index.styl -o public/css/main.css | pug -w app/html/index.pug -o public",
+    "dev": "budo app/js/index.js:js/main.js --dir ./public --live --open -- -t babelify -g glslify | stylus -w app/css/index.styl -o public/css/main.css | pug -w app/html/index.pug -o public",
     "build": "browserify -t babelify -t stripify -g glslify app/js/index.js | uglifyjs -o public/js/main.js | stylus -c app/css/index.styl -o public/css/main.css | pug app/html/index.pug -o public"
   },
   "repository": {
