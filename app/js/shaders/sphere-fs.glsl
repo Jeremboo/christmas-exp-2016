@@ -19,7 +19,7 @@ void main() {
   if( dotProduct > 0.9 ) {
     opacity = 1.0;
   } else if( dotProduct > 0.85 ) {
-    opacity = ( dotProduct - 0.85 ) / 0.05;
+    opacity = ( dotProduct - 0.85 ) / ( 0.9 - 0.85 );
   }
 
   vec4 texture = texture2D( uTexture, vUv );

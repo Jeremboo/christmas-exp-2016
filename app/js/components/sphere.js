@@ -30,7 +30,7 @@ export default class Sphere extends Mesh {
         },
         uLight: {
           type: 'v3',
-          value: props.lightPosition,
+          value: new Vector3( 0, 80, 150 ),
         },
         uTexture: biomeTextureTool.uniform,
         uHeightMap: heightMapTextureTool.uniform,
