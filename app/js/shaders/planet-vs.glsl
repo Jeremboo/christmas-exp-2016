@@ -1,11 +1,9 @@
 uniform sampler2D uHeightMap;
 
-varying float ampl; // TODO add to uniforms and dat.gui
-varying vec2 vUv;
+float ampl; // TODO add to uniforms and dat.gui
 varying vec3 vNormal;
 
 void main() {
-  vUv = uv;
   vNormal = normal;
   ampl = 15.0;
 
