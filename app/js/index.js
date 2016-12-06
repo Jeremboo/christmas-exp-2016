@@ -1,13 +1,14 @@
 import domready from 'domready'
 import dat from 'dat-gui';
+import { Object3D } from 'three';
+
 import Engine from './core/engine'
 import props from './core/props';
+import { loadObj, loadJSON } from './core/loaderManager';
+
 
 domready( () => {
   console.log( '[DOM] - DOM is ready' )
-
-  const container = document.getElementById( 'experiment' )
-  const experiment = new Engine( container )
 
   const gui = new dat.GUI();
   const rotationFolder = gui.addFolder('Rotation');
@@ -32,4 +33,34 @@ domready( () => {
   shaderFolder.open();
 
   // gui.close();
+
+
+  function init() {
+    const container = document.getElementById( 'experiment' )
+    const experiment = new Engine( container )
+  }
+
+  /**
+   * LOADER
+   */
+  let i, j;
+  let loader = 0;
+  const loaderI = 100 / props.assets.length;
+
+  console.log('... Loading');
+  for (i = 0; i < props.assets.length; i++) {
+    const { name, children } = props.assets[i];
+    loadObj(`assets/${name}.json`, loadedObjs => {
+      const object = new Object3D();
+      for (j = 0; j < children.length; j++) {
+        object.add(loadedObjs.getObjectByName(children[j]))
+      }
+      props.objects.set(name, object);
+      loader += loaderI;
+      console.log(`... ${loader}%`);
+
+      // TEST THE END
+      if (loader === 100) init();
+    });
+  }
 } )

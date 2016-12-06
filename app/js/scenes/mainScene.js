@@ -1,6 +1,4 @@
-import { Scene, Object3D, Vector3, AmbientLight, Mesh, MeshBasicMaterial} from 'three';
-import { loadObj, loadJSON } from '../core/loaderManager';
-import props from '../core/props';
+import { Scene } from 'three';
 import Skybox from '../components/skybox';
 import Planet from '../components/planet';
 
@@ -10,31 +8,11 @@ export default class MainScene extends Scene {
     this.meshCount = 0;
     this.meshListeners = [];
 
-    // TODO load all object before construct
-    // TODO add loaderVisualizer
-    console.log('load objects...');
-    const objName = 'christmasTree';
-    loadObj(`assets/${objName}.json`, ( loadedObjs ) => {
+    this.skybox = new Skybox()
+    this.add( this.skybox );
 
-      // Load all christmastree obj
-      const object = new Object3D();
-      object.add(loadedObjs.getObjectByName('eye_right'));
-      object.add(loadedObjs.getObjectByName('eye_left'));
-      object.add(loadedObjs.getObjectByName('Cône'));
-      object.add(loadedObjs.getObjectByName('Cône.1'));
-      object.add(loadedObjs.getObjectByName('Cône.2'));
-      const tronc = loadedObjs.getObjectByName('tronc');
-      tronc.material.skinning = true;
-      tronc.material.needsUpdate = true;
-      object.add(tronc);
-      props.objects.set(objName, object);
-
-      this.skybox = new Skybox()
-      this.add( this.skybox );
-
-      this.planet = new Planet()
-      this.addMesh( this.planet );
-    });
+    this.planet = new Planet()
+    this.addMesh( this.planet );
   }
 
   update() {
