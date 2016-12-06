@@ -1,6 +1,6 @@
 import domready from 'domready'
 import dat from 'dat-gui';
-import { Object3D } from 'three';
+import { Object3D, Mesh, MeshBasicMaterial, MeshFaceMaterial } from 'three';
 
 import Engine from './core/engine'
 import props from './core/props';
@@ -47,20 +47,34 @@ domready( () => {
   let loader = 0;
   const loaderI = 100 / props.assets.length;
 
+  function save(name, object) {
+    props.objects.set(name, object);
+    loader += loaderI;
+    console.log(`... ${loader}%`);
+
+    // TEST THE END
+    if (loader === 100) init();
+  }
+
   console.log('... Loading');
   for (i = 0; i < props.assets.length; i++) {
+    let object = null;
     const { name, children } = props.assets[i];
-    loadObj(`assets/${name}.json`, loadedObjs => {
-      const object = new Object3D();
-      for (j = 0; j < children.length; j++) {
-        object.add(loadedObjs.getObjectByName(children[j]))
-      }
-      props.objects.set(name, object);
-      loader += loaderI;
-      console.log(`... ${loader}%`);
 
-      // TEST THE END
-      if (loader === 100) init();
-    });
+    if (children.length > 0) {
+      loadObj(`assets/${name}.json`, loadedObjs => {
+        object = new Object3D();
+        for (j = 0; j < children.length; j++) {
+          object.add(loadedObjs.getObjectByName(children[j]))
+        }
+        save(name, object);
+      });
+    } else {
+      loadJSON(`assets/${name}.json`, (geometry, material) => {
+        object = new Mesh(geometry, new MeshFaceMaterial(material));
+        save(name, object);
+      });
+    }
   }
+
 } )

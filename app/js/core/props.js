@@ -27,6 +27,11 @@ const props = {
         'tronc',
       ],
     },
+    {
+      name: 'skeleton',
+      ex: 'json',
+      children: [],
+    },
   ]
 };
 
