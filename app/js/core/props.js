@@ -15,7 +15,7 @@ const props = {
   lightPosition: new Vector3(1.0, 1.0, 1.0),
   objects: new Map(),
   assets: [
-    { name: 'skeleton', ex: 'json' },
+    { name: 'christmasTree', ex: 'json' },
   ]
 };
 

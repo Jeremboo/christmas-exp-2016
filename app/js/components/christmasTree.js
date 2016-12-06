@@ -1,17 +1,14 @@
-import { SkinnedMesh, MeshBasicMaterial, Object3D, Euler, Vector3, ArrowHelper, Ray } from 'three'
+import { Object3D, Vector3, Ray } from 'three'
 
 import props from '../core/props';
-import { toRadians, getRandomFloat, getRandomEuler } from '../core/utils';
+import { getRandomFloat } from '../core/utils';
 
 
-export default class ChristmasTree extends SkinnedMesh {
+export default class ChristmasTree extends Object3D {
   constructor() {
-    // https://www.youtube.com/watch?v=eEqB-eKcv7k
-    const { geometry, material } = props.objects.get('christmasTree');
-    super( geometry, new MeshBasicMaterial({ color: 'red', skinning: true }));
-    this.castShadow = true;
-    this.receiveShadow = true;
-    this.scale.multiplyScalar(getRandomFloat(1, 2));
+    super();
+    this.add(props.objects.get('christmasTree').clone());
+    this.scale.multiplyScalar(getRandomFloat(2, 4));
 
     // Position on sphere
     this.position.x = Math.random() * 2 - 1;
@@ -33,21 +30,16 @@ export default class ChristmasTree extends SkinnedMesh {
   }
 
   update( ) {
+    // get dist runned
     const newWorldPosition = new Vector3().applyMatrix4( this.matrixWorld );
-    // TODO Matriceeeee
-    const dist = this.oldWorldPosition.clone().sub(newWorldPosition).multiplyScalar(0.1);
-    // console.log(dist);
+    const dist = this.oldWorldPosition.clone().sub(newWorldPosition).multiplyScalar(0.9);
     this.oldWorldPosition.copy(newWorldPosition);
-    // update skeleton
-    // const time = Date.now() * 0.003;
-    // const angle = new Euler(
-    //   toRadians(10 * Math.cos(time)),
-    //   toRadians(0),
-    //   toRadians(10 * Math.sin(time)),
-    // );
-    for (let i = (this.skeleton.bones.length - 1); i > 0; i--) {
+
+    // update skeleton with dist
+    const tronc = this.getObjectByName('tronc');
+    for (let i = (tronc.skeleton.bones.length - 1); i > 0; i--) {
       // http://answers.unity3d.com/questions/46770/rotate-a-vector3-direction.html
-      this.skeleton.bones[i].rotation.setFromVector3(dist);
+      tronc.skeleton.bones[i].rotation.setFromVector3(dist);
     }
   }
 }

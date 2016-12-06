@@ -1,4 +1,4 @@
-import { JSONLoader, OBJLoader } from 'three';
+import { JSONLoader, ObjectLoader } from 'three';
 
 
 // PRIVATE
@@ -35,7 +35,7 @@ export const loadJSONs = (fileNameArray, callback) => {
 };
 
 export const loadObj = (fileName, callback) => {
-  const loader = new OBJLoader();
+  const loader = new ObjectLoader();
   loader.load(fileName, (obj) => {
     callback(obj);
   }, onProgress, onError);

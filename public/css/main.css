@@ -178,3 +178,6 @@ td,
 th {
   padding: 0;
 }
+#texture-tool-wrapper {
+  display: none;
+}
