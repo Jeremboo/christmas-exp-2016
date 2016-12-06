@@ -3,8 +3,6 @@ import { loadObj, loadJSON } from '../core/loaderManager';
 import props from '../core/props';
 import Skybox from '../components/skybox';
 import Planet from '../components/planet';
-import VolumetricLight from '../components/volumetricLight';
-import StarsTexture from '../components/starsTexture';
 
 export default class MainScene extends Scene {
   constructor() {
@@ -36,15 +34,6 @@ export default class MainScene extends Scene {
 
       this.planet = new Planet()
       this.addMesh( this.planet );
-
-      this.cylinder = new VolumetricLight()
-      this.cylinder.position.y = 220
-      this.addMesh( this.cylinder )
-
-      this.stars = new StarsTexture()
-      this.stars.position.y = 200
-      this.stars.position.z = -200
-      this.addMesh( this.stars )
     });
   }
 

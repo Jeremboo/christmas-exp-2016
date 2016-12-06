@@ -7,7 +7,7 @@ import props from './props';
 export default class Engine {
   constructor( container ) {
     this.camera = new PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0.1, 1000 )
-    this.camera.position.set( 0, 0, 300 )
+    this.camera.position.set( 0, 0, 0 )
     this.camera.lookAt( 0, 0, 0 )
 
     this.renderer = new WebGLRenderer( { antialias: true } )

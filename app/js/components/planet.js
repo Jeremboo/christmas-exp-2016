@@ -1,10 +1,11 @@
-import { Mesh, SphereGeometry, ShaderMaterial, Vector3, Quaternion, Euler } from 'three'
+import { Mesh, SphereGeometry, ShaderMaterial, Vector3, Quaternion, Euler, TextureLoader } from 'three'
 import ThreejsTextureTool from 'threejs-texture-tool'
 
 import { toRadians, worldToLocalDirection } from '../core/utils';
 import props from '../core/props';
 
 import ChristmasTree from './christmasTree';
+import Star from './star'
 
 const glslify = require( 'glslify' );
 
@@ -56,7 +57,21 @@ export default class Planet extends Mesh {
       this.christmasTrees.push(christmasTree);
     }
 
-    this.worldLightDirection = new Vector3( 0, 1, 0 )
+    this.stars = []
+    const starTexture = new TextureLoader().load( './assets/images/snow.png' )
+    for( let j = 0; j < 500; j++ ) {
+      const star = new Star( starTexture )
+      star.position.x = Math.random() * 2 - 1;
+      star.position.y = Math.random() * 2 - 1;
+      star.position.z = Math.random() * 2 - 1;
+      star.position.normalize();
+      star.position.multiplyScalar( Math.random() * 300 + 300 );
+      this.add( star )
+      this.stars.push( star )
+    }
+
+    this.worldLightDirection = props.lightPosition
+    this.counter = 0
   }
 
   update() {
@@ -80,11 +95,17 @@ export default class Planet extends Mesh {
       this.christmasTrees[i].update();
     }
 
+    for( let star of this.stars ) {
+      star.update( this.counter + this.stars.indexOf( star ) )
+    }
+
     // update light position
     let localVector = new Vector3()
     localVector = worldToLocalDirection( this, this.worldLightDirection, localVector )
     this.material.uniforms.uLight.value = localVector
     this.material.uniforms.uCeil.value = props.shader.ceil
+
+    this.counter += 0.03
   }
 
   startDragging(mousePos) {

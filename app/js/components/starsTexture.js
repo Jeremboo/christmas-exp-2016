@@ -42,7 +42,7 @@ class Stars {
       this.context.closePath()
     }
 
-    this.counter += 0.02
+    this.counter += 0.05
   }
 }
 

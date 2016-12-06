@@ -12,7 +12,7 @@ const props = {
   shader: {
     ceil: 0.95
   },
-  lightPosition: new Vector3(1.0, 1.0, 1.0),
+  lightPosition: new Vector3(0.0, 1.0, 0.0),
   objects: new Map(),
   assets: [
     { name: 'christmasTree', ex: 'json' },
