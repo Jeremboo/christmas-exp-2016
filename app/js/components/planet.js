@@ -66,13 +66,13 @@ export default class Planet extends Mesh {
     }
 
     this.stars = []
-    for( let j = 0; j < 500; j++ ) {
+    for( let j = 0; j < 300; j++ ) {
       const star = new Star()
       this.add( star )
       this.stars.push( star )
     }
 
-    // for raycaster
+    // For raycaster
     this.name = 'planet'
 
     this.worldLightDirection = props.lightPosition
