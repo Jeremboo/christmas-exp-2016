@@ -1,4 +1,4 @@
-import { Mesh, SphereGeometry, ShaderMaterial, Vector3, Quaternion, Euler, TextureLoader } from 'three'
+import { Mesh, SphereGeometry, ShaderMaterial, Vector3, Quaternion, Euler } from 'three'
 import ThreejsTextureTool from 'threejs-texture-tool'
 
 import { toRadians, worldToLocalDirection } from '../core/utils';
@@ -65,18 +65,12 @@ export default class Planet extends Mesh {
       this.candies.push( candy )
     }
 
-    // this.stars = []
-    // const starTexture = new TextureLoader().load( './assets/images/snow.png' )
-    // for( let j = 0; j < 500; j++ ) {
-    //   const star = new Star( starTexture )
-    //   star.position.x = Math.random() * 2 - 1;
-    //   star.position.y = Math.random() * 2 - 1;
-    //   star.position.z = Math.random() * 2 - 1;
-    //   star.position.normalize();
-    //   star.position.multiplyScalar( Math.random() * 300 + 300 );
-    //   this.add( star )
-    //   this.stars.push( star )
-    // }
+    this.stars = []
+    for( let j = 0; j < 500; j++ ) {
+      const star = new Star()
+      this.add( star )
+      this.stars.push( star )
+    }
 
     this.worldLightDirection = props.lightPosition
     this.counter = 0
@@ -103,11 +97,11 @@ export default class Planet extends Mesh {
       this.christmasTrees[i].update();
     }
 
-    // for( let star of this.stars ) {
-    //   star.update( this.counter + this.stars.indexOf( star ) )
-    // }
+    for( const star of this.stars ) {
+      star.update( this.counter + this.stars.indexOf( star ) )
+    }
 
-    for( let candy of this.candies ) {
+    for( const candy of this.candies ) {
       candy.update( this.counter + this.candies.indexOf( candy ) )
     }
 
