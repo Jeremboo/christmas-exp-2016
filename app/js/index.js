@@ -36,6 +36,7 @@ domready( () => {
 
 
   function init() {
+    // TODO create custom trees with another colors
     const container = document.getElementById( 'experiment' )
     const experiment = new Engine( container )
   }

@@ -1,32 +1,46 @@
 import { Object3D, Vector3, Ray } from 'three'
 
 import props from '../core/props';
-import { getRandomFloat } from '../core/utils';
+import { getRandomFloat, toRadians } from '../core/utils';
 
 
 export default class ChristmasTree extends Object3D {
   constructor() {
     super();
-    this.add(props.objects.get('christmasTree').clone());
-    this.scale.multiplyScalar(getRandomFloat(2, 4));
 
-    // Position on sphere
+    // var
+    this.oldWorldPosition = new Vector3();
+
+    // Position on the sphere
     this.position.x = Math.random() * 2 - 1;
     this.position.y = Math.random() * 2 - 1;
     this.position.z = Math.random() * 2 - 1;
     this.position.normalize();
     this.position.multiplyScalar( 200 );
 
-    // Make onject perpendicular
-    const up = new Vector3(0, -1, 0);
+    // Make object perpendicular
+    this.up.negate();
+    // Get vector to the center of the sphere
     const ray = new Ray(this.position);
     ray.lookAt(new Vector3());
-    // // calculate normal to center of sphere
-    const axis = up.clone().cross(ray.direction).normalize();
-    const angle = Math.acos(ray.direction.clone().dot(up));
+    // calculate normal
+    const axis = this.up.clone().cross(ray.direction).normalize();
+    const angle = Math.acos(ray.direction.clone().dot(this.up));
     this.quaternion.setFromAxisAngle(axis, angle);
 
-    this.oldWorldPosition = new Vector3();
+    // Add and custom ChristmasTree
+    this.christmasTree = props.objects.get('christmasTree').clone();
+    this.add(this.christmasTree);
+    this.customize();
+  }
+
+  customize() {
+    this.christmasTree.scale.multiplyScalar(getRandomFloat(1.5, 2.5));
+    this.christmasTree.rotation.set(
+      toRadians(getRandomFloat(0, 5)),
+      toRadians(getRandomFloat(0, 360)),
+      toRadians(getRandomFloat(0, 5))
+    );
   }
 
   update( ) {
