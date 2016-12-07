@@ -82,10 +82,14 @@ export default class Engine {
     const mouseNormToScreen = getNormalizedPosFromScreen(e.clientX, e.clientY);
     this.raycaster.setFromCamera(mouseNormToScreen, this.camera );
     const intersects = this.raycaster.intersectObject( this.scene.planet, true );
-    if ( intersects.length > 0 ) {
-      this.scene.planet.startDragging(mouseNormToScreen);
-      this.planetSelected = true;
-      document.body.style.cursor = 'move';
+    for( const intersected of intersects ) {
+      if( intersected.object.name === 'planet' ) {
+        this.scene.planet.startDragging(mouseNormToScreen);
+        this.planetSelected = true;
+        document.body.style.cursor = 'move';
+      } else if( intersected.object.name === 'candy' ) {
+        intersected.object.parent.isClicked()
+      }
     }
   }
 

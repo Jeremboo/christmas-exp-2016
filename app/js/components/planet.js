@@ -72,6 +72,9 @@ export default class Planet extends Mesh {
       this.stars.push( star )
     }
 
+    // for raycaster
+    this.name = 'planet'
+
     this.worldLightDirection = props.lightPosition
     this.counter = 0
   }

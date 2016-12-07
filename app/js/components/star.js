@@ -19,11 +19,11 @@ export default class Star extends Mesh {
     const starMaterial = new MeshBasicMaterial( { color: 0xECF0F1 } )
     super( starGeometry, starMaterial )
 
-    this.position.x = Math.random() * 2 - 1;
-    this.position.y = Math.random() * 2 - 1;
-    this.position.z = Math.random() * 2 - 1;
-    this.position.normalize();
-    this.position.multiplyScalar( Math.random() * 300 + 300 );
+    this.position.x = Math.random() * 2 - 1
+    this.position.y = Math.random() * 2 - 1
+    this.position.z = Math.random() * 2 - 1
+    this.position.normalize()
+    this.position.multiplyScalar( Math.random() * 300 + 300 )
   }
 
   update( counter ) {

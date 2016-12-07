@@ -23,10 +23,17 @@ export default class Candy extends Object3D {
     const axis = this.up.clone().cross( ray.direction ).normalize()
     const angle = Math.acos( ray.direction.clone().dot( this.up ) )
     this.quaternion.setFromAxisAngle( axis, angle )
+
+    // for raycaster
+    this.collider.name = 'candy'
   }
 
   update( counter ) {
     this.collider.position.y = Math.sin( counter ) * 1
     this.collider.rotation.y += 0.02
+  }
+
+  isClicked() {
+    this.collider.material.color.setHex( 0x00FF00 )
   }
 }
