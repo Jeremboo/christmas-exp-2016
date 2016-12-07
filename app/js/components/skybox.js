@@ -26,6 +26,6 @@ export default class Skybox extends Mesh {
     super( sphereGeometry, sphereMaterial )
 
     this.scale.x = -1
-    this.rotation.x = -45 * Math.PI / 180
+    this.rotation.x = 90 * Math.PI / 180
   }
 }

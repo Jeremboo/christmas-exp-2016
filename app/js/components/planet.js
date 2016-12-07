@@ -5,6 +5,7 @@ import { toRadians, worldToLocalDirection } from '../core/utils';
 import props from '../core/props';
 
 import ChristmasTree from './christmasTree';
+import Candy from './candy';
 import Star from './star'
 
 const glslify = require( 'glslify' );
@@ -57,18 +58,25 @@ export default class Planet extends Mesh {
       this.christmasTrees.push(christmasTree);
     }
 
-    this.stars = []
-    const starTexture = new TextureLoader().load( './assets/images/snow.png' )
-    for( let j = 0; j < 500; j++ ) {
-      const star = new Star( starTexture )
-      star.position.x = Math.random() * 2 - 1;
-      star.position.y = Math.random() * 2 - 1;
-      star.position.z = Math.random() * 2 - 1;
-      star.position.normalize();
-      star.position.multiplyScalar( Math.random() * 300 + 300 );
-      this.add( star )
-      this.stars.push( star )
+    this.candies = []
+    for( let j = 0; j < 24; j++ ) {
+      const candy = new Candy()
+      this.add( candy )
+      this.candies.push( candy )
     }
+
+    // this.stars = []
+    // const starTexture = new TextureLoader().load( './assets/images/snow.png' )
+    // for( let j = 0; j < 500; j++ ) {
+    //   const star = new Star( starTexture )
+    //   star.position.x = Math.random() * 2 - 1;
+    //   star.position.y = Math.random() * 2 - 1;
+    //   star.position.z = Math.random() * 2 - 1;
+    //   star.position.normalize();
+    //   star.position.multiplyScalar( Math.random() * 300 + 300 );
+    //   this.add( star )
+    //   this.stars.push( star )
+    // }
 
     this.worldLightDirection = props.lightPosition
     this.counter = 0
@@ -95,8 +103,12 @@ export default class Planet extends Mesh {
       this.christmasTrees[i].update();
     }
 
-    for( let star of this.stars ) {
-      star.update( this.counter + this.stars.indexOf( star ) )
+    // for( let star of this.stars ) {
+    //   star.update( this.counter + this.stars.indexOf( star ) )
+    // }
+
+    for( let candy of this.candies ) {
+      candy.update( this.counter + this.candies.indexOf( candy ) )
     }
 
     // update light position
@@ -105,7 +117,7 @@ export default class Planet extends Mesh {
     this.material.uniforms.uLight.value = localVector
     this.material.uniforms.uCeil.value = props.shader.ceil
 
-    this.counter += 0.03
+    this.counter += 0.05
   }
 
   startDragging(mousePos) {
