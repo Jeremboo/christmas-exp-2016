@@ -65,6 +65,7 @@ domready( () => {
     if (children.length > 0) {
       loadObj(`assets/${name}.json`, loadedObjs => {
         object = new Object3D();
+        object.name = 'item';
         for (j = 0; j < children.length; j++) {
           object.add(loadedObjs.getObjectByName(children[j]))
         }

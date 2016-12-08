@@ -83,7 +83,7 @@ export default class Engine {
     this.raycaster.setFromCamera(mouseNormToScreen, this.camera );
     const intersects = this.raycaster.intersectObject( this.scene.planet, true );
     if( intersects.length > 0 ) {
-      if( intersects[0].object.name === 'planet' ) {
+      if( intersects[0].object.name === 'planet' || intersects[0].object.parent.name === 'item') {
         this.scene.planet.startDragging(mouseNormToScreen);
         this.planetSelected = true;
         document.body.style.cursor = 'move';
