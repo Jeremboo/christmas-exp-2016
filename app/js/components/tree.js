@@ -4,7 +4,7 @@ import Item from './_item';
 
 export default class ChristmasTree extends Item {
   constructor() {
-    super('christmasTree');
+    super('tree');
 
     this.oldWorldPosition = new Vector3();
   }

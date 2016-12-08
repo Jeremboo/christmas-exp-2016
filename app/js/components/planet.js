@@ -5,6 +5,8 @@ import { toRadians, worldToLocalDirection } from '../core/utils';
 import props from '../core/props';
 
 import ChristmasTree from './christmasTree';
+import Tree from './tree';
+import Mount from './mount';
 import Candy from './candy';
 import Star from './star'
 
@@ -56,6 +58,20 @@ export default class Planet extends Mesh {
       const christmasTree = new ChristmasTree();
       this.add(christmasTree);
       this.christmasTrees.push(christmasTree);
+    }
+
+    this.trees = [];
+    for (let i = 0; i < 100; i++) {
+      const tree = new Tree();
+      this.add(tree);
+      this.trees.push(tree);
+    }
+
+    this.mounts = [];
+    for (let i = 0; i < 100; i++) {
+      const mount = new Mount();
+      this.add(mount);
+      this.mounts.push(mount);
     }
 
     this.candies = []
