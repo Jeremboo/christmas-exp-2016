@@ -28,10 +28,9 @@ export default class Item extends Object3D {
     // Add and custom Item
     this.item = props.objects.get(itemName).clone();
     this.add(this.item);
-    this.customize();
   }
 
-  customize() {
+  naturalCustomize() {
     this.item.scale.multiplyScalar(getRandomFloat(1.5, 2.5));
     this.item.rotation.set(
       toRadians(getRandomFloat(0, 5)),

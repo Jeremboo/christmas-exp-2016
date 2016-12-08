@@ -6,6 +6,7 @@ import props from '../core/props';
 
 import ChristmasTree from './christmasTree';
 import Tree from './tree';
+import Dir from './dir';
 import Mount from './mount';
 import Candy from './candy';
 import Star from './star'
@@ -72,6 +73,13 @@ export default class Planet extends Mesh {
       const mount = new Mount();
       this.add(mount);
       this.mounts.push(mount);
+    }
+
+    this.dirs = [];
+    for (let i = 0; i < 100; i++) {
+      const dir = new Dir();
+      this.add(dir);
+      this.dirs.push(dir);
     }
 
     this.candies = []

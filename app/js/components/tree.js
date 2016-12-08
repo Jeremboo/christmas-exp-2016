@@ -7,6 +7,7 @@ export default class ChristmasTree extends Item {
     super('tree');
 
     this.oldWorldPosition = new Vector3();
+    super.naturalCustomize();
   }
 
   update( ) {
