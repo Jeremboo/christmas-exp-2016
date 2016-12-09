@@ -1,4 +1,4 @@
-import { Object3D, CubeGeometry, MeshBasicMaterial, Mesh, Ray, Vector3 } from 'three'
+import { CubeGeometry, MeshBasicMaterial, Mesh, Vector3 } from 'three'
 import HUD from '../core/hud'
 
 import Item from './_item';
@@ -22,7 +22,7 @@ export default class Candy extends Item {
   update( counter ) {
     super.update();
     // Animate the mesh instead of the collider
-    this.collider.position.y = Math.sin( counter ) * 1
+    this.collider.position.y = (Math.sin( counter ) * 1) + 10;
     this.collider.rotation.y += 0.02
   }
 
