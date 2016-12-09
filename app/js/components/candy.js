@@ -22,7 +22,7 @@ export default class Candy extends Item {
   update( counter ) {
     super.update();
     // Animate the mesh instead of the collider
-    this.collider.position.y = (Math.sin( counter ) * 1) + 10;
+    this.collider.position.y = Math.sin( counter ) * 1 + 10;
     this.collider.rotation.y += 0.02
   }
 

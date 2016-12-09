@@ -10,7 +10,7 @@ export default class Item extends Object3D {
 
     this.position.copy(pos);
     this.position.normalize();
-    this.position.multiplyScalar( 202 );
+    this.position.multiplyScalar( 200 );
 
     // Make object perpendicular
     this.up.negate();
@@ -41,14 +41,12 @@ export default class Item extends Object3D {
   update() {
     const vector = new Vector3();
     vector.setFromMatrixPosition( this.matrixWorld );
-    // console.log(a);
-    // console.log(Math.min(a + 0.20, 1));
-    // console.log( 1 - Math.max( 190 / 200, ( vector.y - 200 ) * 190 / 200 ) )
-    // console.log( ( vector.y - ceil ) / ceil * 200 / ceil );
-    const ceil = 194;
-    const ampl = 40;
-    const pos = vector.y / ceil;
-    const scale = Math.min( Math.max( (pos * ampl) - (ampl - 1), 0.0001), 1);
+    const ceil = 192;
+    const max = 195;
+    // const ampl = 40;
+    // const pos = vector.y / ceil;
+    // const scale = Math.min(Math.max(pos * ampl - (ampl - 1), 0.0001), 1);
+    const scale = Math.min(1, Math.max((vector.y - ceil) / (max - ceil), 0.0001));
     this.scale.set(scale, scale, scale);
   }
 }

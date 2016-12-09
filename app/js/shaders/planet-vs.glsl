@@ -5,7 +5,7 @@ varying vec3 vNormal;
 
 void main() {
   vNormal = normal;
-  ampl = 15.0;
+  ampl = 0.0;
 
   vec4 heightData = texture2D( uHeightMap, uv );
   vec3 newPosition = position + vNormal * heightData.r * ampl;
