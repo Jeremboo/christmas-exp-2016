@@ -14,6 +14,32 @@ const props = {
   },
   lightPosition: new Vector3(0.0, 1.0, 0.0),
   objects: new Map(),
+  candies: [
+    {
+      category: 'lollipop',
+      positions: [
+        { x: Math.random() * 2 - 1, y: Math.random() * 2 - 1, z: Math.random() * 2 - 1 },
+        { x: Math.random() * 2 - 1, y: Math.random() * 2 - 1, z: Math.random() * 2 - 1 },
+        { x: Math.random() * 2 - 1, y: Math.random() * 2 - 1, z: Math.random() * 2 - 1 }
+      ]
+    },
+    {
+      category: 'candy',
+      positions: [
+        { x: Math.random() * 2 - 1, y: Math.random() * 2 - 1, z: Math.random() * 2 - 1 },
+        { x: Math.random() * 2 - 1, y: Math.random() * 2 - 1, z: Math.random() * 2 - 1 },
+        { x: Math.random() * 2 - 1, y: Math.random() * 2 - 1, z: Math.random() * 2 - 1 }
+      ]
+    },
+    {
+      category: 'stick',
+      positions: [
+        { x: Math.random() * 2 - 1, y: Math.random() * 2 - 1, z: Math.random() * 2 - 1 },
+        { x: Math.random() * 2 - 1, y: Math.random() * 2 - 1, z: Math.random() * 2 - 1 },
+        { x: Math.random() * 2 - 1, y: Math.random() * 2 - 1, z: Math.random() * 2 - 1 }
+      ]
+    },
+  ],
   assets: [
     {
       name: 'christmasTree',

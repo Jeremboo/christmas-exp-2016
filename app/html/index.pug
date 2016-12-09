@@ -3,13 +3,7 @@ html( lang='en' )
     include ./_sections/head
   body
     #experiment
-
-    - var candies = [ './assets/images/candy.png', './assets/images/candy.png', './assets/images/candy.png' ]
     #hud.hud
-      each candy, index in candies
-        .candy( id=index )
-          img.candy--image( src=candy alt='Christmas candy' )
-          p.candy--counter 0 / 8
 
     button#sound.sound
 

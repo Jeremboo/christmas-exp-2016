@@ -4,6 +4,8 @@ import MainScene from '../scenes/mainScene'
 import { getNormalizedPosFromScreen } from './utils';
 import props from './props';
 
+import HUD from './hud'
+
 export default class Engine {
   constructor( container ) {
     this.camera = new PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0.1, 1000 )

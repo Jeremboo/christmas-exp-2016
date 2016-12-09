@@ -12,33 +12,50 @@
   position absolute
   top rem( 20 )
   left rem( 20 )
+  user-select none
+  cursor default
 
-.candy
-  width 100%
+.counter
+  text-align center
+  color #ecf0f1
   margin-bottom rem( 30 )
+  width 100%
+  position relative
 
-  &--image
-    width 100%
-    display block
+  &:before
+    content ''
+    background-size rem( 40 )
+    background-position center center
+    background-repeat no-repeat
     border solid 1px #ecf0f1
     border-radius 50%
-    padding rem( 10 )
+    margin-bottom rem( 10 )
+    width 100%
+    height rem( 50 )
+    display block
     box-sizing border-box
+    overflow hidden
 
-  &--counter
-    text-align center
-    color #ecf0f1
-    margin 0
-    padding-top rem( 10 )
+  &.lollipop
+    &:before
+      background-image url( '../assets/images/lollipop.png' )
+
+  &.candy
+    &:before
+      background-image url( '../assets/images/candy.png' )
+
+  &.stick
+    &:before
+      background-image url( '../assets/images/stick.png' )
 
 .sound
-  width rem( 30 )
-  height rem( 30 )
   background url( '../assets/images/sound.png' ) no-repeat center center
   background-size contain
   border none
   appearance none
   outline none
+  width rem( 30 )
+  height rem( 30 )
   position absolute
   bottom rem( 20 )
   right rem( 20 )
