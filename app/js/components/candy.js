@@ -1,7 +1,8 @@
 import { Object3D, CubeGeometry, MeshBasicMaterial, Mesh, Ray, Vector3 } from 'three'
+import HUD from '../core/hud'
 
 export default class Candy extends Object3D {
-  constructor() {
+  constructor( x, y, z, category ) {
     super()
 
     // Collider
@@ -10,9 +11,9 @@ export default class Candy extends Object3D {
     this.collider = new Mesh( cubeGeometry, cubeMaterial )
     this.add( this.collider )
 
-    this.position.x = Math.random() * 2 - 1
-    this.position.y = Math.random() * 2 - 1
-    this.position.z = Math.random() * 2 - 1
+    this.position.x = x
+    this.position.y = y
+    this.position.z = z
     this.position.normalize()
     this.position.multiplyScalar( 210 )
 
@@ -26,6 +27,8 @@ export default class Candy extends Object3D {
 
     // For raycaster
     this.collider.name = 'candy'
+    this.active = true
+    this.category = category
   }
 
   update( counter ) {
@@ -36,6 +39,14 @@ export default class Candy extends Object3D {
 
   isClicked() {
     // Update the mesh instead of the collider
-    this.collider.material.color.setHex( 0x00FF00 )
+    if( this.active ) {
+      this.active = false
+
+      // animate
+      this.visible = false
+
+      this.collider.material.color.setHex( 0x00FF00 )
+      HUD.foundCandy( this.category )
+    }
   }
 }

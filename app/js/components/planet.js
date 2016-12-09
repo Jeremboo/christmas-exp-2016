@@ -83,10 +83,12 @@ export default class Planet extends Mesh {
     }
 
     this.candies = []
-    for( let j = 0; j < 24; j++ ) {
-      const candy = new Candy()
-      this.add( candy )
-      this.candies.push( candy )
+    for( let i = 0; i < props.candies.length; i++ ) {
+      for( const position of props.candies[i].positions ) {
+        const candy = new Candy( position.x, position.y, position.z, props.candies[i].category )
+        this.add( candy )
+        this.candies.push( candy )
+      }
     }
 
     this.stars = []
