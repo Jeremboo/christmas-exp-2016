@@ -10,7 +10,8 @@ const props = {
     position: new Vector3(0, 254, 143)
   },
   shader: {
-    ceil: 0.95
+    ceil: 0.95,
+    amplitude: 8.0
   },
   lightPosition: new Vector3(0.0, 1.0, 0.0),
   objects: new Map(),

@@ -23,7 +23,6 @@ export default class Planet extends Mesh {
     const textureTool = new ThreejsTextureTool();
 
     const biomeTextureTool = textureTool.createImageTexture('assets/images/biome.jpg', 'Biome');
-    const heightMapTextureTool = textureTool.createImageTexture('assets/images/heightMap.jpg', 'HeightMap');
 
     const material = new ShaderMaterial({
       vertexShader,
@@ -41,8 +40,11 @@ export default class Planet extends Mesh {
           type: 'f',
           value: 0.9
         },
-        uTexture: biomeTextureTool.uniform,
-        uHeightMap: heightMapTextureTool.uniform,
+        amplitude: {
+          type: 'f',
+          value: 8.0
+        },
+        uTexture: biomeTextureTool.uniform
       },
       transparent: true
     })
@@ -146,6 +148,8 @@ export default class Planet extends Mesh {
     localVector = worldToLocalDirection(this, this.worldLightDirection, localVector);
     this.material.uniforms.uLight.value = localVector;
     this.material.uniforms.uCeil.value = props.shader.ceil;
+
+    this.material.uniforms.amplitude.value = props.shader.amplitude
 
     this.counter += 0.05
   }
