@@ -1,5 +1,14 @@
 import { Matrix4, Vector3, Euler } from 'three';
 
+export const toRadians = angle => angle * (Math.PI / 180);
+export const getRandomFloat = (min, max) => Math.random() * (max - min) + min;
+export const getRandomEuler = () => new Euler(
+  getRandomFloat(0, 6.2831),
+  getRandomFloat(0, 6.2831),
+  getRandomFloat(0, 6.2831),
+);
+
+
 export const getRotationMatrix = vectRotation => {
   const m = new Matrix4();
   const m1 = new Matrix4();
@@ -16,19 +25,16 @@ export const getRotationMatrix = vectRotation => {
   return m;
 };
 
-export const toRadians = angle => angle * (Math.PI / 180);
+export const getRandomNormalizedVector3 = () => new Vector3(
+  getRandomFloat(-1, 1),
+  getRandomFloat(-1, 1),
+  getRandomFloat(-1, 1),
+);
 
 export const getNormalizedPosFromScreen = (x, y) => new Vector3(
   (( x / window.innerWidth ) * 2) - 1,
   -(( y / window.innerHeight ) * 2) + 1,
   0,
-);
-
-export const getRandomFloat = (min, max) => Math.random() * (max - min) + min;
-export const getRandomEuler = () => new Euler(
-  getRandomFloat(0, 6.2831),
-  getRandomFloat(0, 6.2831),
-  getRandomFloat(0, 6.2831),
 );
 
 export const worldToLocalDirection = ( object, worldDirectionVector, localDirectionVector ) => {

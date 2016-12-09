@@ -1,22 +1,14 @@
 import { Object3D, Vector3, Ray } from 'three'
 
 import props from '../core/props';
-import { getRandomFloat, toRadians } from '../core/utils';
+import { getRandomFloat, toRadians, getRandomNormalizedVector3 } from '../core/utils';
 
 
 export default class Item extends Object3D {
-  constructor(itemName, pos) {
+  constructor(itemName, pos = getRandomNormalizedVector3()) {
     super();
 
-    // Position on the sphere
-    if (pos) {
-      this.position.copy(pos);
-    } else {
-      this.position.x = Math.random() * 2 - 1;
-      this.position.y = Math.random() * 2 - 1;
-      this.position.z = Math.random() * 2 - 1;
-    }
-
+    this.position.copy(pos);
     this.position.normalize();
     this.position.multiplyScalar( 202 );
 
@@ -30,7 +22,7 @@ export default class Item extends Object3D {
     const angle = Math.acos(ray.direction.clone().dot(this.up));
     this.quaternion.setFromAxisAngle(axis, angle);
 
-    // Add and custom Item
+    // Add item object on the Item
     if (itemName || itemName.length > 0) {
       this.item = props.objects.get(itemName).clone();
       this.add(this.item);

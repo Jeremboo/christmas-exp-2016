@@ -8,7 +8,7 @@ export default class Mountain extends Item {
   constructor() {
     super('mountain');
 
-    this.item.scale.multiplyScalar(getRandomFloat(2, 3));
+    this.item.scale.multiplyScalar(getRandomFloat(2.5, 3));
     super.naturalCustomize();
   }
 
