@@ -4,14 +4,15 @@ import Item from './_item';
 import { getRandomFloat } from '../core/utils';
 
 
-export default class Dir extends Item {
+export default class Mountain extends Item {
   constructor() {
-    super('dir');
+    super('mountain');
 
+    this.item.scale.multiplyScalar(getRandomFloat(2, 3));
     super.naturalCustomize();
   }
 
-  update() {
+  update( ) {
     super.update();
   }
 }

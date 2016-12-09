@@ -1,32 +1,32 @@
-import { PerspectiveCamera, WebGLRenderer, Raycaster } from 'three'
-import MainScene from '../scenes/mainScene'
+import { PerspectiveCamera, WebGLRenderer, Raycaster } from 'three';
+import MainScene from '../scenes/mainScene';
 
 import { getNormalizedPosFromScreen } from './utils';
 import props from './props';
 
-import HUD from './hud'
+import HUD from './hud';
 
 export default class Engine {
-  constructor( container ) {
-    this.camera = new PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0.1, 1000 )
-    this.camera.position.set( 0, 0, 0 )
-    this.camera.lookAt( 0, 0, 0 )
+  constructor(container) {
+    this.camera = new PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+    this.camera.position.set(0, 0, 0);
+    this.camera.lookAt(0, 0, 0);
 
-    this.renderer = new WebGLRenderer( { antialias: true } )
-    this.renderer.setPixelRatio( window.devicePixelRatio )
-    this.renderer.setSize( this.innerWidth, this.innerHeight )
-    this.renderer.setClearColor( 0x292929 )
-    container.appendChild( this.renderer.domElement )
+    this.renderer = new WebGLRenderer({ antialias: true });
+    this.renderer.setPixelRatio(window.devicePixelRatio);
+    this.renderer.setSize(this.innerWidth, this.innerHeight);
+    this.renderer.setClearColor(0x292929);
+    container.appendChild(this.renderer.domElement);
 
-    const fps = 120
-    this.fpsInterval = 1000 / fps
-    this.then = Date.now()
+    const fps = 120;
+    this.fpsInterval = 1000 / fps;
+    this.then = Date.now();
 
-    this.init()
+    this.init();
   }
 
   init() {
-    this.scene = new MainScene()
+    this.scene = new MainScene();
 
     // DRAGGING SPHERE
     this.planetSelected = false;
@@ -40,63 +40,63 @@ export default class Engine {
     this.onMouseUp = this.onMouseUp.bind(this);
 
     // START
-    this.resize()
-    this.loop()
+    this.resize();
+    this.loop();
 
-    window.addEventListener( 'resize', this.resize, false )
-    window.addEventListener( 'mousemove', this.onMouseMove, false );
-    window.addEventListener( 'mousedown', this.onMouseDown, false );
-    window.addEventListener( 'mouseup', this.onMouseUp, false );
+    window.addEventListener('resize', this.resize, false);
+    window.addEventListener('mousemove', this.onMouseMove, false);
+    window.addEventListener('mousedown', this.onMouseDown, false);
+    window.addEventListener('mouseup', this.onMouseUp, false);
   }
 
   loop() {
-    this.raf = window.requestAnimationFrame( this.loop )
+    this.raf = window.requestAnimationFrame(this.loop);
 
-    const now = Date.now()
-    const delta = now - this.then
+    const now = Date.now();
+    const delta = now - this.then;
 
-    if( delta > this.fpsInterval ) {
-      this.scene.update()
-      this.camera.rotation.setFromVector3( props.camera.rotation )
-      this.camera.position.copy( props.camera.position )
-      this.renderer.render( this.scene, this.camera )
-      this.then = now
+    if(delta > this.fpsInterval) {
+      this.scene.update();
+      this.camera.rotation.setFromVector3(props.camera.rotation);
+      this.camera.position.copy(props.camera.position);
+      this.renderer.render(this.scene, this.camera);
+      this.then = now;
     }
   }
 
   resize() {
-    this.innerWidth = window.innerWidth
-    this.innerHeight = window.innerHeight
+    this.innerWidth = window.innerWidth;
+    this.innerHeight = window.innerHeight;
 
-    this.camera.aspect = this.innerWidth / this.innerHeight
-    this.camera.updateProjectionMatrix()
+    this.camera.aspect = this.innerWidth / this.innerHeight;
+    this.camera.updateProjectionMatrix();
 
-    this.renderer.setSize( this.innerWidth, this.innerHeight )
+    this.renderer.setSize(this.innerWidth, this.innerHeight);
   }
 
   onMouseMove(e) {
-    if ( this.planetSelected ) {
+    if (this.planetSelected) {
       this.scene.planet.updateDragging(getNormalizedPosFromScreen(e.clientX, e.clientY));
     }
   }
 
   onMouseDown(e) {
     const mouseNormToScreen = getNormalizedPosFromScreen(e.clientX, e.clientY);
-    this.raycaster.setFromCamera(mouseNormToScreen, this.camera );
-    const intersects = this.raycaster.intersectObject( this.scene.planet, true );
-    if( intersects.length > 0 ) {
-      if( intersects[0].object.name === 'planet' || intersects[0].object.parent.name === 'item') {
+    this.raycaster.setFromCamera(mouseNormToScreen, this.camera);
+    const intersects = this.raycaster.intersectObject(this.scene.planet, true);
+    if(intersects.length > 0) {
+      if(intersects[0].object.name === 'planet' || intersects[0].object.parent.name === 'item') {
         this.scene.planet.startDragging(mouseNormToScreen);
         this.planetSelected = true;
         document.body.style.cursor = 'move';
-      } else if( intersects[0].object.name === 'candy' ) {
-        intersects[0].object.parent.isClicked()
+      } else if(intersects[0].object.name === 'candy') {
+        intersects[0].object.parent.isClicked();
       }
     }
   }
 
   onMouseUp() {
-    if ( this.planetSelected ) {
+    if (this.planetSelected) {
       this.planetSelected = false;
       document.body.style.cursor = 'auto';
     }

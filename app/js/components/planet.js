@@ -1,41 +1,41 @@
-import { Mesh, SphereGeometry, ShaderMaterial, Vector3, Quaternion, Euler } from 'three'
-import ThreejsTextureTool from 'threejs-texture-tool'
+import { Mesh, SphereGeometry, ShaderMaterial, Vector3, Quaternion, Euler } from 'three';
+import ThreejsTextureTool from 'threejs-texture-tool';
 
 import { toRadians, worldToLocalDirection } from '../core/utils';
 import props from '../core/props';
 
 import ChristmasTree from './christmasTree';
 import Tree from './tree';
-import Dir from './dir';
-import Mount from './mount';
+import Deer from './deer';
+import Mountain from './mountain';
 import Candy from './candy';
-import Star from './star'
+import Star from './star';
 
 const glslify = require( 'glslify' );
 
 const SIZE = 200;
-const vertexShader = glslify( '../shaders/planet-vs.glsl' )
-const fragmentShader = glslify( '../shaders/planet-fs.glsl' )
+const vertexShader = glslify( '../shaders/planet-vs.glsl' );
+const fragmentShader = glslify( '../shaders/planet-fs.glsl' );
 
 export default class Planet extends Mesh {
   constructor() {
-    const geometry = new SphereGeometry( SIZE, 100, 100 )
+    const geometry = new SphereGeometry(SIZE, 100, 100);
     const textureTool = new ThreejsTextureTool();
 
     const biomeTextureTool = textureTool.createImageTexture('assets/images/biome.jpg', 'Biome');
     const heightMapTextureTool = textureTool.createImageTexture('assets/images/heightMap.jpg', 'HeightMap');
 
-    const material = new ShaderMaterial( {
+    const material = new ShaderMaterial({
       vertexShader,
       fragmentShader,
       uniforms: {
         uColor: {
           type: 'v3',
-          value: new Vector3( 0.93, 0.94, 0.95 )
+          value: new Vector3(0.93, 0.94, 0.95)
         },
         uLight: {
           type: 'v3',
-          value: new Vector3( 0, 80, 150 )
+          value: new Vector3(0, 80, 150)
         },
         uCeil: {
           type: 'f',
@@ -45,9 +45,9 @@ export default class Planet extends Mesh {
         uHeightMap: heightMapTextureTool.uniform,
       },
       transparent: true
-    } )
+    })
 
-    super( geometry, material )
+    super(geometry, material);
 
     this.savedQuaternions = new Quaternion();
     this.baseMousePos = new Vector3();
@@ -68,34 +68,34 @@ export default class Planet extends Mesh {
       this.trees.push(tree);
     }
 
-    this.mounts = [];
+    this.mountains = [];
     for (let i = 0; i < 100; i++) {
-      const mount = new Mount();
-      this.add(mount);
-      this.mounts.push(mount);
+      const mountain = new Mountain();
+      this.add(mountain);
+      this.mountains.push(mountain);
     }
 
-    this.dirs = [];
+    this.deers = [];
     for (let i = 0; i < 50; i++) {
-      const dir = new Dir();
-      this.add(dir);
-      this.dirs.push(dir);
+      const deer = new Deer();
+      this.add(deer);
+      this.deers.push(deer);
     }
 
-    this.candies = []
-    for( let i = 0; i < props.candies.length; i++ ) {
-      for( const position of props.candies[i].positions ) {
-        const candy = new Candy( position.x, position.y, position.z, props.candies[i].category )
-        this.add( candy )
-        this.candies.push( candy )
+    this.candies = [];
+    for (let i = 0; i < props.candies.length; i++) {
+      for (let j = 0; j < props.candies[i].positions.length; j++) {
+        const candy = new Candy(props.candies[i].positions[j].x, props.candies[i].positions[j].y, props.candies[i].positions[j].z, props.candies[i].category);
+        this.add(candy);
+        this.candies.push(candy);
       }
     }
 
-    this.stars = []
-    for( let j = 0; j < 300; j++ ) {
-      const star = new Star()
-      this.add( star )
-      this.stars.push( star )
+    this.stars = [];
+    for (let i = 0; i < 300; i++) {
+      const star = new Star();
+      this.add(star);
+      this.stars.push(star);
     }
 
     // For raycaster
@@ -128,26 +128,24 @@ export default class Planet extends Mesh {
     for (let i = this.trees.length - 1; i >= 0; i--) {
       this.trees[i].update();
     }
-    for (let i = this.mounts.length - 1; i >= 0; i--) {
-      this.mounts[i].update();
+    for (let i = this.mountains.length - 1; i >= 0; i--) {
+      this.mountains[i].update();
     }
-    for (let i = this.dirs.length - 1; i >= 0; i--) {
-      this.dirs[i].update();
+    for (let i = this.deers.length - 1; i >= 0; i--) {
+      this.deers[i].update();
     }
-
-    for( const star of this.stars ) {
-      star.update( this.counter + this.stars.indexOf( star ) )
+    for (let i = this.stars.length - 1; i >= 0; i--) {
+      this.stars[i].update(this.counter + i);
     }
-
-    for( const candy of this.candies ) {
-      candy.update( this.counter + this.candies.indexOf( candy ) )
+    for (let i = this.candies.length - 1; i >= 0; i--) {
+      this.candies[i].update(this.counter);
     }
 
     // update light position
     let localVector = new Vector3()
-    localVector = worldToLocalDirection( this, this.worldLightDirection, localVector )
-    this.material.uniforms.uLight.value = localVector
-    this.material.uniforms.uCeil.value = props.shader.ceil
+    localVector = worldToLocalDirection(this, this.worldLightDirection, localVector);
+    this.material.uniforms.uLight.value = localVector;
+    this.material.uniforms.uCeil.value = props.shader.ceil;
 
     this.counter += 0.05
   }

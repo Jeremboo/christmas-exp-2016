@@ -1,4 +1,4 @@
-import { Object3D, CubeGeometry, MeshBasicMaterial, Mesh, Ray, Vector3 } from 'three'
+import { CubeGeometry, MeshBasicMaterial, Mesh, Vector3 } from 'three'
 import HUD from '../core/hud'
 
 import Item from './_item';

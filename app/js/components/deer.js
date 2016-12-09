@@ -4,15 +4,14 @@ import Item from './_item';
 import { getRandomFloat } from '../core/utils';
 
 
-export default class Mount extends Item {
+export default class Deer extends Item {
   constructor() {
-    super('mount');
+    super('deer');
 
-    this.item.scale.multiplyScalar(getRandomFloat(2, 3));
     super.naturalCustomize();
   }
 
-  update( ) {
+  update() {
     super.update();
   }
 }

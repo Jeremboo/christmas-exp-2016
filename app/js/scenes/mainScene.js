@@ -10,15 +10,15 @@ export default class MainScene extends Scene {
     this.meshCount = 0;
     this.meshListeners = [];
 
-    const mainLight = new HemisphereLight( 0xffffff, 0x072a3e, 1 );
-    mainLight.position.set( 0, 400, 200);
-    this.add( mainLight );
+    const mainLight = new HemisphereLight(0xffffff, 0x072a3e, 1);
+    mainLight.position.set(0, 400, 200);
+    this.add(mainLight);
 
     this.skybox = new Skybox()
-    this.add( this.skybox );
+    this.add(this.skybox);
 
     this.planet = new Planet()
-    this.addMesh( this.planet );
+    this.addMesh(this.planet);
   }
 
   update() {

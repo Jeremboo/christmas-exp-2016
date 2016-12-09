@@ -75,7 +75,7 @@ const props = {
       ],
     },
     {
-      name: 'mount',
+      name: 'mountain',
       ex: 'json',
       children: [
         'arm_left',
@@ -87,7 +87,7 @@ const props = {
       ],
     },
     {
-      name: 'dir',
+      name: 'deer',
       ex: 'json',
       children: [
         'Capsule.1',
