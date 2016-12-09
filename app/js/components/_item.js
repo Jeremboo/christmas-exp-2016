@@ -5,13 +5,18 @@ import { getRandomFloat, toRadians } from '../core/utils';
 
 
 export default class Item extends Object3D {
-  constructor(itemName) {
+  constructor(itemName, pos) {
     super();
 
     // Position on the sphere
-    this.position.x = Math.random() * 2 - 1;
-    this.position.y = Math.random() * 2 - 1;
-    this.position.z = Math.random() * 2 - 1;
+    if (pos) {
+      this.position.copy(pos);
+    } else {
+      this.position.x = Math.random() * 2 - 1;
+      this.position.y = Math.random() * 2 - 1;
+      this.position.z = Math.random() * 2 - 1;
+    }
+
     this.position.normalize();
     this.position.multiplyScalar( 202 );
 
@@ -26,8 +31,10 @@ export default class Item extends Object3D {
     this.quaternion.setFromAxisAngle(axis, angle);
 
     // Add and custom Item
-    this.item = props.objects.get(itemName).clone();
-    this.add(this.item);
+    if (itemName || itemName.length > 0) {
+      this.item = props.objects.get(itemName).clone();
+      this.add(this.item);
+    }
   }
 
   naturalCustomize() {
