@@ -11,6 +11,7 @@ export default class ChristmasTree extends Item {
   }
 
   update( ) {
+    super.update();
     // get dist runned
     const newWorldPosition = new Vector3().applyMatrix4( this.matrixWorld );
     const dist = this.oldWorldPosition.clone().sub(newWorldPosition).multiplyScalar(0.9);

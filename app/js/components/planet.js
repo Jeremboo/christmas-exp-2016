@@ -76,7 +76,7 @@ export default class Planet extends Mesh {
     }
 
     this.dirs = [];
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 50; i++) {
       const dir = new Dir();
       this.add(dir);
       this.dirs.push(dir);
@@ -119,9 +119,18 @@ export default class Planet extends Mesh {
     ));
     this.quaternion.multiplyQuaternions(deltaRotationQuaternion, this.savedQuaternions);
 
-    // update christmasTrees
+    // update objects
     for (let i = this.christmasTrees.length - 1; i >= 0; i--) {
       this.christmasTrees[i].update();
+    }
+    for (let i = this.trees.length - 1; i >= 0; i--) {
+      this.trees[i].update();
+    }
+    for (let i = this.mounts.length - 1; i >= 0; i--) {
+      this.mounts[i].update();
+    }
+    for (let i = this.dirs.length - 1; i >= 0; i--) {
+      this.dirs[i].update();
     }
 
     for( const star of this.stars ) {

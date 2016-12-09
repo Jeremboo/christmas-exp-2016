@@ -12,5 +12,7 @@ export default class Mount extends Item {
     super.naturalCustomize();
   }
 
-  update( ) {}
+  update( ) {
+    super.update();
+  }
 }

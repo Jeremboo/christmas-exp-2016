@@ -11,5 +11,7 @@ export default class Dir extends Item {
     super.naturalCustomize();
   }
 
-  update() {}
+  update() {
+    super.update();
+  }
 }
