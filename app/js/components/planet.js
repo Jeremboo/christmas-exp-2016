@@ -13,13 +13,12 @@ import Star from './star';
 
 const glslify = require( 'glslify' );
 
-const SIZE = 200;
 const vertexShader = glslify( '../shaders/planet-vs.glsl' );
 const fragmentShader = glslify( '../shaders/planet-fs.glsl' );
 
 export default class Planet extends Mesh {
   constructor() {
-    const geometry = new SphereGeometry(SIZE, 100, 100);
+    const geometry = new SphereGeometry(props.planet.size, 100, 100);
     const textureTool = new ThreejsTextureTool();
 
     const biomeTextureTool = textureTool.createImageTexture('assets/images/biome.jpg', 'Biome');

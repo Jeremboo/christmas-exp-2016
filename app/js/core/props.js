@@ -9,6 +9,10 @@ const props = {
     rotation: new Vector3(-0.3, 0, 0),
     position: new Vector3(0, 254, 143)
   },
+  planet: {
+    size: 200,
+    vanishingDist: 5.0,
+  },
   shader: {
     ceil: 0.95,
     amplitude: 8.0

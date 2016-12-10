@@ -11,6 +11,8 @@ domready(() => {
   console.log('[DOM] - DOM is ready')
 
   const gui = new dat.GUI();
+
+  // Rotation
   const rotationFolder = gui.addFolder('Rotation');
   rotationFolder.add(props.rotation, 'force', 10, 1000);
   rotationFolder.add(props.rotation, 'vel', 0.01, 0.2);
@@ -32,6 +34,11 @@ domready(() => {
   shaderFolder.add(props.shader, 'ceil', 0.0, 1.0).step(0.01);
   shaderFolder.add(props.shader, 'amplitude', 0.1, 20.0).step(0.1);
   shaderFolder.open();
+
+  // Planete
+  const planetFolder = gui.addFolder('Planet');
+  planetFolder.add(props.planet, 'vanishingDist', 0.1, 7).step(0.01);
+  planetFolder.open();
 
   // gui.close();
 
