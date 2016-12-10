@@ -3,6 +3,8 @@ import { loadAssetsFromProps } from './loaderManager';
 
 class HUD {
   constructor( candies ) {
+    this.callbackEndGame = f => f;
+
     this.hud = document.getElementById( 'hud' )
     this.loader = document.getElementById( 'loader' )
 
@@ -52,12 +54,17 @@ class HUD {
   /**
    * GAME
    **/
-  startGame() {
-    // TODO hide loader
-    this.updateLoader(100);
-
+  startGame(callbackEndGame) {
     console.log('startGame');
-    // TODO show scene and move camera
+
+    this.callbackEndGame = callbackEndGame;
+    this.updateLoader(100);
+    // TODO hide loader
+  }
+
+  endGame() {
+    console.log( 'YAS ! Good job mate' )
+    this.callbackEndGame();
   }
 
   checkEndGame() {
@@ -70,9 +77,7 @@ class HUD {
       }
     }
 
-    if( endGame ) {
-      console.log( 'YAS ! Good job mate' )
-    }
+    if( endGame ) this.endGame();
   }
 
   /**

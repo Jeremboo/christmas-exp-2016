@@ -4,22 +4,24 @@ import { PerspectiveCamera, WebGLRenderer, Raycaster } from 'three';
 import WAGNER from '@superguigui/wagner';
 import VignettePass from '@superguigui/wagner/src/passes/vignette/VignettePass';
 
+import { TweenLite, TimelineLite, Power2, Power3 } from 'gsap';
 import MainScene from '../scenes/mainScene';
-import { getNormalizedPosFromScreen } from './utils';
+
+import { getNormalizedPosFromScreen, toRadians } from './utils';
 import props from './props';
 
 import HUD from './hud';
 
 export default class Engine {
   constructor(container) {
-    this.camera = new PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+    this.camera = new PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 2000);
     this.camera.position.set(0, 0, 0);
     this.camera.lookAt(0, 0, 0);
 
     this.renderer = new WebGLRenderer({ antialias: true });
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.setSize(this.innerWidth, this.innerHeight);
-    this.renderer.setClearColor(0x292929);
+    this.renderer.setClearColor(0x02061D);
     container.appendChild(this.renderer.domElement);
 
     const fps = 120;
@@ -45,6 +47,8 @@ export default class Engine {
     this.onMouseMove = this.onMouseMove.bind(this);
     this.onMouseDown = this.onMouseDown.bind(this);
     this.onMouseUp = this.onMouseUp.bind(this);
+    this.inGamePositionning = this.inGamePositionning.bind(this);
+    this.endGamePositionning = this.endGamePositionning.bind(this);
 
     // START
     this.scene = new MainScene();
@@ -52,9 +56,12 @@ export default class Engine {
     this.resize();
     this.loop();
 
+    TweenLite.to(props.camera.position, 8, { y: 430, ease: Power2.easeOut });
+
     HUD.load(() => {
       this.scene.planet.placeItems(() => {
-        HUD.startGame();
+        this.inGamePositionning();
+        HUD.startGame(this.endGamePositionning);
       });
     });
 
@@ -68,6 +75,25 @@ export default class Engine {
     // INIT POST PROCESS
     this.composer = new WAGNER.Composer(this.renderer);
     this.vignette = new VignettePass({ reduction: 0.5 });
+  }
+
+  inGamePositionning() {
+    props.rotation.autoRotate = false;
+    const t = new TimelineLite();
+    t.to(props.camera.position, 4, { y: 255, z: 150, ease: Power2.easeOut });
+    t.to(props.camera.rotation, 2, { x: -0.3, ease: Power2.easeOut }, '-=4');
+
+    t.to(props.shader, 2, { ceil: 0.95, ease: Power3.easeOut }, '-=2');
+    t.play();
+  }
+
+  endGamePositionning() {
+    props.rotation.autoRotate = true;
+    const t = new TimelineLite();
+    t.to(props.camera.rotation, 3, { x: toRadians(-90), ease: Power2.easeOut });
+    t.to(props.camera.position, 4, { y: 910, z: 0, ease: Power2.easeOut }, '-=3');
+    t.to(props.shader, 5, { ceil: 0, ease: Power3.easeOut }, '-=4');
+    t.play();
   }
 
   loop() {

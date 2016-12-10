@@ -7,7 +7,7 @@ const fragmentShader = glslify( '../shaders/skybox-fs.glsl' )
 
 export default class Skybox extends Mesh {
   constructor() {
-    const sphereGeometry = new SphereGeometry( 500, 30, 30 )
+    const sphereGeometry = new SphereGeometry( 1000, 30, 30 )
     const sphereMaterial = new ShaderMaterial( {
       vertexShader,
       fragmentShader,

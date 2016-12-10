@@ -54,9 +54,9 @@ export default class Planet extends Mesh {
     this.name = 'planet'
 
     this.savedQuaternions = new Quaternion();
-    this.baseMousePos = new Vector3();
-    this.currentMousePos = new Vector3();
-    this.targetedMousePos = new Vector3();
+    this.basePos = new Vector3();
+    this.currentPos = new Vector3();
+    this.targetedPos = new Vector3();
 
     this.worldLightDirection = props.lightPosition;
     this.counter = 0;
@@ -112,12 +112,17 @@ export default class Planet extends Mesh {
   }
 
   update() {
-    // updateRotation
-    const dist = this.targetedMousePos.clone().sub(this.currentMousePos);
-    const vel = dist.clone().multiplyScalar(props.rotation.vel);
-    this.currentMousePos.add(vel);
+    if (props.rotation.autoRotate) {
+      this.targetedPos.x += 0.003;
+      this.targetedPos.y += 0.002;
+    }
 
-    const delta = this.currentMousePos.clone().sub(this.baseMousePos)
+    // updateRotation
+    const dist = this.targetedPos.clone().sub(this.currentPos);
+    const vel = dist.clone().multiplyScalar(props.rotation.vel);
+    this.currentPos.add(vel);
+
+    const delta = this.currentPos.clone().sub(this.basePos)
     const deltaRotationQuaternion = new Quaternion()
     .setFromEuler(new Euler(
        toRadians(-delta.y * props.rotation.force),
@@ -153,19 +158,19 @@ export default class Planet extends Mesh {
     this.material.uniforms.uLight.value = localVector;
     this.material.uniforms.uCeil.value = props.shader.ceil;
 
-    this.material.uniforms.amplitude.value = props.shader.amplitude
+    this.material.uniforms.amplitude.value = props.shader.amplitude;
 
-    this.counter += 0.05
+    this.counter += 0.05;
   }
 
   startDragging(mousePos) {
-    this.baseMousePos.copy(mousePos);
-    this.currentMousePos.copy(mousePos);
-    this.targetedMousePos.copy(mousePos);
+    this.basePos.copy(mousePos);
+    this.currentPos.copy(mousePos);
+    this.targetedPos.copy(mousePos);
     this.savedQuaternions.copy(this.quaternion);
   }
 
-  updateDragging(targetedMousePos) {
-    this.targetedMousePos.copy(targetedMousePos);
+  updateDragging(targetedPos) {
+    this.targetedPos.copy(targetedPos);
   }
 }

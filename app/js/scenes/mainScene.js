@@ -14,8 +14,8 @@ export default class MainScene extends Scene {
     mainLight.position.set(0, 400, 200);
     this.add(mainLight);
 
-    this.skybox = new Skybox()
-    this.add(this.skybox);
+    // this.skybox = new Skybox()
+    // this.add(this.skybox);
 
     this.planet = new Planet()
     this.addMesh(this.planet);
