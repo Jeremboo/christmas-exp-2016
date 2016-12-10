@@ -1,7 +1,7 @@
 import { Matrix4, Vector3, Euler } from 'three';
 
 export const toRadians = angle => angle * (Math.PI / 180);
-export const getRandomFloat = (min, max) => Math.random() * (max - min) + min;
+export const getRandomFloat = (min = 0, max = 1) => Math.random() * (max - min) + min;
 export const getRandomEuler = () => new Euler(
   getRandomFloat(0, 6.2831),
   getRandomFloat(0, 6.2831),

@@ -10,7 +10,7 @@ export default class Item extends Object3D {
 
     this.position.copy(pos);
     this.position.normalize();
-    this.position.multiplyScalar( props.planet.size );
+    this.position.multiplyScalar( props.planet.size + 2);
 
     // Make object perpendicular
     this.up.negate();
@@ -30,7 +30,7 @@ export default class Item extends Object3D {
   }
 
   naturalCustomize() {
-    this.item.scale.multiplyScalar(getRandomFloat(0.5, 1.5));
+    this.item.scale.multiplyScalar(getRandomFloat(0.8, 1.8));
     this.item.rotation.set(
       toRadians(getRandomFloat(0, 5)),
       toRadians(getRandomFloat(0, 360)),

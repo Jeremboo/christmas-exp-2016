@@ -1,5 +1,7 @@
 import { Vector3 } from 'three'
 
+import { getRandomNormalizedVector3 } from './utils';
+
 const props = {
   loader: 0,
   rotation: {
@@ -17,7 +19,7 @@ const props = {
     endView: false,
   },
   shader: {
-    ceil: 0.0,
+    ceil: 10.0,
     amplitude: 8.0,
     postProcess: true
   },
@@ -27,25 +29,25 @@ const props = {
     {
       category: 'lollipop',
       positions: [
-        { x: Math.random() * 2 - 1, y: Math.random() * 2 - 1, z: Math.random() * 2 - 1 },
-        { x: Math.random() * 2 - 1, y: Math.random() * 2 - 1, z: Math.random() * 2 - 1 },
-        { x: Math.random() * 2 - 1, y: Math.random() * 2 - 1, z: Math.random() * 2 - 1 }
+        getRandomNormalizedVector3(),
+        getRandomNormalizedVector3(),
+        getRandomNormalizedVector3(),
       ]
     },
     {
-      category: 'candy',
+      category: 'peppermint',
       positions: [
-        { x: Math.random() * 2 - 1, y: Math.random() * 2 - 1, z: Math.random() * 2 - 1 },
-        { x: Math.random() * 2 - 1, y: Math.random() * 2 - 1, z: Math.random() * 2 - 1 },
-        { x: Math.random() * 2 - 1, y: Math.random() * 2 - 1, z: Math.random() * 2 - 1 }
+        getRandomNormalizedVector3(),
+        getRandomNormalizedVector3(),
+        getRandomNormalizedVector3(),
       ]
     },
     {
       category: 'stick',
       positions: [
-        { x: Math.random() * 2 - 1, y: Math.random() * 2 - 1, z: Math.random() * 2 - 1 },
-        { x: Math.random() * 2 - 1, y: Math.random() * 2 - 1, z: Math.random() * 2 - 1 },
-        { x: Math.random() * 2 - 1, y: Math.random() * 2 - 1, z: Math.random() * 2 - 1 }
+        getRandomNormalizedVector3(),
+        getRandomNormalizedVector3(),
+        getRandomNormalizedVector3(),
       ]
     },
   ],
@@ -93,6 +95,31 @@ const props = {
         'eye_right',
         'montagne.2',
         'nez',
+      ],
+    },
+    {
+      name: 'stick',
+      ex: 'json',
+      children: [
+        'Candy',
+      ],
+    },
+    {
+      name: 'peppermint',
+      ex: 'json',
+      children: [
+        'Cylindre',
+      ],
+    },
+    {
+      name: 'lollipop',
+      ex: 'json',
+      children: [
+        'Arrondi',
+        'Couvercle:1',
+        'Couvercle:2',
+        'Cylindre.001',
+        'Extrusion:contr\u00f4l\u00e9e',
       ],
     },
     {

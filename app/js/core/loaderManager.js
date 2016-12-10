@@ -61,7 +61,7 @@ export const loadAssetsFromProps = ({ onProgress = f => f, onComplete = f => f }
     const { name, children } = props.assets[i];
 
     if (children.length > 0) {
-      loadObj(`assets/${name}.json`, ( loadedObjs ) => {
+      loadObj(`assets/objects/${name}.json`, ( loadedObjs ) => {
         object = new Object3D();
         object.name = 'item';
         for (let j = 0; j < children.length; j++) {
