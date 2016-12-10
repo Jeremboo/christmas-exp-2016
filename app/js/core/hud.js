@@ -25,6 +25,9 @@ class HUD {
     this.checkFoundCandies()
   }
 
+  /**
+   * LOADER
+   **/
   updateLoader(purcent) {
     this.loader.innerHTML = purcent;
   }
@@ -46,26 +49,15 @@ class HUD {
     })
   }
 
+  /**
+   * GAME
+   **/
   startGame() {
     // TODO hide loader
     this.updateLoader(100);
 
     console.log('startGame');
     // TODO show scene and move camera
-  }
-
-  foundCandy( category ) {
-    this.candies[category].found++
-    this.checkFoundCandies()
-  }
-
-  checkFoundCandies() {
-    for( const key in this.candies ) {
-      const counter = document.getElementById( key )
-      counter.innerHTML = Math.min( this.candies[key].found, this.candies[key].total )  + ' / ' + this.candies[key].total
-    }
-
-    this.checkEndGame()
   }
 
   checkEndGame() {
@@ -81,6 +73,23 @@ class HUD {
     if( endGame ) {
       console.log( 'YAS ! Good job mate' )
     }
+  }
+
+  /**
+   * CANDY
+   **/
+  foundCandy( category ) {
+    this.candies[category].found++
+    this.checkFoundCandies()
+  }
+
+  checkFoundCandies() {
+    for( const key in this.candies ) {
+      const counter = document.getElementById( key )
+      counter.innerHTML = Math.min( this.candies[key].found, this.candies[key].total )  + ' / ' + this.candies[key].total
+    }
+
+    this.checkEndGame()
   }
 }
 
