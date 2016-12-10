@@ -1,4 +1,5 @@
 import { PerspectiveCamera, WebGLRenderer, Raycaster } from 'three';
+import { TweenLite, TimelineLite, Power2, Power3 } from 'gsap';
 import MainScene from '../scenes/mainScene';
 
 import { getNormalizedPosFromScreen } from './utils';
@@ -15,7 +16,7 @@ export default class Engine {
     this.renderer = new WebGLRenderer({ antialias: true });
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.setSize(this.innerWidth, this.innerHeight);
-    this.renderer.setClearColor(0x292929);
+    this.renderer.setClearColor(0x02061D);
     container.appendChild(this.renderer.domElement);
 
     const fps = 120;
@@ -36,6 +37,8 @@ export default class Engine {
     this.onMouseMove = this.onMouseMove.bind(this);
     this.onMouseDown = this.onMouseDown.bind(this);
     this.onMouseUp = this.onMouseUp.bind(this);
+    this.inGamePositionning = this.inGamePositionning.bind(this);
+    this.endGamePositionning = this.endGamePositionning.bind(this);
 
     // START
     this.scene = new MainScene();
@@ -43,9 +46,12 @@ export default class Engine {
     this.resize();
     this.loop();
 
+    TweenLite.to(props.camera.position, 8, { y: 430, ease: Power2.easeOut });
+
     HUD.load(() => {
       this.scene.planet.placeItems(() => {
-        HUD.startGame();
+        this.inGamePositionning();
+        HUD.startGame(this.endGamePositionning);
       });
     });
 
@@ -53,6 +59,22 @@ export default class Engine {
     window.addEventListener('mousemove', this.onMouseMove, false);
     window.addEventListener('mousedown', this.onMouseDown, false);
     window.addEventListener('mouseup', this.onMouseUp, false);
+  }
+
+  inGamePositionning() {
+    props.rotation.autoRotate = false;
+    const t = new TimelineLite();
+    t.to(props.camera.position, 4, { y: 255, z: 150, ease: Power2.easeOut });
+    t.to(props.shader, 2, { ceil: 0.95, ease: Power3.easeOut }, '-=2');
+    t.play();
+  }
+
+  endGamePositionning() {
+    props.rotation.autoRotate = true;
+    const t = new TimelineLite();
+    t.to(props.camera.position, 4, { y: 260, z: 800, ease: Power2.easeOut });
+    t.to(props.shader, 2, { ceil: 0, ease: Power3.easeOut }, '-=4');
+    t.play();
   }
 
   loop() {

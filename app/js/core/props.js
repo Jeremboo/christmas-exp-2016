@@ -3,19 +3,21 @@ import { Vector3 } from 'three'
 const props = {
   loader: 0,
   rotation: {
+    autoRotate: true,
     force: 100,
     vel: 0.1,
   },
   camera: {
     rotation: new Vector3(-0.3, 0, 0),
-    position: new Vector3(0, 254, 143)
+    position: new Vector3(0, 1000, 150), // y : 255
   },
   planet: {
     size: 200,
     vanishingDist: 5.0,
+    endView: false,
   },
   shader: {
-    ceil: 0.95,
+    ceil: 20, // 0.95,
     amplitude: 8.0
   },
   lightPosition: new Vector3(0.0, 1.0, 0.0),
