@@ -33,7 +33,7 @@ domready(() => {
 
   // Shader
   const shaderFolder = gui.addFolder('Shader');
-  shaderFolder.add(props.shader, 'ceil', 0.0, 10).step(0.01).listen();
+  shaderFolder.add(props.shader, 'ceil', 0.0, 1.0).step(0.01).listen();
   shaderFolder.add(props.shader, 'amplitude', 0.1, 20.0).step(0.1);
   shaderFolder.add(props.shader, 'postProcess');
   shaderFolder.open();
