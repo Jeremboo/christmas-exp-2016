@@ -2,7 +2,7 @@ import { PerspectiveCamera, WebGLRenderer, Raycaster } from 'three';
 import { TweenLite, TimelineLite, Power2, Power3 } from 'gsap';
 import MainScene from '../scenes/mainScene';
 
-import { getNormalizedPosFromScreen } from './utils';
+import { getNormalizedPosFromScreen, toRadians } from './utils';
 import props from './props';
 
 import HUD from './hud';
@@ -65,6 +65,8 @@ export default class Engine {
     props.rotation.autoRotate = false;
     const t = new TimelineLite();
     t.to(props.camera.position, 4, { y: 255, z: 150, ease: Power2.easeOut });
+    t.to(props.camera.rotation, 2, { x: -0.3, ease: Power2.easeOut }, '-=4');
+
     t.to(props.shader, 2, { ceil: 0.95, ease: Power3.easeOut }, '-=2');
     t.play();
   }
@@ -72,8 +74,9 @@ export default class Engine {
   endGamePositionning() {
     props.rotation.autoRotate = true;
     const t = new TimelineLite();
-    t.to(props.camera.position, 4, { y: 260, z: 800, ease: Power2.easeOut });
-    t.to(props.shader, 2, { ceil: 0, ease: Power3.easeOut }, '-=4');
+    t.to(props.camera.rotation, 3, { x: toRadians(-90), ease: Power2.easeOut });
+    t.to(props.camera.position, 4, { y: 910, z: 0, ease: Power2.easeOut }, '-=3');
+    t.to(props.shader, 5, { ceil: 0, ease: Power3.easeOut }, '-=4');
     t.play();
   }
 
