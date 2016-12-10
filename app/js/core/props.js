@@ -115,11 +115,11 @@ const props = {
       name: 'lollipop',
       ex: 'json',
       children: [
-        'Arrondi',
-        'Couvercle:1',
-        'Couvercle:2',
-        'Cylindre.001',
-        'Extrusion:contr\u00f4l\u00e9e',
+        'Arrondi.001',
+        'Couvercle:1.001',
+        'Couvercle:2.001',
+        'Cylindre',
+        'Extrusion:contr\u00f4l\u00e9e.001',
       ],
     },
     {
