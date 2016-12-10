@@ -26,8 +26,6 @@ export default class Engine {
   }
 
   init() {
-    this.scene = new MainScene();
-
     // DRAGGING SPHERE
     this.planetSelected = false;
     this.raycaster = new Raycaster();
@@ -40,8 +38,16 @@ export default class Engine {
     this.onMouseUp = this.onMouseUp.bind(this);
 
     // START
+    this.scene = new MainScene();
+
     this.resize();
     this.loop();
+
+    HUD.load(() => {
+      this.scene.planet.placeItems(() => {
+        HUD.startGame();
+      });
+    });
 
     window.addEventListener('resize', this.resize, false);
     window.addEventListener('mousemove', this.onMouseMove, false);

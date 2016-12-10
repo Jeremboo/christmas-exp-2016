@@ -1,15 +1,13 @@
 import domready from 'domready'
 import dat from 'dat-gui';
-import { Object3D, Mesh, MeshBasicMaterial, MeshFaceMaterial } from 'three';
 
 import Engine from './core/engine'
 import props from './core/props';
-import { loadObj, loadJSON } from './core/loaderManager';
-
 
 domready(() => {
   console.log('[DOM] - DOM is ready')
 
+  // GUI
   const gui = new dat.GUI();
 
   // Rotation
@@ -42,49 +40,7 @@ domready(() => {
 
   // gui.close();
 
-
-  function init() {
-    // TODO create custom trees with another colors
-    const container = document.getElementById('experiment')
-    const experiment = new Engine(container)
-  }
-
-  /**
-   * LOADER
-   */
-  let i, j;
-  let loader = 0;
-  const loaderI = 100 / props.assets.length;
-
-  function save(name, object) {
-    props.objects.set(name, object);
-    loader += loaderI;
-    console.log(`... ${loader}%`);
-
-    // TEST THE END
-    if (loader === 100) init();
-  }
-
-  console.log('... Loading');
-  for (i = 0; i < props.assets.length; i++) {
-    let object = null;
-    const { name, children } = props.assets[i];
-
-    if (children.length > 0) {
-      loadObj(`assets/${name}.json`, loadedObjs => {
-        object = new Object3D();
-        object.name = 'item';
-        for (j = 0; j < children.length; j++) {
-          object.add(loadedObjs.getObjectByName(children[j]))
-        }
-        save(name, object);
-      });
-    } else {
-      loadJSON(`assets/${name}.json`, (geometry, material) => {
-        object = new Mesh(geometry, new MeshFaceMaterial(material));
-        save(name, object);
-      });
-    }
-  }
-
-})
+  // INIT
+  const container = document.getElementById('experiment');
+  const experiment = new Engine(container);
+});

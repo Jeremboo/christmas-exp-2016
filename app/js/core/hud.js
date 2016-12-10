@@ -1,8 +1,10 @@
 import props from './props'
+import { loadAssetsFromProps } from './loaderManager';
 
 class HUD {
   constructor( candies ) {
-    this.el = document.getElementById( 'hud' )
+    this.hud = document.getElementById( 'hud' )
+    this.loader = document.getElementById( 'loader' )
 
     this.candies = {}
     for( const candy of candies ) {
@@ -10,7 +12,7 @@ class HUD {
       container.id = candy.category
       container.classList.add( 'counter' )
       container.classList.add( candy.category )
-      this.el.appendChild( container )
+      this.hud.appendChild( container )
 
       const entry = {
         category: candy.category,
@@ -21,6 +23,35 @@ class HUD {
     }
 
     this.checkFoundCandies()
+  }
+
+  updateLoader(purcent) {
+    this.loader.innerHTML = purcent;
+  }
+
+  load( callback ) {
+    // TODO show loader
+    this.updateLoader(10);
+    console.log('... Loading');
+
+    loadAssetsFromProps({
+      onProgress: ( status ) => {
+        console.log(status);
+        this.updateLoader(80 * status);
+      },
+      onComplete: () => {
+        this.updateLoader(80);
+        callback();
+      },
+    })
+  }
+
+  startGame() {
+    // TODO hide loader
+    this.updateLoader(100);
+
+    console.log('startGame');
+    // TODO show scene and move camera
   }
 
   foundCandy( category ) {

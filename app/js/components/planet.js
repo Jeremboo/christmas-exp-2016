@@ -50,40 +50,56 @@ export default class Planet extends Mesh {
 
     super(geometry, material);
 
+    // For raycaster
+    this.name = 'planet'
+
     this.savedQuaternions = new Quaternion();
     this.baseMousePos = new Vector3();
     this.currentMousePos = new Vector3();
     this.targetedMousePos = new Vector3();
 
+    this.worldLightDirection = props.lightPosition;
+    this.counter = 0;
+
+    this.stars = [];
     this.christmasTrees = [];
+    this.trees = [];
+    this.mountains = [];
+    this.deers = [];
+    this.candies = [];
+
+    for (let i = 0; i < 300; i++) {
+      const star = new Star();
+      this.add(star);
+      this.stars.push(star);
+    }
+  }
+
+  placeItems(callback) {
     for (let i = 0; i < 100; i++) {
       const christmasTree = new ChristmasTree();
       this.add(christmasTree);
       this.christmasTrees.push(christmasTree);
     }
 
-    this.trees = [];
     for (let i = 0; i < 100; i++) {
       const tree = new Tree();
       this.add(tree);
       this.trees.push(tree);
     }
 
-    this.mountains = [];
     for (let i = 0; i < 100; i++) {
       const mountain = new Mountain();
       this.add(mountain);
       this.mountains.push(mountain);
     }
 
-    this.deers = [];
     for (let i = 0; i < 50; i++) {
       const deer = new Deer();
       this.add(deer);
       this.deers.push(deer);
     }
 
-    this.candies = [];
     for (let i = 0; i < props.candies.length; i++) {
       for (let j = 0; j < props.candies[i].positions.length; j++) {
         const candy = new Candy(props.candies[i].positions[j].x, props.candies[i].positions[j].y, props.candies[i].positions[j].z, props.candies[i].category);
@@ -92,18 +108,7 @@ export default class Planet extends Mesh {
       }
     }
 
-    this.stars = [];
-    for (let i = 0; i < 300; i++) {
-      const star = new Star();
-      this.add(star);
-      this.stars.push(star);
-    }
-
-    // For raycaster
-    this.name = 'planet'
-
-    this.worldLightDirection = props.lightPosition
-    this.counter = 0
+    callback();
   }
 
   update() {

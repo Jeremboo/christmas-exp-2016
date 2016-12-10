@@ -42,3 +42,11 @@ export const worldToLocalDirection = ( object, worldDirectionVector, localDirect
   localDirectionVector.copy( worldDirectionVector ).applyQuaternion( object.getWorldQuaternion().inverse() )
   return localDirectionVector
 }
+
+export const easing = (target, value, { vel = 0.03, update = f => f, callback = f => f } = {}) => {
+  const f = (target - value) * vel;
+  update(f);
+  if (Math.abs(f) < 0.001) {
+    callback();
+  }
+}

@@ -178,8 +178,19 @@ td,
 th {
   padding: 0;
 }
-#texture-tool-wrapper {
-  display: none;
+.header {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  top: 20%;
+  font-size: 1.875rem;
+  color: #ecf0f1;
+  text-align: center;
 }
 .hud {
   width: 3.125rem;
@@ -219,16 +230,16 @@ th {
   overflow: hidden;
 }
 .counter.lollipop:before {
-  background-image: url("../assets/images/lollipop.png");
+  background-image: url("../../assets/images/lollipop.png");
 }
 .counter.candy:before {
-  background-image: url("../assets/images/candy.png");
+  background-image: url("../../assets/images/candy.png");
 }
 .counter.stick:before {
-  background-image: url("../assets/images/stick.png");
+  background-image: url("../../assets/images/stick.png");
 }
 .sound {
-  background: url("../assets/images/sound.png") no-repeat center center;
+  background: url("../../assets/images/sound.png") no-repeat center center;
   background-size: contain;
   border: none;
   -webkit-appearance: none;
@@ -240,4 +251,11 @@ th {
   position: absolute;
   bottom: 1.25rem;
   right: 1.25rem;
+}
+html,
+body {
+  background-color: #02061d;
+}
+#texture-tool-wrapper {
+  display: none;
 }

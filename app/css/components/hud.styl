@@ -1,0 +1,42 @@
+.hud
+  width rem( 50 )
+  display flex
+  flex-direction column
+  position absolute
+  top rem( 20 )
+  left rem( 20 )
+  user-select none
+  cursor default
+
+.counter
+  text-align center
+  color whiteColor
+  margin-bottom rem( 30 )
+  width 100%
+  position relative
+
+  &:before
+    content ''
+    background-size rem( 40 )
+    background-position center center
+    background-repeat no-repeat
+    border solid 1px whiteColor
+    border-radius 50%
+    margin-bottom rem( 10 )
+    width 100%
+    height rem( 50 )
+    display block
+    box-sizing border-box
+    overflow hidden
+
+  &.lollipop
+    &:before
+      background-image url( '../../assets/images/lollipop.png' )
+
+  &.candy
+    &:before
+      background-image url( '../../assets/images/candy.png' )
+
+  &.stick
+    &:before
+      background-image url( '../../assets/images/stick.png' )

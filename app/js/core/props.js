@@ -1,6 +1,7 @@
 import { Vector3 } from 'three'
 
 const props = {
+  loader: 0,
   rotation: {
     force: 100,
     vel: 0.1,
