@@ -1,6 +1,10 @@
 import { PerspectiveCamera, WebGLRenderer, Raycaster } from 'three';
-import MainScene from '../scenes/mainScene';
 
+// POST PROCESS
+import WAGNER from '@superguigui/wagner';
+import VignettePass from '@superguigui/wagner/src/passes/vignette/VignettePass';
+
+import MainScene from '../scenes/mainScene';
 import { getNormalizedPosFromScreen } from './utils';
 import props from './props';
 
@@ -21,6 +25,11 @@ export default class Engine {
     const fps = 120;
     this.fpsInterval = 1000 / fps;
     this.then = Date.now();
+
+    const usePostProcess = true
+    if( usePostProcess ) {
+      this.initPostProcessing()
+    }
 
     this.init();
   }
@@ -55,6 +64,12 @@ export default class Engine {
     window.addEventListener('mouseup', this.onMouseUp, false);
   }
 
+  initPostProcessing() {
+    // INIT POST PROCESS
+    this.composer = new WAGNER.Composer(this.renderer);
+    this.vignette = new VignettePass({ reduction: 0.5 });
+  }
+
   loop() {
     this.raf = window.requestAnimationFrame(this.loop);
 
@@ -65,7 +80,18 @@ export default class Engine {
       this.scene.update();
       this.camera.rotation.setFromVector3(props.camera.rotation);
       this.camera.position.copy(props.camera.position);
-      this.renderer.render(this.scene, this.camera);
+
+      // POST PROCESS RENDERING
+      if(props.shader.postProcess) {
+        this.renderer.autoClearColor = true;
+        this.composer.reset();
+        this.composer.render(this.scene, this.camera);
+        this.composer.pass(this.vignette);
+        this.composer.toScreen();
+      } else {
+        this.renderer.render(this.scene, this.camera);
+      }
+
       this.then = now;
     }
   }
@@ -73,6 +99,10 @@ export default class Engine {
   resize() {
     this.innerWidth = window.innerWidth;
     this.innerHeight = window.innerHeight;
+
+    if (this.composer) {
+      this.composer.setSize(this.innerWidth, this.innerHeight);
+    }
 
     this.camera.aspect = this.innerWidth / this.innerHeight;
     this.camera.updateProjectionMatrix();
