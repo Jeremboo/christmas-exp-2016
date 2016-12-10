@@ -7,8 +7,8 @@ import Item from './_item';
 
 
 export default class Candy extends Item {
-  constructor(category, position) {
-    super(category, position);
+  constructor(category, position, scale) {
+    super(category, position, scale);
 
     // Collider
     const cubeGeometry = new CubeGeometry( 5, 15, 5 )

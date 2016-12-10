@@ -29,28 +29,34 @@ const props = {
     {
       category: 'lollipop',
       positions: [
-        getRandomNormalizedVector3(),
-        getRandomNormalizedVector3(),
-        getRandomNormalizedVector3(),
+        { x: 0, y: 1, z: 0, scale: 1 },
+        { x: 0, y: 1, z: 0, scale: 1 },
+        { x: 0, y: 1, z: 0, scale: 1 }
       ]
     },
     {
       category: 'peppermint',
       positions: [
-        getRandomNormalizedVector3(),
-        getRandomNormalizedVector3(),
-        getRandomNormalizedVector3(),
+        { x: 0, y: 1, z: 0, scale: 1 },
+        { x: 0, y: 1, z: 0, scale: 1 },
+        { x: 0, y: 1, z: 0, scale: 1 }
       ]
     },
     {
       category: 'stick',
       positions: [
-        getRandomNormalizedVector3(),
-        getRandomNormalizedVector3(),
-        getRandomNormalizedVector3(),
+        { x: 0, y: 1, z: 0, scale: 1 },
+        { x: 0, y: 1, z: 0, scale: 1 },
+        { x: 0, y: 1, z: 0, scale: 1 }
       ]
     },
   ],
+  montains: [
+    { x: 1, y: 1, z: 0, scale: 3, rotation: 0 }
+  ],
+  trees: [],
+  christmasTrees: [],
+  deers: [],
   assets: [
     {
       name: 'christmasTree',

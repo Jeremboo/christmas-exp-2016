@@ -3,11 +3,8 @@ import { Vector3 } from 'three'
 import Item from './_item';
 
 export default class ChristmasTree extends Item {
-  constructor() {
-    super('tree');
-
-    this.oldWorldPosition = new Vector3();
-    super.naturalCustomize();
+  constructor(position, scale, rotation) {
+    super('tree', position, scale, rotation);
   }
 
   update( ) {
