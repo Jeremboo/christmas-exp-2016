@@ -3,6 +3,7 @@ import { PerspectiveCamera, WebGLRenderer, Raycaster } from 'three';
 // POST PROCESS
 import WAGNER from '@superguigui/wagner';
 import VignettePass from '@superguigui/wagner/src/passes/vignette/VignettePass';
+import FXAAPass from '@superguigui/wagner/src/passes/fxaa/FXAAPass';
 
 import { TweenLite, TimelineLite, Power2, Power3 } from 'gsap';
 import MainScene from '../scenes/mainScene';
@@ -28,10 +29,7 @@ export default class Engine {
     this.fpsInterval = 1000 / fps;
     this.then = Date.now();
 
-    const usePostProcess = true
-    if( usePostProcess ) {
-      this.initPostProcessing()
-    }
+    this.initPostProcessing()
 
     this.init();
   }
@@ -75,6 +73,7 @@ export default class Engine {
     // INIT POST PROCESS
     this.composer = new WAGNER.Composer(this.renderer);
     this.vignette = new VignettePass({ reduction: 0.5 });
+    this.fxaa = new FXAAPass();
   }
 
   inGamePositionning() {
@@ -113,6 +112,7 @@ export default class Engine {
         this.composer.reset();
         this.composer.render(this.scene, this.camera);
         this.composer.pass(this.vignette);
+        this.composer.pass(this.fxaa);
         this.composer.toScreen();
       } else {
         this.renderer.render(this.scene, this.camera);
@@ -126,14 +126,14 @@ export default class Engine {
     this.innerWidth = window.innerWidth;
     this.innerHeight = window.innerHeight;
 
-    if (this.composer) {
-      this.composer.setSize(this.innerWidth, this.innerHeight);
-    }
-
     this.camera.aspect = this.innerWidth / this.innerHeight;
     this.camera.updateProjectionMatrix();
 
     this.renderer.setSize(this.innerWidth, this.innerHeight);
+
+    if (this.composer) {
+      this.composer.setSize(this.innerWidth, this.innerHeight);
+    }
   }
 
   onMouseMove(e) {
