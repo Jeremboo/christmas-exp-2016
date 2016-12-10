@@ -27,34 +27,55 @@ const props = {
     {
       category: 'lollipop',
       positions: [
-        { x: 0, y: 1, z: 0, scale: 1 },
-        { x: 0, y: 1, z: 0, scale: 1 },
-        { x: 0, y: 1, z: 0, scale: 1 }
+        // First scene
+        { x: 0, y: 1, z: 0.06, scale: 1 }
       ]
-    },
-    {
-      category: 'candy',
-      positions: [
-        { x: 0, y: 1, z: 0, scale: 1 },
-        { x: 0, y: 1, z: 0, scale: 1 },
-        { x: 0, y: 1, z: 0, scale: 1 }
-      ]
-    },
-    {
-      category: 'stick',
-      positions: [
-        { x: 0, y: 1, z: 0, scale: 1 },
-        { x: 0, y: 1, z: 0, scale: 1 },
-        { x: 0, y: 1, z: 0, scale: 1 }
-      ]
-    },
+    }
   ],
+  //   {
+  //     category: 'lollipop',
+  //     positions: [
+  //       { x: 0, y: 1, z: 0, scale: 1 }
+  //     ]
+  //   },
+  //   {
+  //     category: 'candy',
+  //     positions: [
+  //       { x: 0, y: 1, z: 0, scale: 1 }
+  //     ]
+  //   },
+  //   {
+  //     category: 'stick',
+  //     positions: [
+  //       { x: 0, y: 1, z: 0, scale: 1 }
+  //     ]
+  //   },
+  // ],
   montains: [
-    { x: 1, y: 1, z: 0, scale: 3, rotation: 0 }
+    // First scene
+    { x: 0, y: 1, z: 0, scale: 2.4, rotation: 0 },
+    { x: 0.07, y: 1, z: 0, scale: 1.5, rotation: -30 },
+    { x: -0.07, y: 1, z: 0.05, scale: 1, rotation: 30 },
+    { x: -0.05, y: 1, z: -0.02, scale: 1, rotation: 10 },
+    { x: -0.06, y: 1, z: 0.02, scale: 1, rotation: -10 },
+    // Second scene
   ],
-  trees: [],
-  christmasTrees: [],
-  deers: [],
+  trees: [
+    // First scene
+    { x: -0.04, y: 1, z: 0.1, scale: 1, rotation: 0 },
+    { x: 0.06, y: 1, z: 0.04, scale: 1, rotation: 0 },
+  ],
+  christmasTrees: [
+    // First scene
+    { x: 0.06, y: 1, z: 0.1, scale: 1, rotation: 70 },
+    { x: 0.09, y: 1, z: 0.07, scale: 1.4, rotation: -45 },
+    { x: 0.04, y: 1, z: 0.07, scale: 0.8, rotation: -45 },
+    { x: -0.07, y: 1, z: 0.09, scale: 0.8, rotation: -45 },
+  ],
+  deers: [
+    // First scene
+    { x: 0, y: 1, z: 0.1, scale: 1, rotation: 0 },
+  ],
   assets: [
     {
       name: 'christmasTree',

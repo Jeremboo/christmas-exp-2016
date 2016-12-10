@@ -77,13 +77,13 @@ export default class Planet extends Mesh {
 
   placeItems(callback) {
     for (let i = 0; i < props.christmasTrees.length; i++) {
-      const christmasTree = new ChristmasTree();
+      const christmasTree = new ChristmasTree(new Vector3(props.christmasTrees[i].x, props.christmasTrees[i].y, props.christmasTrees[i].z), props.christmasTrees[i].scale, props.christmasTrees[i].rotation);
       this.add(christmasTree);
       this.christmasTrees.push(christmasTree);
     }
 
     for (let i = 0; i < props.trees.length; i++) {
-      const tree = new Tree();
+      const tree = new Tree(new Vector3(props.trees[i].x, props.trees[i].y, props.trees[i].z), props.trees[i].scale, props.trees[i].rotation);
       this.add(tree);
       this.trees.push(tree);
     }
@@ -95,7 +95,7 @@ export default class Planet extends Mesh {
     }
 
     for (let i = 0; i < props.deers.length; i++) {
-      const deer = new Deer();
+      const deer = new Deer(new Vector3(props.deers[i].x, props.deers[i].y, props.deers[i].z), props.deers[i].scale, props.deers[i].rotation);
       this.add(deer);
       this.deers.push(deer);
     }
