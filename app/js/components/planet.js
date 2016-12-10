@@ -76,25 +76,25 @@ export default class Planet extends Mesh {
   }
 
   placeItems(callback) {
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < props.christmasTrees.length; i++) {
       const christmasTree = new ChristmasTree();
       this.add(christmasTree);
       this.christmasTrees.push(christmasTree);
     }
 
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < props.trees.length; i++) {
       const tree = new Tree();
       this.add(tree);
       this.trees.push(tree);
     }
 
-    for (let i = 0; i < 100; i++) {
-      const mountain = new Mountain();
+    for (let i = 0; i < props.montains.length; i++) {
+      const mountain = new Mountain(new Vector3(props.montains[i].x, props.montains[i].y, props.montains[i].z), props.montains[i].scale, props.montains[i].rotation);
       this.add(mountain);
       this.mountains.push(mountain);
     }
 
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < props.deers.length; i++) {
       const deer = new Deer();
       this.add(deer);
       this.deers.push(deer);
@@ -102,7 +102,7 @@ export default class Planet extends Mesh {
 
     for (let i = 0; i < props.candies.length; i++) {
       for (let j = 0; j < props.candies[i].positions.length; j++) {
-        const candy = new Candy(props.candies[i].positions[j].x, props.candies[i].positions[j].y, props.candies[i].positions[j].z, props.candies[i].category);
+        const candy = new Candy(new Vector3(props.candies[i].positions[j].x, props.candies[i].positions[j].y, props.candies[i].positions[j].z), props.candies[i].positions[j].scale, props.candies[i].category);
         this.add(candy);
         this.candies.push(candy);
       }

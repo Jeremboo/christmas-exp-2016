@@ -4,8 +4,8 @@ import HUD from '../core/hud'
 import Item from './_item';
 
 export default class Candy extends Item {
-  constructor( x, y, z, category ) {
-    super('', new Vector3(x, y, z));
+  constructor( position, scale, category ) {
+    super('', position, scale);
 
     // Collider
     const cubeGeometry = new CubeGeometry( 5, 5, 5 )

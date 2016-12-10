@@ -5,10 +5,8 @@ import { getRandomFloat } from '../core/utils';
 
 
 export default class Deer extends Item {
-  constructor() {
-    super('deer');
-
-    super.naturalCustomize();
+  constructor(position, scale, rotation) {
+    super('deer', position, scale, rotation);
   }
 
   update() {

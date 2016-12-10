@@ -27,28 +27,34 @@ const props = {
     {
       category: 'lollipop',
       positions: [
-        { x: Math.random() * 2 - 1, y: Math.random() * 2 - 1, z: Math.random() * 2 - 1 },
-        { x: Math.random() * 2 - 1, y: Math.random() * 2 - 1, z: Math.random() * 2 - 1 },
-        { x: Math.random() * 2 - 1, y: Math.random() * 2 - 1, z: Math.random() * 2 - 1 }
+        { x: 0, y: 1, z: 0, scale: 1 },
+        { x: 0, y: 1, z: 0, scale: 1 },
+        { x: 0, y: 1, z: 0, scale: 1 }
       ]
     },
     {
       category: 'candy',
       positions: [
-        { x: Math.random() * 2 - 1, y: Math.random() * 2 - 1, z: Math.random() * 2 - 1 },
-        { x: Math.random() * 2 - 1, y: Math.random() * 2 - 1, z: Math.random() * 2 - 1 },
-        { x: Math.random() * 2 - 1, y: Math.random() * 2 - 1, z: Math.random() * 2 - 1 }
+        { x: 0, y: 1, z: 0, scale: 1 },
+        { x: 0, y: 1, z: 0, scale: 1 },
+        { x: 0, y: 1, z: 0, scale: 1 }
       ]
     },
     {
       category: 'stick',
       positions: [
-        { x: Math.random() * 2 - 1, y: Math.random() * 2 - 1, z: Math.random() * 2 - 1 },
-        { x: Math.random() * 2 - 1, y: Math.random() * 2 - 1, z: Math.random() * 2 - 1 },
-        { x: Math.random() * 2 - 1, y: Math.random() * 2 - 1, z: Math.random() * 2 - 1 }
+        { x: 0, y: 1, z: 0, scale: 1 },
+        { x: 0, y: 1, z: 0, scale: 1 },
+        { x: 0, y: 1, z: 0, scale: 1 }
       ]
     },
   ],
+  montains: [
+    { x: 1, y: 1, z: 0, scale: 3, rotation: 0 }
+  ],
+  trees: [],
+  christmasTrees: [],
+  deers: [],
   assets: [
     {
       name: 'christmasTree',

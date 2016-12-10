@@ -5,12 +5,12 @@ import { getRandomFloat, toRadians, getRandomNormalizedVector3 } from '../core/u
 
 
 export default class Item extends Object3D {
-  constructor(itemName, pos = getRandomNormalizedVector3()) {
+  constructor(itemName, pos = getRandomNormalizedVector3(), scale = 1.0, rotationY = 0 ) {
     super();
 
     this.position.copy(pos);
     this.position.normalize();
-    this.position.multiplyScalar( props.planet.size );
+    this.position.multiplyScalar(props.planet.size);
 
     // Make object perpendicular
     this.up.negate();
@@ -26,16 +26,14 @@ export default class Item extends Object3D {
     if (itemName || itemName.length > 0) {
       this.item = props.objects.get(itemName).clone();
       this.add(this.item);
-    }
-  }
 
-  naturalCustomize() {
-    this.item.scale.multiplyScalar(getRandomFloat(0.5, 1.5));
-    this.item.rotation.set(
-      toRadians(getRandomFloat(0, 5)),
-      toRadians(getRandomFloat(0, 360)),
-      toRadians(getRandomFloat(0, 5))
-    );
+      this.item.scale.multiplyScalar(scale);
+      this.item.rotation.set(
+        toRadians(getRandomFloat(0, 5)),
+        toRadians(rotationY),
+        toRadians(getRandomFloat(0, 5))
+      );
+    }
   }
 
   update() {

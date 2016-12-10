@@ -70,7 +70,6 @@ export default class Engine {
   }
 
   initPostProcessing() {
-    // INIT POST PROCESS
     this.composer = new WAGNER.Composer(this.renderer);
     this.vignette = new VignettePass({ reduction: 0.5 });
     this.fxaa = new FXAAPass();
