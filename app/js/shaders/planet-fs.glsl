@@ -19,8 +19,8 @@ void main() {
   // TODO trouver un moyen de remplacer les if (GOURMAND)
   if( dotProduct > uCeil ) {
     opacity = 1.0;
-  } else if( dotProduct > 0.94 ) {
-    opacity = ( dotProduct - 0.94 ) / ( uCeil - 0.94 );
+  } else if( dotProduct > 0.87 ) {
+    opacity = ( dotProduct - 0.87 ) / ( uCeil - 0.87 );
   }
 
   gl_FragColor = vec4( uColor.xyz, opacity );
