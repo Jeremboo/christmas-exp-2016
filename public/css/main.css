@@ -187,8 +187,7 @@ th {
   -ms-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  top: 45%;
-  font-size: 1.875rem;
+  top: 48%;
   color: #ecf0f1;
   text-align: center;
   -webkit-user-select: none;
@@ -196,6 +195,11 @@ th {
   -ms-user-select: none;
   user-select: none;
   cursor: default;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 .header-title {
   width: 18.75rem;
@@ -211,6 +215,123 @@ th {
   -o-animation: sprite 1s steps(39);
   animation: sprite 1s steps(39);
   animation-fill-mode: forwards;
+}
+.header-title.reverse {
+  -webkit-animation: reversee 1s steps(39);
+  -moz-animation: reversee 1s steps(39);
+  -ms-animation: reversee 1s steps(39);
+  -o-animation: reversee 1s steps(39);
+  animation: reversee 1s steps(39);
+  animation-fill-mode: forwards;
+}
+.header-sentences {
+  margin-top: 3.4375rem;
+  margin-bottom: 3.4375rem;
+  font-size: 0.875rem;
+  letter-spacing: 0.0625rem;
+}
+.header-sentences strong {
+  font-style: italic;
+  font-weight: 700;
+  font-size: 1.0625rem;
+}
+.header-sentences p {
+  margin: 0.3125rem;
+  font-weight: 300;
+  opacity: 0;
+}
+.header-button {
+  position: relative;
+  width: 4.375rem;
+  height: 4.375rem;
+  -webkit-border-radius: 3.125rem;
+  border-radius: 3.125rem;
+  cursor: pointer;
+  pointer-events: none;
+}
+.header-button.ok-visible {
+  pointer-events: auto;
+}
+.header-button.ok-visible circle:first-child {
+  stroke-dasharray: 210 9999;
+}
+.header-button.ok-visible span {
+  opacity: 1;
+  -webkit-transform: translate(0, 0);
+  -moz-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
+  transform: translate(0, 0);
+}
+.header-button.ok-visible:hover span {
+  -webkit-transform: translate(0, -0.1875rem);
+  -moz-transform: translate(0, -0.1875rem);
+  -ms-transform: translate(0, -0.1875rem);
+  -o-transform: translate(0, -0.1875rem);
+  transform: translate(0, -0.1875rem);
+}
+.header-button.ok-visible:hover circle+circle {
+  stroke-dasharray: 210 9999;
+}
+.header-button p {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: 1rem;
+  letter-spacing: 0.1875rem;
+  text-transform: uppercase;
+  display: flex;
+}
+.header-button span {
+  display: block;
+  opacity: 0;
+  -webkit-transform: translate(0, 0.3125rem);
+  -moz-transform: translate(0, 0.3125rem);
+  -ms-transform: translate(0, 0.3125rem);
+  -o-transform: translate(0, 0.3125rem);
+  transform: translate(0, 0.3125rem);
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+.header-button span+span {
+  transition-delay: 0.05s;
+}
+.header-button svg {
+  width: 4.375rem;
+  height: 4.375rem;
+}
+.header-button circle {
+  r: 2.03125rem;
+  cx: 2.1875rem;
+  cy: 2.1875rem;
+  stroke: rgba(255,255,255,0.2);
+  stroke-width: 0.1875rem;
+  stroke-width: 0.1875rem;
+  stroke-dasharray: 0 9999;
+  fill: none;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+  transition: 0.2s;
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+.header-button circle+circle {
+  stroke: #ecf0f1;
 }
 @-moz-keyframes sprite {
   0% {
@@ -242,6 +363,38 @@ th {
   }
   100% {
     background-position: center 100%;
+  }
+}
+@-moz-keyframes reversee {
+  0% {
+    background-position: center 100%;
+  }
+  100% {
+    background-position: center 0%;
+  }
+}
+@-webkit-keyframes reversee {
+  0% {
+    background-position: center 100%;
+  }
+  100% {
+    background-position: center 0%;
+  }
+}
+@-o-keyframes reversee {
+  0% {
+    background-position: center 100%;
+  }
+  100% {
+    background-position: center 0%;
+  }
+}
+@keyframes reversee {
+  0% {
+    background-position: center 100%;
+  }
+  100% {
+    background-position: center 0%;
   }
 }
 .hud {
@@ -640,7 +793,7 @@ th {
   background-image: url("../assets/images/sprites/tuto.png");
   background-repeat: no-repeat;
   position: absolute;
-  top: 70%;
+  top: 30%;
   left: 50%;
   -webkit-transform: translateX(-50%);
   -moz-transform: translateX(-50%);
@@ -692,6 +845,7 @@ html,
 body {
   background-color: #02061d;
   font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 #texture-tool-wrapper {
   display: none;

@@ -63,19 +63,47 @@ class HUD {
           TweenMax.to(this.loader, 0.3, {
             autoAlpha: 0.0,
             onComplete: () => {
-              setTimeout(() => {
-                this.tuto.classList.add('play');
-                callback();
-              }, 1500);
-
+              const ok = document.getElementById('ok');
               setTimeout(() => {
                 this.logo.classList.add('play');
+                TweenMax.staggerFromTo(document.getElementsByClassName('header-sentence'), 0.5,
+                  { autoAlpha: 0, y: 5 },
+                  { autoAlpha: 1, y: 0, delay: -0.6 },
+                  0.2,
+                  () => {
+                    ok.classList.add('ok-visible');
+                    ok.addEventListener('click', () => {
+                      ok.disable = true;
+                      ok.classList.remove('ok-visible');
+                      this.hideHeader(callback);
+                    });
+                  }
+                );
               }, 500);
             },
           });
         },
       })
     }, 200);
+  }
+
+  hideHeader(callback) {
+    TweenMax.staggerFromTo(document.getElementsByClassName('header-sentence'), 0.5,
+      { autoAlpha: 1, y: 0, delay: 0.8 },
+      { autoAlpha: 0, y: 5 },
+      -0.2,
+      () => {
+        callback();
+      }
+    );
+
+    setTimeout(() => {
+      this.hideLogo();
+    }, 400);
+
+    setTimeout(() => {
+      tuto.classList.add('play');
+    }, 1500);
   }
 
   /**
@@ -133,11 +161,10 @@ class HUD {
   }
 
   hideLogo() {
-    TweenMax.to(this.logo, 0.3,
-    { autoAlpha: 0.0 });
+    this.logo.classList.add('reverse');
 
-    TweenMax.to(this.tuto, 0.3,
-    { autoAlpha: 0.0 });
+    // TweenMax.to(this.tuto, 0.3,
+    // { autoAlpha: 0.0 });
   }
 
   showSuccess() {

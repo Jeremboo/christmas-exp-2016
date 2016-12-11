@@ -1,11 +1,15 @@
 .header
   verticalAlign()
-  top: 45%
-  font-size rem( 30 )
+  top: 48%
   color whiteColor
   text-align center
   user-select none
   cursor default
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 
   &-title
     width rem( 300 )
@@ -18,8 +22,95 @@
       animation sprite 1s steps( 39 )
       animation-fill-mode forwards
 
+    &.reverse
+      animation reversee 1s steps( 39 )
+      animation-fill-mode forwards
+
+  &-sentences
+    margin-top: rem( 55 )
+    margin-bottom: rem( 55 )
+    font-size rem( 14 )
+    letter-spacing rem( 1 )
+
+    strong
+      font-style: italic
+      font-weight: 700
+      font-size rem( 17 )
+    p
+      margin: rem( 5 )
+      font-weight: 300
+      opacity 0
+
+  &-button
+    position relative
+    width: rem( 70 )
+    height: rem( 70 )
+    border-radius: rem( 50 )
+    cursor: pointer;
+    pointer-events: none;
+
+    &.ok-visible
+      pointer-events: auto;
+      circle:first-child
+        stroke-dasharray: 210 9999;
+      span
+        opacity: 1
+        transform: translate(0, 0);
+
+      &:hover
+        span
+          transform: translate(0, rem( -3 ));
+
+        circle+circle
+          stroke-dasharray: 210 9999;
+
+    p
+      margin 0
+      verticalAlign()
+      font-size: rem( 16 )
+      letter-spacing rem( 3 )
+      text-transform: uppercase;
+      display: flex;
+
+    span
+      display: block;
+      opacity: 0;
+      transform: translate(0, rem( 5 ));
+      transition: 0.3s
+
+    span+span
+      transition-delay: 0.05s;
+
+    svg
+      width: rem( 70 )
+      height: rem( 70 )
+
+    circle
+      r rem( 32.5 )
+      cx rem( 35 )
+      cy rem( 35 )
+      stroke rgba(255, 255, 255, 0.2)
+      stroke-width rem( 3 )
+      stroke-width: rem( 3 );
+      stroke-dasharray: 0 9999;
+      fill: none;
+      transition: 0.2s
+      transform: rotate( -90deg )
+      transform-origin: 50% 50%;
+
+    circle+circle
+      stroke whiteColor
+
+
+
 @keyframes sprite
   0%
     background-position center 0%
   100%
     background-position center 100%
+
+@keyframes reversee
+  0%
+    background-position center 100%
+  100%
+    background-position center 0%
