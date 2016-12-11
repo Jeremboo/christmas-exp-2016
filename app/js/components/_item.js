@@ -10,7 +10,7 @@ export default class Item extends Object3D {
 
     this.position.copy(pos);
     this.position.normalize();
-    this.position.multiplyScalar(props.planet.size);
+    this.position.multiplyScalar(props.planet.size - 2);
 
     // Make object perpendicular
     this.up.negate();

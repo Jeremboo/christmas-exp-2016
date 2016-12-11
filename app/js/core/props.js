@@ -3,6 +3,13 @@ import { Vector3 } from 'three'
 import { getRandomNormalizedVector3 } from './utils';
 
 const props = {
+  test: {
+    x: 0.1,
+    y: 0.9,
+    z: 0.1,
+    rotation: 0,
+    scale: 2,
+  },
   loader: 0,
   rotation: {
     autoRotate: true,
@@ -32,81 +39,55 @@ const props = {
       category: 'lollipop',
       positions: [
         // First scene
-        { x: 0, y: 1, z: 0.18, scale: 0.5 }
+        { x: 0, y: 1, z: 0.18, scale: 4 }, // 0.5
+        { x: 0.1, y: -0.9, z: 0.1, scale: 4 },
+        { x: 1, y: 0, z: 0, scale: 4 },
       ]
     },
-    {
-      category: 'peppermint',
-      positions: [
-        // { x: 0, y: 1, z:  0.18, scale: 4 }
-      ]
-    },
-    {
-      category: 'stick',
-      positions: [
-        // { x: 0, y: 1, z:  0.18, scale: 4 }
-        // { x: 0, y: 1, z:  0.18, scale: 4 }
-      ]
-    }
     // {
     //   category: 'peppermint',
     //   positions: [
-    //     { x: 0, y: 1, z: 0, scale: 1 },
-    //     { x: 0, y: 1, z: 0, scale: 1 },
-    //     { x: 0, y: 1, z: 0, scale: 1 }
+    //     { x: 1, y: 1, z: 1, scale: 0.5 },
+    //     { x: 1, y: 1, z: 0, scale: 0.5 },
+    //     { x: 1, y: 0, z: 1, scale: 0.5 },
     //   ]
     // },
-    // {
-    //   category: 'stick',
-    //   positions: [
-    //     { x: 0, y: 1, z: 0, scale: 1 },
-    //     { x: 0, y: 1, z: 0, scale: 1 },
-    //     { x: 0, y: 1, z: 0, scale: 1 }
-    //   ]
-    // },
+    {
+      category: 'stick',
+      positions: [
+        { x: -1, y: 0, z: 0, scale: 6 }, // 2
+        { x: 0, y: 0, z: -1, scale: 6 },
+        { x: 0, y: 0, z: 1, scale: 6 },
+      ]
+    },
   ],
-  //   {
-  //     category: 'lollipop',
-  //     positions: [
-  //       { x: 0, y: 1, z: 0, scale: 1 }
-  //     ]
-  //   },
-  //   {
-  //     category: 'candy',
-  //     positions: [
-  //       { x: 0, y: 1, z: 0, scale: 1 }
-  //     ]
-  //   },
-  //   {
-  //     category: 'stick',
-  //     positions: [
-  //       { x: 0, y: 1, z: 0, scale: 1 }
-  //     ]
-  //   },
-  // ],
   montains: [
-    // First scene
+    // 1.1
     { x: 0, y: 1, z: 0, scale: 7.2, rotation: 0 },
     { x: 0.21, y: 1, z: 0, scale: 4.5, rotation: -30 },
     { x: -0.21, y: 1, z: 0.15, scale: 3, rotation: 30 },
     { x: -0.15, y: 1, z: -0.06, scale: 3, rotation: 10 },
     { x: -0.18, y: 1, z: 0.06, scale: 3, rotation: -10 },
-    // Second scene
+    // 2.3
+    { x: 0, y: 0.1, z: 1.1, scale: 7, rotation: 0.1 },
+    { x: 0.2, y: 0.12, z: 1.13, scale: 5, rotation: -28 },
   ],
   trees: [
-    // First scene
+    // 1.1
     { x: -0.12, y: 1, z: 0.3, scale: 3, rotation: 0 },
     { x: 0.18, y: 1, z: 0.12, scale: 3, rotation: 0 },
+    // 2.3
+
   ],
   christmasTrees: [
-    // First scene
+    // 1.1
     { x: 0.18, y: 1, z: 0.3, scale: 3, rotation: 70 },
     { x: 0.27, y: 1, z: 0.21, scale: 4.2, rotation: -45 },
     { x: 0.12, y: 1, z: 0.21, scale: 2.4, rotation: -45 },
     { x: -0.21, y: 1, z: 0.27, scale: 2.4, rotation: -45 },
   ],
   deers: [
-    // First scene
+    // 1.1
     { x: 0, y: 1, z: 0.3, scale: 3, rotation: 0 },
   ],
   assets: [

@@ -54,7 +54,16 @@ domready(() => {
     } else {
       experiment.inGamePositionning()
     }
-  })
+  });
+
+  // Planete
+  const testFolder = gui.addFolder('Test');
+  testFolder.add(props.test, 'x', -1, 1).step(0.01);
+  testFolder.add(props.test, 'y', -1, 1).step(0.01);
+  testFolder.add(props.test, 'z', -1, 1).step(0.01);
+  testFolder.add(props.test, 'rotation', 0, 360).step(1);
+  testFolder.add(props.test, 'scale', 0, 10).step(0.01);
+  testFolder.open();
 
   // gui.close();
 });
