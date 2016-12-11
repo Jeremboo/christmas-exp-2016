@@ -1,7 +1,5 @@
 import { Vector3 } from 'three'
 
-import { getRandomNormalizedVector3 } from './utils';
-
 const props = {
   // test: {
   //   x: 0.1,
@@ -320,13 +318,13 @@ const props = {
         'Candy',
       ],
     },
-    {
-      name: 'peppermint',
-      ex: 'json',
-      children: [
-        'Cylindre',
-      ],
-    },
+    // {
+    //   name: 'peppermint',
+    //   ex: 'json',
+    //   children: [
+    //     'Cylindre',
+    //   ],
+    // },
     {
       name: 'lollipop',
       ex: 'json',

@@ -1,5 +1,5 @@
 import { Mesh, SphereGeometry, ShaderMaterial, Vector3, Quaternion, Euler } from 'three';
-import ThreejsTextureTool from 'threejs-texture-tool';
+// import ThreejsTextureTool from 'threejs-texture-tool';
 
 import { toRadians, worldToLocalDirection } from '../core/utils';
 import props from '../core/props';
@@ -19,9 +19,9 @@ const fragmentShader = glslify( '../shaders/planet-fs.glsl' );
 export default class Planet extends Mesh {
   constructor() {
     const geometry = new SphereGeometry(props.planet.size, 100, 100);
-    const textureTool = new ThreejsTextureTool();
+    // const textureTool = new ThreejsTextureTool();
 
-    const biomeTextureTool = textureTool.createImageTexture('assets/images/biome.jpg', 'Biome');
+    // const biomeTextureTool = textureTool.createImageTexture('assets/images/biome.jpg', 'Biome');
 
     const material = new ShaderMaterial({
       vertexShader,
@@ -43,7 +43,7 @@ export default class Planet extends Mesh {
           type: 'f',
           value: 8.0
         },
-        uTexture: biomeTextureTool.uniform
+        // uTexture: biomeTextureTool.uniform
       },
       transparent: true
     })

@@ -3,25 +3,25 @@ import { JSONLoader, ObjectLoader, Object3D, Mesh, MeshFaceMaterial } from 'thre
 import props from './props';
 
 // PRIVATE
-const onProgress = (xhr) => {
-  if (xhr.lengthComputable) {
-    const percentComplete = xhr.loaded / xhr.total * 100;
-    // console.log(Math.round(percentComplete, 2) + '% downloaded');
-    return percentComplete;
-  }
-};
+// const onProgress = (xhr) => {
+//   if (xhr.lengthComputable) {
+//     const percentComplete = xhr.loaded / xhr.total * 100;
+//     // console.log(Math.round(percentComplete, 2) + '% downloaded');
+//     return percentComplete;
+//   }
+// };
 
 const onError = (xhr) => {
   // console.error('LoadingERROR : ', xhr);
 };
 
-const onLoaded = (item, loaded, total) => {
-  // console.log('Loaded : ', item, loaded, total);
-};
+// const onLoaded = (item, loaded, total) => {
+//   // console.log('Loaded : ', item, loaded, total);
+// };
 
-const saveObjectToProps = (objectName, geometry, materials) => {
-  props.objects.set(objectName, { geometry, materials });
-};
+// const saveObjectToProps = (objectName, geometry, materials) => {
+//   props.objects.set(objectName, { geometry, materials });
+// };
 
 // PUBLIC
 export const loadJSON = (fileName, callback, progress) => {

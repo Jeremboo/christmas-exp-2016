@@ -1,7 +1,7 @@
 import { Scene, AmbientLight, HemisphereLight } from 'three';
-import Skybox from '../components/skybox';
+// import Skybox from '../components/skybox';
 import Planet from '../components/planet';
-import props from '../core/props';
+// import props from '../core/props';
 
 
 export default class MainScene extends Scene {
