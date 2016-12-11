@@ -152,7 +152,6 @@ class HUD {
   foundCandy(category) {
     this.candies[category].found++
     this.checkFoundCandies();
-    console.log(this.candies[category].found)
 
     if(!this.mutted) {
       soundPlayer.candyFound.play();

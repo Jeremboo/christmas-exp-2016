@@ -1,9 +1,9 @@
 import { PerspectiveCamera, WebGLRenderer, Raycaster } from 'three';
 
 // POST PROCESS
-import WAGNER from '@superguigui/wagner';
-import VignettePass from '@superguigui/wagner/src/passes/vignette/VignettePass';
-import FXAAPass from '@superguigui/wagner/src/passes/fxaa/FXAAPass';
+// import WAGNER from '@superguigui/wagner';
+// import VignettePass from '@superguigui/wagner/src/passes/vignette/VignettePass';
+// import FXAAPass from '@superguigui/wagner/src/passes/fxaa/FXAAPass';
 
 import { TweenLite, TimelineLite, Power2, Power3 } from 'gsap';
 import MainScene from '../scenes/mainScene';
@@ -29,7 +29,7 @@ export default class Engine {
     this.fpsInterval = 1000 / fps;
     this.then = Date.now();
 
-    this.initPostProcessing()
+    // this.initPostProcessing()
 
     this.init();
   }
@@ -72,11 +72,11 @@ export default class Engine {
     window.addEventListener('mouseup', this.onMouseUp, false);
   }
 
-  initPostProcessing() {
-    this.composer = new WAGNER.Composer(this.renderer);
-    this.vignette = new VignettePass({ reduction: 0.5 });
-    this.fxaa = new FXAAPass();
-  }
+  // initPostProcessing() {
+  //   this.composer = new WAGNER.Composer(this.renderer);
+  //   this.vignette = new VignettePass({ reduction: 0.5 });
+  //   this.fxaa = new FXAAPass();
+  // }
 
   inGamePositioning(callback = f => f) {
     props.rotation.autoRotate = false;
@@ -109,17 +109,17 @@ export default class Engine {
       this.camera.rotation.setFromVector3(props.camera.rotation);
       this.camera.position.copy(props.camera.position);
 
-      // POST PROCESS RENDERING
-      if(props.postProcess.enabled) {
-        this.renderer.autoClearColor = true;
-        this.composer.reset();
-        this.composer.render(this.scene, this.camera);
-        this.composer.pass(this.vignette);
-        this.composer.pass(this.fxaa);
-        this.composer.toScreen();
-      } else {
-        this.renderer.render(this.scene, this.camera);
-      }
+      // // POST PROCESS RENDERING
+      // if(props.postProcess.enabled) {
+      //   this.renderer.autoClearColor = true;
+      //   this.composer.reset();
+      //   this.composer.render(this.scene, this.camera);
+      //   this.composer.pass(this.vignette);
+      //   this.composer.pass(this.fxaa);
+      //   this.composer.toScreen();
+      // } else {
+      this.renderer.render(this.scene, this.camera);
+      // }
 
       this.then = now;
     }

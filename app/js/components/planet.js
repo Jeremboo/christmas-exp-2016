@@ -76,16 +76,16 @@ export default class Planet extends Mesh {
   }
 
   placeItems(callback) {
-    this.test = new Mountain(
-      new Vector3(
-        props.test.x,
-        props.test.y,
-        props.test.z,
-      ),
-      props.test.scale,
-      props.test.rotation,
-    );
-    this.add(this.test);
+    // this.test = new Mountain(
+    //   new Vector3(
+    //     props.test.x,
+    //     props.test.y,
+    //     props.test.z,
+    //   ),
+    //   props.test.scale,
+    //   props.test.rotation,
+    // );
+    // this.add(this.test);
 
     for (let i = 0; i < props.christmasTrees.length; i++) {
       const christmasTree = new ChristmasTree(new Vector3(props.christmasTrees[i].x, props.christmasTrees[i].y, props.christmasTrees[i].z), props.christmasTrees[i].scale, props.christmasTrees[i].rotation);
@@ -127,13 +127,13 @@ export default class Planet extends Mesh {
   }
 
   update() {
-    if (this.test) {
-      this.test.testUpdate(new Vector3(
-        props.test.x,
-        props.test.y,
-        props.test.z,
-      ), props.test.rotation, props.test.scale);
-    }
+    // if (this.test) {
+    //   this.test.testUpdate(new Vector3(
+    //     props.test.x,
+    //     props.test.y,
+    //     props.test.z,
+    //   ), props.test.rotation, props.test.scale);
+    // }
 
     if (props.rotation.autoRotate) {
       this.targetedPos.x += 0.003;

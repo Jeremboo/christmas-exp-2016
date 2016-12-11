@@ -20,17 +20,17 @@ export default class Mountain extends Item {
     this.quaternion.setFromAxisAngle(axis, angle);
   }
 
-  testUpdate(position, rotation, scale) {
-    this.position.copy(position);
-    this.position.normalize();
-    this.position.multiplyScalar(props.planet.size - 3.5);
-    // this.item.rotation.y = rotation
-    this.scale.set(
-      scale,
-      scale,
-      scale,
-    );
-  }
+  // testUpdate(position, rotation, scale) {
+  //   this.position.copy(position);
+  //   this.position.normalize();
+  //   this.position.multiplyScalar(props.planet.size - 3.5);
+  //   // this.item.rotation.y = rotation
+  //   this.scale.set(
+  //     scale,
+  //     scale,
+  //     scale,
+  //   );
+  // }
 
   update( ) {
     super.update();

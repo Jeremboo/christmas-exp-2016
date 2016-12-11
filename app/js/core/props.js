@@ -3,13 +3,13 @@ import { Vector3 } from 'three'
 import { getRandomNormalizedVector3 } from './utils';
 
 const props = {
-  test: {
-    x: 0.1,
-    y: 0.9,
-    z: 0.1,
-    rotation: 0,
-    scale: 2,
-  },
+  // test: {
+  //   x: 0.1,
+  //   y: 0.9,
+  //   z: 0.1,
+  //   rotation: 0,
+  //   scale: 2,
+  // },
   loader: 0,
   rotation: {
     autoRotate: true,
