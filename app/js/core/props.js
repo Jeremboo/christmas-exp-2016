@@ -68,6 +68,13 @@ const props = {
     { x: -0.21, y: 1, z: 0.15, scale: 3, rotation: 30 },
     { x: -0.15, y: 1, z: -0.06, scale: 3, rotation: 10 },
     { x: -0.18, y: 1, z: 0.06, scale: 3, rotation: -10 },
+    // 2.1
+    { x: -1, y: -0.14, z: -0.45, scale: 6 },
+    { x: -1, y: 0.24, z: -0.34, scale: 4 },
+    { x: -1, y: 0.06, z: -0.36, scale: 4 },
+    { x: -1, y: 0.14, z: 0.53, scale: 7 },
+    { x: -1, y: -0.38, z: 0.59, scale: 7 },
+    { x: -1, y: -0.32, z: -0.1, scale: 7 },
     // 2.3
     { x: 0, y: 0.1, z: 1.1, scale: 7, rotation: 0.1 },
     { x: 0.2, y: 0.12, z: 1.13, scale: 5, rotation: -28 },
@@ -76,6 +83,13 @@ const props = {
     // 1.1
     { x: -0.12, y: 1, z: 0.3, scale: 3, rotation: 0 },
     { x: 0.18, y: 1, z: 0.12, scale: 3, rotation: 0 },
+    // 2.1
+    { x: -1, y: 0.08, z: 0.21, scale: 2.6 },
+    { x: -1, y: -0.14, z: -0.14, scale: 3 },
+    { x: -1, y: 0.8, z: 0.28, scale: 2.4 },
+    { x: -1, y: 0.1, z: -0.07, scale: 3.1 },
+    { x: -1, y: 0.06, z: 0.3, scale: 2.1 },
+    { x: -1, y: -0.14, z: 0.24, scale: 2.1 },
     // 2.3
 
   ],
@@ -85,10 +99,27 @@ const props = {
     { x: 0.27, y: 1, z: 0.21, scale: 4.2, rotation: -45 },
     { x: 0.12, y: 1, z: 0.21, scale: 2.4, rotation: -45 },
     { x: -0.21, y: 1, z: 0.27, scale: 2.4, rotation: -45 },
+    // 2.1
+    { x: -1, y: 0.3, z: 0.1, scale: 3 },
+    { x: -1, y: 0.4, z: 0.4, scale: 2.4 },
+    { x: -1, y: 0.15, z: 0.1, scale: 3.1 },
+    { x: -1, y: 0.24, z: 0.24, scale: 1.5 },
+    { x: -1, y: -0.05, z: 0.37, scale: 2.5 },
+    { x: -1, y: -0.18, z: 0.28, scale: 3.0 },
+    { x: -1, y: -0.21, z: -0.01, scale: 1.5 },
+    { x: -1, y: -0.32, z: 0.15, scale: 1.9 },
+    { x: -1, y: -0.16, z: 0.14, scale: 2.3 },
+    { x: -1, y: 0.04, z: -0.18, scale: 2.9 },
+    { x: -1, y: 0.17, z: -0.03, scale: 1.3 },
+    { x: -1, y: 0.17, z: -0.15, scale: 1.8 },
   ],
   deers: [
     // 1.1
     { x: 0, y: 1, z: 0.3, scale: 3, rotation: 0 },
+    // 2.1
+    { x: -1, y: -0.01, z: 0.17, scale: 3, rotation: 180 },
+    { x: -1, y: -0.03, z: 0.12, scale: 1.5, rotation: 175 },
+    { x: -1, y: 0.04, z: 0.12, scale: 2.7, rotation: 190 },
   ],
   assets: [
     {
