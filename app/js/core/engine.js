@@ -83,6 +83,7 @@ export default class Engine {
     const t = new TimelineLite({ onComplete: callback });
     t.to(props.camera.position, 4, { y: 255, z: 150, ease: Power2.easeOut });
     t.to(props.camera.rotation, 2, { x: -0.3, ease: Power2.easeOut }, '-=4');
+    t.to(this.scene.planet.targetedPos, 2, { x: 0, y: 0, z: 0, ease: Power2.easeOut }, '-=4');
 
     t.to(props.shader, 2, { ceil: 0.95, ease: Power3.easeOut }, '-=2');
     t.play();
