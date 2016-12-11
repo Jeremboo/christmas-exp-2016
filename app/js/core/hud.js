@@ -17,6 +17,7 @@ class HUD {
     this.logo = document.getElementById('logo')
     this.tuto = document.getElementById('tuto')
     this.success = document.getElementById('success')
+    this.credits = document.getElementById('credits')
 
     this.candies = {}
     this.mutted = false;
@@ -146,6 +147,7 @@ class HUD {
 
     setTimeout(() => {
       this.success.classList.add('play');
+      this.credits.classList.remove('hidden');
     }, 2000)
   }
 

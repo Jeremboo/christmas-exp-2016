@@ -1,18 +1,23 @@
+.soundContainer
+  display flex
+  align-items center
+  flex-wrap nowrap
+  position absolute
+  bottom rem( 20 )
+  right rem( 38 )
+
 .sound
   background none
-  background-size rem( 30 )
+  background-size rem( 20 )
   background-image url( '../assets/images/sprites/sound.png' )
   background-repeat no-repeat
   opacity 0.7
   border none
   appearance none
   outline none
-  width rem( 30 )
-  height rem( 30 )
+  width rem( 20 )
+  height rem( 20 )
   padding 0
-  position absolute
-  bottom rem( 20 )
-  right rem( 20 )
   transition transform 0.3s linear, opacity 0.3s linear
 
   &.play
@@ -21,7 +26,24 @@
     transform scale( 1.1 )
 
   &.hidden
-    opacity: 0;
+    opacity 0
+
+.credits
+  font-size rem( 14 )
+  letter-spacing 0.5px
+  font-weight 200
+  color alpha( #FFFFFF, 0.8 )
+  margin-right rem( 15 )
+  transition opacity 0.2s linear, transform 0.2s linear
+
+  span
+    text-transform uppercase
+    color alpha( #FFFFFF, 0.6 )
+
+  &.hidden
+    opacity 0.0
+    transform translateY( rem( 5 ) )
+
 @keyframes sprite
   0%
     background-position center 0%
