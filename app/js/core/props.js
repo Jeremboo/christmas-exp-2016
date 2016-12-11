@@ -20,8 +20,10 @@ const props = {
   },
   shader: {
     ceil: 10.0,
-    amplitude: 8.0,
-    postProcess: true
+    amplitude: 8.0
+  },
+  postProcess: {
+    enabled: true
   },
   lightPosition: new Vector3(0.0, 1.0, 0.0),
   objects: new Map(),
@@ -30,25 +32,38 @@ const props = {
       category: 'lollipop',
       positions: [
         // First scene
-        { x: 0, y: 1, z: 0.06, scale: 1 }
+        { x: 0, y: 1, z: 0.18, scale: 0.5 }
       ]
     },
     {
       category: 'peppermint',
       positions: [
-        { x: 0, y: 1, z: 0, scale: 1 },
-        { x: 0, y: 1, z: 0, scale: 1 },
-        { x: 0, y: 1, z: 0, scale: 1 }
+        // { x: 0, y: 1, z:  0.18, scale: 4 }
       ]
     },
     {
       category: 'stick',
       positions: [
-        { x: 0, y: 1, z: 0, scale: 1 },
-        { x: 0, y: 1, z: 0, scale: 1 },
-        { x: 0, y: 1, z: 0, scale: 1 }
+        // { x: 0, y: 1, z:  0.18, scale: 4 }
+        // { x: 0, y: 1, z:  0.18, scale: 4 }
       ]
-    },
+    }
+    // {
+    //   category: 'peppermint',
+    //   positions: [
+    //     { x: 0, y: 1, z: 0, scale: 1 },
+    //     { x: 0, y: 1, z: 0, scale: 1 },
+    //     { x: 0, y: 1, z: 0, scale: 1 }
+    //   ]
+    // },
+    // {
+    //   category: 'stick',
+    //   positions: [
+    //     { x: 0, y: 1, z: 0, scale: 1 },
+    //     { x: 0, y: 1, z: 0, scale: 1 },
+    //     { x: 0, y: 1, z: 0, scale: 1 }
+    //   ]
+    // },
   ],
   //   {
   //     category: 'lollipop',
@@ -71,28 +86,28 @@ const props = {
   // ],
   montains: [
     // First scene
-    { x: 0, y: 1, z: 0, scale: 2.4, rotation: 0 },
-    { x: 0.07, y: 1, z: 0, scale: 1.5, rotation: -30 },
-    { x: -0.07, y: 1, z: 0.05, scale: 1, rotation: 30 },
-    { x: -0.05, y: 1, z: -0.02, scale: 1, rotation: 10 },
-    { x: -0.06, y: 1, z: 0.02, scale: 1, rotation: -10 },
+    { x: 0, y: 1, z: 0, scale: 7.2, rotation: 0 },
+    { x: 0.21, y: 1, z: 0, scale: 4.5, rotation: -30 },
+    { x: -0.21, y: 1, z: 0.15, scale: 3, rotation: 30 },
+    { x: -0.15, y: 1, z: -0.06, scale: 3, rotation: 10 },
+    { x: -0.18, y: 1, z: 0.06, scale: 3, rotation: -10 },
     // Second scene
   ],
   trees: [
     // First scene
-    { x: -0.04, y: 1, z: 0.1, scale: 1, rotation: 0 },
-    { x: 0.06, y: 1, z: 0.04, scale: 1, rotation: 0 },
+    { x: -0.12, y: 1, z: 0.3, scale: 3, rotation: 0 },
+    { x: 0.18, y: 1, z: 0.12, scale: 3, rotation: 0 },
   ],
   christmasTrees: [
     // First scene
-    { x: 0.06, y: 1, z: 0.1, scale: 1, rotation: 70 },
-    { x: 0.09, y: 1, z: 0.07, scale: 1.4, rotation: -45 },
-    { x: 0.04, y: 1, z: 0.07, scale: 0.8, rotation: -45 },
-    { x: -0.07, y: 1, z: 0.09, scale: 0.8, rotation: -45 },
+    { x: 0.18, y: 1, z: 0.3, scale: 3, rotation: 70 },
+    { x: 0.27, y: 1, z: 0.21, scale: 4.2, rotation: -45 },
+    { x: 0.12, y: 1, z: 0.21, scale: 2.4, rotation: -45 },
+    { x: -0.21, y: 1, z: 0.27, scale: 2.4, rotation: -45 },
   ],
   deers: [
     // First scene
-    { x: 0, y: 1, z: 0.1, scale: 1, rotation: 0 },
+    { x: 0, y: 1, z: 0.3, scale: 3, rotation: 0 },
   ],
   assets: [
     {

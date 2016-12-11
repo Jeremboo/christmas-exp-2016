@@ -1,0 +1,20 @@
+.tuto
+  width rem( 300 )
+  height rem( 120 )
+  background-size rem( 300 )
+  background-image url( '../assets/images/sprites/tuto.png' )
+  background-repeat no-repeat
+  position absolute
+  top 20%
+  left 50%
+  transform translateX( -50% )
+
+  &.play
+    animation sprite 1.5s infinite steps( 59 )
+    animation-iteration-count 2
+
+@keyframes sprite
+  0%
+    background-position center 0%
+  100%
+    background-position center 100%

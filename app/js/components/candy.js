@@ -1,4 +1,4 @@
-import { Vector3, CubeGeometry, MeshBasicMaterial, Mesh } from 'three'
+import { CubeGeometry, MeshBasicMaterial, Mesh } from 'three'
 import { TimelineLite } from 'gsap';
 
 import HUD from '../core/hud'
@@ -11,7 +11,7 @@ export default class Candy extends Item {
     super(category, position, scale);
 
     // Collider
-    const cubeGeometry = new CubeGeometry( 5, 15, 5 )
+    const cubeGeometry = new CubeGeometry( 5, 30, 5 )
     const cubeMaterial = new MeshBasicMaterial({
       color: 0xFF0000,
       transparent: true,
@@ -26,9 +26,9 @@ export default class Candy extends Item {
     this.category = category
 
     this.item.rotation.y = getRandomFloat(0, 10);
+    this.collider.scale.multiplyScalar(scale);
     for(let i = 0; i < this.children.length; i++) {
       this.children[i].name = 'candy'
-      this.children[i].scale.set(2, 2, 2);
       this.children[i].position.y = getRandomFloat(8, 10);
     }
   }

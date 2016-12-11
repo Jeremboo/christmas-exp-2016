@@ -1,7 +1,27 @@
 .header
-  verticalAlign()
-  top 20%
+  position absolute
+  top 5%
+  left 50%
+  transform translateX( -50% )
   font-size rem( 30 )
   color whiteColor
   text-align center
   user-select none
+  cursor default
+
+  &-title
+    width rem( 200 )
+    height rem( 100 )
+    background-size rem( 200 )
+    background-image url( '../assets/images/sprites/logo.png' )
+    background-repeat no-repeat
+
+    &.play
+      animation sprite 1s steps( 39 )
+      animation-fill-mode forwards
+
+@keyframes sprite
+  0%
+    background-position center 0%
+  100%
+    background-position center 100%
