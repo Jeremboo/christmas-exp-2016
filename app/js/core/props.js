@@ -36,7 +36,7 @@ const props = {
     {
       category: 'peppermint',
       positions: [
-        { x: 0, y: 1, z: 0, scale: 1 },
+        { x: 0, y: 1.1, z: 0.1, scale: 1 },
         { x: 0, y: 1, z: 0, scale: 1 },
         { x: 0, y: 1, z: 0, scale: 1 }
       ]
@@ -206,11 +206,6 @@ const props = {
     //     'mono:5',
     //   ],
     // },
-    {
-      name: 'skeleton',
-      ex: 'json',
-      children: [],
-    },
   ]
 };
 

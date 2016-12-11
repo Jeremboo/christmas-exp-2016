@@ -1,5 +1,6 @@
 import props from './props'
 import { loadAssetsFromProps } from './loaderManager';
+import soundPlayer from './sounds';
 
 class HUD {
   constructor( candies ) {
@@ -7,8 +8,10 @@ class HUD {
 
     this.hud = document.getElementById( 'hud' )
     this.loader = document.getElementById( 'loader' )
+    this.sound = document.getElementById( 'sound' )
 
     this.candies = {}
+    this.mutted = false;
     for( const candy of candies ) {
       const container = document.createElement( 'div' )
       container.id = candy.category
@@ -25,6 +28,8 @@ class HUD {
     }
 
     this.checkFoundCandies()
+
+    this.sound.addEventListener('click', this.toggleSound.bind(this));
   }
 
   /**
@@ -55,11 +60,8 @@ class HUD {
    * GAME
    **/
   startGame(callbackEndGame) {
-    console.log('startGame');
-
     this.callbackEndGame = callbackEndGame;
-    this.updateLoader(100);
-    // TODO hide loader
+    if (!this.mutted) soundPlayer.soundBackground.play();
   }
 
   endGame() {
@@ -81,11 +83,33 @@ class HUD {
   }
 
   /**
+   * SOUND
+   **/
+  toggleSound() {
+    this.mutted = !this.mutted;
+    if (this.mutted) {
+      soundPlayer.soundBackground.pause();
+      this.sound.classList.add('mutted');
+    } else {
+      soundPlayer.soundBackground.play();
+      this.sound.classList.remove('mutted');
+    }
+  }
+
+  /**
    * CANDY
    **/
   foundCandy( category ) {
     this.candies[category].found++
-    this.checkFoundCandies()
+    this.checkFoundCandies();
+    console.log(this.candies[category].found)
+
+    if(!this.mutted) {
+      soundPlayer.candyFound.play();
+      if(this.candies[category].found === 3) {
+        soundPlayer.counterFill.play();
+      }
+    }
   }
 
   checkFoundCandies() {
