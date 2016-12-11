@@ -1,23 +1,24 @@
 
 .TextAnimation
-  display: flex
-  flex-direction: row
-  flex-wrap: wrap
+  display flex
+  flex-direction row
+  flex-wrap wrap
+  justify-content center
 
   &-letter
-    display: block
-    transition: 0.4s
-    backface-visibility: hidden
-    animation: translateTop 1s infinite ease-in-out
+    display block
+    transition 0.4s
+    backface-visibility hidden
+    animation translateTop 1s infinite ease-in-out
 
     for i in (0..10)
       &:nth-child({i + 1})
-        animation-delay: 0.1s * i
+        animation-delay 0.1s * i
 
     // ANIMATIONS
     // OPACITY
     &_opacity
-      opacity: 0
+      opacity 0
 
       &.TextAnimation-visible
         opacity: 1
@@ -27,21 +28,21 @@
     letterTranslation = 20px
 
     &_top
-      transform: rotateX(letterRotation) translateY(letterTranslation)
+      transform rotateX(letterRotation) translateY(letterTranslation)
     &_bottom
-      transform: rotateX(-(letterRotation)) translateY(-(letterTranslation))
+      transform rotateX(-(letterRotation)) translateY(-(letterTranslation))
     &_left
-      transform: rotateY(letterRotation) translateX(letterTranslation)
+      transform rotateY(letterRotation) translateX(letterTranslation)
     &_right
-      transform: rotateY(letterRotation) translateX(letterTranslation)
+      transform rotateY(letterRotation) translateX(letterTranslation)
 
     &_top, &_bottom, &_left, &_right
       &.TextAnimation-visible
-        transform: translateX(0) translateY(0) rotateX(0deg) rotateY(0deg)
+        transform translateX(0) translateY(0) rotateX(0deg) rotateY(0deg)
 
 
 @keyframes translateTop
   0%, 30%, 100%
-    transform: translateY(0px)
+    transform translateY(0px)
   15%
-    transform: translateY(-3px)
+    transform translateY(-3px)

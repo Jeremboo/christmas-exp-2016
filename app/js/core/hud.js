@@ -18,9 +18,6 @@ class HUD {
     this.tuto = document.getElementById('tuto')
     this.success = document.getElementById('success')
 
-    this._titleAnimation = new TextAnim(this.loaderTitle, 50, 'top');
-    this._titleAnimation.show();
-
     this.candies = {}
     this.mutted = false;
     for (const candy of candies) {
@@ -52,19 +49,33 @@ class HUD {
   }
 
   load(callback) {
-    // TODO show loader
-    this.updateLoader(10);
-    console.log('... Loading');
+    this._titleAnimation = new TextAnim(this.loaderTitle, 50, 'top');
+    setTimeout(() => {
+      this.updateLoader(10);
+      loadAssetsFromProps({
+        onProgress: (status) => {
+          this.updateLoader(80 * status);
+        },
+        onComplete: () => {
+          this.updateLoader(100);
+          if (!this.mutted) soundPlayer.soundBackground.play();
 
-    loadAssetsFromProps({
-      onProgress: (status) => {
-        this.updateLoader(80 * status);
-      },
-      onComplete: () => {
-        this.updateLoader(100);
-        callback();
-      },
-    })
+          TweenMax.to(this.loader, 0.3, {
+            autoAlpha: 0.0,
+            onComplete: () => {
+              setTimeout(() => {
+                this.tuto.classList.add('play');
+                callback();
+              }, 1500);
+
+              setTimeout(() => {
+                this.logo.classList.add('play');
+              }, 500);
+            },
+          });
+        },
+      })
+    }, 200);
   }
 
   /**
@@ -72,12 +83,7 @@ class HUD {
    **/
   startGame(callbackEndGame) {
     this.callbackEndGame = callbackEndGame;
-    if (!this.mutted) soundPlayer.soundBackground.play();
-
-    TweenMax.to(this.loader, 0.3,
-      { autoAlpha: 0.0 });
-
-      this.showHUD();
+    this.showHUD();
   }
 
   endGame() {
@@ -119,15 +125,11 @@ class HUD {
   showHUD() {
     const candyDivs = document.querySelectorAll('.counter');
 
+    TweenMax.to(this.sound, 0.3, { autoAlpha: 1.0, delay: 4.6 });
+
     TweenMax.staggerFromTo(candyDivs, 0.3,
     { autoAlpha: 0.0, x: -10 },
     { autoAlpha: 1.0, x: 0, delay: 4.0 }, 0.2);
-
-    this.logo.classList.add('play');
-
-    setTimeout(() => {
-      this.tuto.classList.add('play');
-    }, 1000);
   }
 
   hideLogo() {

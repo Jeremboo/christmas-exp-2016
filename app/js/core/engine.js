@@ -58,7 +58,10 @@ export default class Engine {
 
     HUD.load(() => {
       this.scene.planet.placeItems(() => {
-        this.inGamePositioning(HUD.hideLogo);
+        this.inGamePositioning();
+        setTimeout(() => {
+          HUD.hideLogo();
+        }, 3000);
         HUD.startGame(this.endGamePositioning);
       });
     });
