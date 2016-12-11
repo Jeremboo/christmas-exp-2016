@@ -1,18 +1,23 @@
 import props from './props'
 import { loadAssetsFromProps } from './loaderManager';
 import soundPlayer from './sounds';
+import TextAnim from './textAnim';
 
 class HUD {
   constructor( candies ) {
     this.callbackEndGame = f => f;
 
     this.hud = document.getElementById( 'hud' )
-    this.loader = document.getElementById( 'loader' )
+    this.progress = document.getElementById( 'progress' )
     this.sound = document.getElementById( 'sound' )
+    this.loaderTitle = document.getElementById( 'loader-title' )
+
+    this._titleAnimation = new TextAnim(this.loaderTitle, 50, 'top');
+    this._titleAnimation.show();
 
     this.candies = {}
     this.mutted = false;
-    for( const candy of candies ) {
+    for ( const candy of candies ) {
       const container = document.createElement( 'div' )
       container.id = candy.category
       container.classList.add( 'counter' )
@@ -36,7 +41,7 @@ class HUD {
    * LOADER
    **/
   updateLoader(purcent) {
-    this.loader.innerHTML = purcent;
+    this.progress.style.width = `${purcent}%`;
   }
 
   load( callback ) {
@@ -46,11 +51,10 @@ class HUD {
 
     loadAssetsFromProps({
       onProgress: ( status ) => {
-        console.log(status);
         this.updateLoader(80 * status);
       },
       onComplete: () => {
-        this.updateLoader(80);
+        this.updateLoader(100);
         callback();
       },
     })
@@ -65,7 +69,8 @@ class HUD {
   }
 
   endGame() {
-    console.log( 'YAS ! Good job mate' )
+    console.log( 'YAS ! Good job mate' );
+    if (!this.mutted) soundPlayer.soundFinal.play();
     this.callbackEndGame();
   }
 
@@ -89,10 +94,10 @@ class HUD {
     this.mutted = !this.mutted;
     if (this.mutted) {
       soundPlayer.soundBackground.pause();
-      this.sound.classList.add('mutted');
+      this.sound.classList.remove('play');
     } else {
       soundPlayer.soundBackground.play();
-      this.sound.classList.remove('mutted');
+      this.sound.classList.add('play');
     }
   }
 
