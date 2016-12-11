@@ -283,13 +283,13 @@ th {
   overflow: hidden;
 }
 .counter.lollipop:before {
-  background-image: url("../../assets/images/lollipop.png");
+  background-image: url("../assets/images/lollipop.png");
 }
 .counter.peppermint:before {
-  background-image: url("../../assets/images/peppermint.png");
+  background-image: url("../assets/images/peppermint.png");
 }
 .counter.stick:before {
-  background-image: url("../../assets/images/stick.png");
+  background-image: url("../assets/images/stick.png");
 }
 .loader {
   position: absolute;

@@ -266,10 +266,6 @@ const props = {
     { x: -1, y: -0.01, z: 0.17, scale: 3, rotation: 180 },
     { x: -1, y: -0.03, z: 0.12, scale: 1.5, rotation: 175 },
     { x: -1, y: 0.04, z: 0.12, scale: 2.7, rotation: 190 },
-
-    { x: -0.2, y: -1.4, z: -0.87, scale: 2.7, rotation: 190 },
-    { x: -0.2, y: -1, z: -0.77, scale: 2.6, rotation: 190 },
-    { x: -0.2, y: -1.1, z: -0.64, scale: 2.7, rotation: 190 },
   ],
   assets: [
     {
