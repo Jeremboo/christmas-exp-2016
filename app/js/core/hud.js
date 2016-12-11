@@ -13,6 +13,7 @@ class HUD {
     this.loader = document.getElementById('loader')
     this.progress = document.getElementById('progress')
     this.sound = document.getElementById('sound')
+    this.soundContainer = document.getElementById('soundContainer')
     this.loaderTitle = document.getElementById('loader-title')
     this.logo = document.getElementById('logo')
     this.tuto = document.getElementById('tuto')
@@ -154,7 +155,7 @@ class HUD {
   showHUD() {
     const candyDivs = document.querySelectorAll('.counter');
 
-    TweenMax.to(this.sound, 0.3, { autoAlpha: 1.0, delay: 4.6 });
+    TweenMax.to(this.soundContainer, 0.3, { autoAlpha: 1.0, delay: 4.6 });
 
     TweenMax.staggerFromTo(candyDivs, 0.3,
     { autoAlpha: 0.0, x: -10 },

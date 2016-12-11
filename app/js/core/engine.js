@@ -79,9 +79,9 @@ export default class Engine {
     props.rotation.autoRotate = false;
     const t = new TimelineLite({ onComplete: callback });
     t.to(props.camera.position, 4, { y: 255, z: 200, ease: Power2.easeOut });
+    t.to(this.scene.planet.targetedPos, 4, { x: 0, y: 0, z: 0, ease: Power2.easeOut }, '-=4');
     t.to(props.camera.rotation, 2, { x: -0.3, ease: Power2.easeOut }, '-=4');
     t.to(props.shader, 4, { ceil: 0.9, ease: Power3.easeOut }, '-=3');
-    t.to(this.scene.planet.targetedPos, 2, { x: 0, y: 0, z: 0, ease: Power2.easeOut }, '-=2.5');
     t.play();
   }
 
