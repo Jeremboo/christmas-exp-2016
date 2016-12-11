@@ -5,7 +5,7 @@ import { getRandomFloat, toRadians, getRandomNormalizedVector3 } from '../core/u
 
 
 export default class Item extends Object3D {
-  constructor(itemName, pos = getRandomNormalizedVector3(), scale = 1.0, rotationY = 0) {
+  constructor(itemName, pos = getRandomNormalizedVector3(), scale = 1.0, rotationY = getRandomFloat(0, 360)) {
     super();
 
     this.position.copy(pos);

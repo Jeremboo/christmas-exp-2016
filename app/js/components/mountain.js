@@ -5,9 +5,8 @@ import Item from './_item';
 import props from '../core/props';
 import { getRandomFloat } from '../core/utils';
 
-
 export default class Mountain extends Item {
-  constructor(position, scale, rotation) {
+  constructor(position, scale = getRandomFloat(3, 7), rotation) {
     super('mountain', position, scale, rotation);
 
     this.position.normalize();

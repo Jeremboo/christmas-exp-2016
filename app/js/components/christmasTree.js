@@ -1,9 +1,11 @@
 import { Vector3 } from 'three'
 
 import Item from './_item';
+import { getRandomFloat } from '../core/utils';
+
 
 export default class ChristmasTree extends Item {
-  constructor(position, scale, rotation) {
+  constructor(position, scale = getRandomFloat(1.5, 3), rotation) {
     super('christmasTree', position, scale, rotation);
 
     this.oldWorldPosition = new Vector3();
