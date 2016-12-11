@@ -5,7 +5,7 @@ import { getRandomFloat, toRadians, getRandomNormalizedVector3 } from '../core/u
 
 
 export default class Item extends Object3D {
-  constructor(itemName, pos = getRandomNormalizedVector3(), scale = 1.0, rotationY = 0 ) {
+  constructor(itemName, pos = getRandomNormalizedVector3(), scale = 1.0, rotationY = 0) {
     super();
 
     this.position.copy(pos);
@@ -25,6 +25,7 @@ export default class Item extends Object3D {
     // Add item object on the Item
     if (itemName || itemName.length > 0) {
       this.item = props.objects.get(itemName).clone();
+      this.item.name = 'item';
       this.add(this.item);
 
       this.item.scale.multiplyScalar(scale);

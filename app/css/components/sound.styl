@@ -1,15 +1,27 @@
 .sound
-  background url( '../../assets/images/sound.png' ) no-repeat center center
-  background-size contain
+  background none
+  background-size rem( 30 )
+  background-image url( '../assets/images/sprites/sound.png' )
+  background-repeat no-repeat
+  opacity 0.7
   border none
   appearance none
   outline none
   width rem( 30 )
   height rem( 30 )
+  padding 0
   position absolute
   bottom rem( 20 )
   right rem( 20 )
-  transition 0.2s
+  transition transform 0.3s linear, opacity 0.3s linear
 
-  &.mutted
-    opacity 0.4
+  &.play
+    animation sprite 1.0s infinite steps( 22 )
+    opacity 1.0
+    transform scale( 1.1 )
+
+@keyframes sprite
+  0%
+    background-position center 0%
+  100%
+    background-position center 100%

@@ -45,8 +45,8 @@ export default class Engine {
     this.onMouseMove = this.onMouseMove.bind(this);
     this.onMouseDown = this.onMouseDown.bind(this);
     this.onMouseUp = this.onMouseUp.bind(this);
-    this.inGamePositionning = this.inGamePositionning.bind(this);
-    this.endGamePositionning = this.endGamePositionning.bind(this);
+    this.inGamePositioning = this.inGamePositioning.bind(this);
+    this.endGamePositioning = this.endGamePositioning.bind(this);
 
     // START
     this.scene = new MainScene();
@@ -58,8 +58,8 @@ export default class Engine {
 
     HUD.load(() => {
       this.scene.planet.placeItems(() => {
-        this.inGamePositionning();
-        HUD.startGame(this.endGamePositionning);
+        this.inGamePositioning(HUD.hideLogo);
+        HUD.startGame(this.endGamePositioning);
       });
     });
 
@@ -75,9 +75,9 @@ export default class Engine {
     this.fxaa = new FXAAPass();
   }
 
-  inGamePositionning() {
+  inGamePositioning(callback = f => f) {
     props.rotation.autoRotate = false;
-    const t = new TimelineLite();
+    const t = new TimelineLite({ onComplete: callback });
     t.to(props.camera.position, 4, { y: 255, z: 150, ease: Power2.easeOut });
     t.to(props.camera.rotation, 2, { x: -0.3, ease: Power2.easeOut }, '-=4');
 
@@ -85,9 +85,9 @@ export default class Engine {
     t.play();
   }
 
-  endGamePositionning() {
+  endGamePositioning(callback = f => f) {
     props.rotation.autoRotate = true;
-    const t = new TimelineLite();
+    const t = new TimelineLite({ onComplete: callback });
     t.to(props.camera.rotation, 3, { x: toRadians(-90), ease: Power2.easeOut });
     t.to(props.camera.position, 4, { y: 910, z: 0, ease: Power2.easeOut }, '-=3');
     t.to(props.shader, 5, { ceil: 0, ease: Power3.easeOut }, '-=4');
@@ -106,7 +106,7 @@ export default class Engine {
       this.camera.position.copy(props.camera.position);
 
       // POST PROCESS RENDERING
-      if(props.shader.postProcess) {
+      if(props.postProcess.enabled) {
         this.renderer.autoClearColor = true;
         this.composer.reset();
         this.composer.render(this.scene, this.camera);

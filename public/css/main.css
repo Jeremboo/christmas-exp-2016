@@ -180,14 +180,13 @@ th {
 }
 .header {
   position: absolute;
-  top: 50%;
+  top: 5%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  top: 20%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
   font-size: 1.875rem;
   color: #ecf0f1;
   text-align: center;
@@ -195,13 +194,61 @@ th {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  cursor: default;
+}
+.header-title {
+  width: 12.5rem;
+  height: 6.25rem;
+  background-size: 12.5rem;
+  background-image: url("../assets/images/sprites/logo.png");
+  background-repeat: no-repeat;
+}
+.header-title.play {
+  -webkit-animation: sprite 1s steps(39);
+  -moz-animation: sprite 1s steps(39);
+  -ms-animation: sprite 1s steps(39);
+  -o-animation: sprite 1s steps(39);
+  animation: sprite 1s steps(39);
+  animation-fill-mode: forwards;
+}
+@-moz-keyframes sprite {
+  0% {
+    background-position: center 0%;
+  }
+  100% {
+    background-position: center 100%;
+  }
+}
+@-webkit-keyframes sprite {
+  0% {
+    background-position: center 0%;
+  }
+  100% {
+    background-position: center 100%;
+  }
+}
+@-o-keyframes sprite {
+  0% {
+    background-position: center 0%;
+  }
+  100% {
+    background-position: center 100%;
+  }
+}
+@keyframes sprite {
+  0% {
+    background-position: center 0%;
+  }
+  100% {
+    background-position: center 100%;
+  }
 }
 .hud {
   width: 3.125rem;
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 1.25rem;
+  top: 5%;
   left: 1.25rem;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -212,9 +259,10 @@ th {
 .counter {
   text-align: center;
   color: #ecf0f1;
-  margin-bottom: 1.875rem;
+  margin-bottom: 1.25rem;
   width: 100%;
   position: relative;
+  opacity: 0;
 }
 .counter:before {
   content: '';
@@ -236,8 +284,8 @@ th {
 .counter.lollipop:before {
   background-image: url("../../assets/images/lollipop.png");
 }
-.counter.candy:before {
-  background-image: url("../../assets/images/candy.png");
+.counter.peppermint:before {
+  background-image: url("../../assets/images/peppermint.png");
 }
 .counter.stick:before {
   background-image: url("../../assets/images/stick.png");
@@ -280,8 +328,11 @@ th {
   opacity: 0;
 }
 .sound {
-  background: url("../../assets/images/sound.png") no-repeat center center;
-  background-size: contain;
+  background: none;
+  background-size: 1.875rem;
+  background-image: url("../assets/images/sprites/sound.png");
+  background-repeat: no-repeat;
+  opacity: 0.7;
   border: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -289,17 +340,115 @@ th {
   outline: none;
   width: 1.875rem;
   height: 1.875rem;
+  padding: 0;
   position: absolute;
   bottom: 1.25rem;
   right: 1.25rem;
-  -webkit-transition: 0.2s;
-  -moz-transition: 0.2s;
-  -ms-transition: 0.2s;
-  -o-transition: 0.2s;
-  transition: 0.2s;
+  -webkit-transition: transform 0.3s linear, opacity 0.3s linear;
+  -moz-transition: transform 0.3s linear, opacity 0.3s linear;
+  -ms-transition: transform 0.3s linear, opacity 0.3s linear;
+  -o-transition: transform 0.3s linear, opacity 0.3s linear;
+  transition: transform 0.3s linear, opacity 0.3s linear;
 }
-.sound.mutted {
-  opacity: 0.4;
+.sound.play {
+  -webkit-animation: sprite 1s infinite steps(22);
+  -moz-animation: sprite 1s infinite steps(22);
+  -ms-animation: sprite 1s infinite steps(22);
+  -o-animation: sprite 1s infinite steps(22);
+  animation: sprite 1s infinite steps(22);
+  opacity: 1;
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -o-transform: scale(1.1);
+  transform: scale(1.1);
+}
+@-moz-keyframes sprite {
+  0% {
+    background-position: center 0%;
+  }
+  100% {
+    background-position: center 100%;
+  }
+}
+@-webkit-keyframes sprite {
+  0% {
+    background-position: center 0%;
+  }
+  100% {
+    background-position: center 100%;
+  }
+}
+@-o-keyframes sprite {
+  0% {
+    background-position: center 0%;
+  }
+  100% {
+    background-position: center 100%;
+  }
+}
+@keyframes sprite {
+  0% {
+    background-position: center 0%;
+  }
+  100% {
+    background-position: center 100%;
+  }
+}
+.success {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+  width: 31.25rem;
+  height: 10.75rem;
+  background-size: 31.25rem;
+  background-image: url("../assets/images/sprites/merrychristmas.png");
+  background-repeat: no-repeat;
+}
+.success.play {
+  -webkit-animation: sprite 3s steps(78);
+  -moz-animation: sprite 3s steps(78);
+  -ms-animation: sprite 3s steps(78);
+  -o-animation: sprite 3s steps(78);
+  animation: sprite 3s steps(78);
+  animation-fill-mode: forwards;
+}
+@-moz-keyframes sprite {
+  0% {
+    background-position: center 0%;
+  }
+  100% {
+    background-position: center 100%;
+  }
+}
+@-webkit-keyframes sprite {
+  0% {
+    background-position: center 0%;
+  }
+  100% {
+    background-position: center 100%;
+  }
+}
+@-o-keyframes sprite {
+  0% {
+    background-position: center 0%;
+  }
+  100% {
+    background-position: center 100%;
+  }
+}
+@keyframes sprite {
+  0% {
+    background-position: center 0%;
+  }
+  100% {
+    background-position: center 100%;
+  }
 }
 .TextAnimation {
   display: flex;
@@ -459,6 +608,61 @@ th {
     -ms-transform: translateY(-3px);
     -o-transform: translateY(-3px);
     transform: translateY(-3px);
+  }
+}
+.tuto {
+  width: 18.75rem;
+  height: 7.5rem;
+  background-size: 18.75rem;
+  background-image: url("../assets/images/sprites/tuto.png");
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+.tuto.play {
+  -webkit-animation: sprite 1.5s infinite steps(59);
+  -moz-animation: sprite 1.5s infinite steps(59);
+  -ms-animation: sprite 1.5s infinite steps(59);
+  -o-animation: sprite 1.5s infinite steps(59);
+  animation: sprite 1.5s infinite steps(59);
+  animation-iteration-count: 2;
+}
+@-moz-keyframes sprite {
+  0% {
+    background-position: center 0%;
+  }
+  100% {
+    background-position: center 100%;
+  }
+}
+@-webkit-keyframes sprite {
+  0% {
+    background-position: center 0%;
+  }
+  100% {
+    background-position: center 100%;
+  }
+}
+@-o-keyframes sprite {
+  0% {
+    background-position: center 0%;
+  }
+  100% {
+    background-position: center 100%;
+  }
+}
+@keyframes sprite {
+  0% {
+    background-position: center 0%;
+  }
+  100% {
+    background-position: center 100%;
   }
 }
 html,

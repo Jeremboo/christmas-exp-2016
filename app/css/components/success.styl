@@ -1,0 +1,20 @@
+.success
+  position absolute
+  bottom 5%
+  left 50%
+  transform translateX( -50% )
+  width rem( 500 )
+  height rem( 172 )
+  background-size rem( 500 )
+  background-image url( '../assets/images/sprites/merrychristmas.png' )
+  background-repeat no-repeat
+
+  &.play
+    animation sprite 3s steps( 78 )
+    animation-fill-mode forwards
+
+@keyframes sprite
+  0%
+    background-position center 0%
+  100%
+    background-position center 100%
